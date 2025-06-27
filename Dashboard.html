@@ -20,6 +20,62 @@
         background: #2563eb;
         color: #fff;
       }
+      .dashboard-bento-scroll {
+        height: calc(100vh - 112px);
+        overflow-y: hidden;
+        padding-bottom: 0;
+        margin-bottom: 0;
+      }
+      .bento-scroll-content {
+        flex: 1 1 0%;
+        min-height: 0;
+        overflow-y: auto;
+        max-height: 100%;
+      }
+      @media (min-width: 1024px) {
+        #dashboard-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          grid-template-rows: repeat(3, minmax(0, 1fr));
+          grid-template-areas:
+            "feed feed kudos people"
+            "mywork myplan myplan people"
+            "revenue myplan myplan people";
+          gap: 2rem;
+          height: 100%;
+        }
+        .bento-feed { grid-area: feed; }
+        .bento-kudos { grid-area: kudos; }
+        .bento-people { grid-area: people; }
+        .bento-revenue { grid-area: revenue; }
+        .bento-mywork { grid-area: mywork; }
+        .bento-myplan { grid-area: myplan; }
+        .bento-feed, .bento-kudos, .bento-people, .bento-revenue, .bento-mywork, .bento-myplan {
+          height: 100%;
+          min-height: 0;
+          display: flex;
+          flex-direction: column;
+          border-radius: 1.25rem;
+        }
+      }
+      .bento-btn-sm {
+        font-size: 0.875rem;
+        padding: 0.25rem 0.75rem;
+        border-radius: 0.5rem;
+        line-height: 1.25rem;
+      }
+      .bento-mywork-compact .work-list {
+        font-size: 0.85rem;
+        padding: 0.25rem 0.5rem;
+      }
+      .bento-mywork-compact .work-list li {
+        margin-bottom: 0.25rem;
+        padding-bottom: 0.25rem;
+        border-bottom: 1px solid #f1f5f9;
+      }
+      .bento-mywork-compact .work-list li:last-child {
+        border-bottom: none;
+      }
     </style>
   </head>
   <body class="bg-white font-sans">
@@ -62,355 +118,64 @@
       <main class="main-content-scroll p-8">
         <div class="max-w-7xl mx-auto">
           <!-- Page Header -->
-          <div class="mb-8">
-            <h1 class="text-4xl font-bold text-gray-800 mb-2 flex items-center gap-3">
-              <i class="ph ph-layout text-blue-600"></i>
-              Dashboard
-            </h1>
-            <p class="text-gray-600 text-lg">Overview of all sections and activities</p>
-          </div>
+          <!-- <div class="mb-8"> ... </div> -->
 
           <!-- Dashboard Grid -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            
-            <!-- My Feed Section -->
-            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
-              <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
-                <i class="ph ph-book-open text-blue-600"></i>
-                My Feed
-              </h2>
-              <div class="space-y-4 max-h-96 overflow-y-auto">
-                <div class="p-4 bg-blue-50 rounded-lg border border-blue-100">
-                  <div class="flex items-start justify-between">
-                    <div class="flex-1">
-                      <h3 class="font-semibold text-blue-800 mb-2">Weekly Team Update - June 2025</h3>
-                      <p class="text-sm text-gray-700 mb-2">Latest updates from our team members and project progress</p>
-                      <div class="flex items-center gap-4 text-xs text-gray-500">
-                        <span>2025-06-03</span>
-                        <span>👍 42</span>
-                        <span>💬 5</span>
+          <div class="dashboard-bento-scroll">
+            <div class="grid grid-cols-1 gap-8" id="dashboard-grid">
+              <div class="bento-feed bg-white rounded-xl shadow-lg border border-gray-200 p-6 h-full flex flex-col">
+                <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="ph ph-book-open"></i> My Feed</h2>
+                <div class="bento-scroll-content" id="feed-list">
+                  <!-- Feed content will be rendered here -->
                       </div>
                     </div>
-                    <div class="text-yellow-500">
-                      <i class="ph ph-star-fill"></i>
+              <div class="bento-kudos bg-white rounded-xl shadow-lg border border-gray-200 p-6 h-full flex flex-col">
+                <div class="flex items-center justify-between mb-4">
+                  <h2 class="text-lg font-bold flex items-center gap-2"><i class="ph ph-thumbs-up"></i> Kudos</h2>
+                  <button id="give-kudos-btn" class="bento-btn-sm bg-blue-600 hover:bg-blue-700 text-white font-semibold transition flex items-center gap-2"><i class="ph ph-thumbs-up"></i> Give Kudos</button>
                     </div>
+                <div class="bento-scroll-content">
+                  <!-- Kudos content will be rendered here by JS -->
                   </div>
                 </div>
-                <div class="p-4 bg-gray-50 rounded-lg border border-gray-100">
-                  <h3 class="font-semibold text-gray-800 mb-2">Design System Workshop</h3>
-                  <p class="text-sm text-gray-700 mb-2">Join us for a deep dive into our new design system implementation</p>
-                  <div class="flex items-center gap-4 text-xs text-gray-500">
-                    <span>2025-06-02</span>
-                    <span>👍 35</span>
-                    <span>💬 8</span>
+              <div class="bento-people bg-white rounded-xl shadow-lg border border-gray-200 p-6 h-full flex flex-col">
+                <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="ph ph-users"></i> People</h2>
+                <div class="bento-scroll-content" id="people-list">
+                  <!-- People content will be rendered here -->
                   </div>
                 </div>
-                <div class="p-4 bg-blue-50 rounded-lg border border-blue-100">
-                  <div class="flex items-start justify-between">
-                    <div class="flex-1">
-                      <h3 class="font-semibold text-blue-800">New Office Location</h3>
-                      <p class="text-sm text-gray-700 mb-2">We're excited to announce our new office space in downtown!</p>
-                      <div class="flex items-center gap-4 text-xs text-gray-500">
-                        <span>2025-05-29</span>
-                        <span>👍 56</span>
-                        <span>💬 12</span>
+              <div class="bento-revenue bg-white rounded-xl shadow-lg border border-gray-200 p-6 h-full flex flex-col">
+                <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="ph ph-trend-up"></i> Revenue</h2>
+                <div class="bento-scroll-content" id="revenue-list">
+                  <!-- Revenue content will be rendered here -->
                       </div>
                     </div>
-                    <div class="text-yellow-500">
-                      <i class="ph ph-star-fill"></i>
+              <div class="bento-mywork bg-white rounded-xl shadow-lg border border-gray-200 p-6 h-full flex flex-col">
+                <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="ph ph-calendar"></i> My Work</h2>
+                <div class="bento-scroll-content" id="work-list">
+                  <!-- My Work content will be rendered here -->
                     </div>
                   </div>
+              <div class="bento-myplan bg-white rounded-xl shadow-lg border border-gray-200 p-6 h-full flex flex-col">
+                <div class="flex items-center justify-between mb-4">
+                  <h2 class="text-lg font-bold flex items-center gap-2"><i class="ph ph-gear"></i> My Plan</h2>
+                  <div class="flex gap-2">
+                    <button id="add-weekly-btn" class="bento-btn-sm bg-blue-600 hover:bg-blue-700 text-white font-semibold transition flex items-center gap-2"><i class="ph ph-calendar"></i> Add Weekly Plan</button>
+                    <button id="add-quarterly-btn" class="bento-btn-sm bg-blue-600 hover:bg-blue-700 text-white font-semibold transition flex items-center gap-2"><i class="ph ph-gear"></i> Add Quarterly Plan</button>
                 </div>
               </div>
+                <div class="bento-scroll-content">
+                  <div class="mb-4">
+                    <h3 class="font-semibold text-blue-700 mb-2">Weekly Plans</h3>
+                    <div id="weekly-list"></div>
             </div>
-
-            <!-- Kudos Section -->
-            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6 kudos-section">
-              <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
-                <i class="ph ph-thumbs-up text-blue-600"></i>
-                Kudos
-              </h2>
-              <div class="space-y-4 max-h-96 overflow-y-auto">
-                <div class="p-4 bg-green-50 rounded-lg border border-green-100">
-                  <div class="flex items-start justify-between">
-                    <div class="flex-1">
-                      <h3 class="font-semibold text-green-800 mb-1">Riya Mehra</h3>
-                      <p class="text-sm text-gray-700 mb-2">Amazing work on the new feature implementation! Your attention to detail and problem-solving skills really made a difference.</p>
-                      <div class="flex items-center gap-4 text-xs text-gray-500">
-                        <span>2025-05-29</span>
-                        <span>👍 45</span>
-                        <span>💬 3</span>
-                      </div>
-                    </div>
-                    <div class="flex gap-1">
-                      <button class="kudos-view-btn p-1 rounded hover:bg-blue-100 transition-colors" title="View">
-                        <i class="ph ph-eye text-sm"></i>
-                      </button>
-                      <button class="kudos-edit-btn p-1 rounded hover:bg-blue-100 transition-colors" title="Edit">
-                        <i class="ph ph-pencil text-sm"></i>
-                      </button>
-                      <button class="kudos-delete-btn p-1 rounded hover:bg-red-100 transition-colors" title="Delete">
-                        <i class="ph ph-trash text-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div class="p-4 bg-green-50 rounded-lg border border-green-100">
-                  <div class="flex items-start justify-between">
-                    <div class="flex-1">
-                      <h3 class="font-semibold text-green-800 mb-1">Vikas Patel</h3>
-                      <p class="text-sm text-gray-700 mb-2">Outstanding presentation skills during the client meeting. You handled all the questions with confidence!</p>
-                      <div class="flex items-center gap-4 text-xs text-gray-500">
-                        <span>2025-05-28</span>
-                        <span>👍 32</span>
-                        <span>💬 2</span>
-                      </div>
-                    </div>
-                    <div class="flex gap-1">
-                      <button class="kudos-view-btn p-1 rounded hover:bg-blue-100 transition-colors" title="View">
-                        <i class="ph ph-eye text-sm"></i>
-                      </button>
-                      <button class="kudos-edit-btn p-1 rounded hover:bg-blue-100 transition-colors" title="Edit">
-                        <i class="ph ph-pencil text-sm"></i>
-                      </button>
-                      <button class="kudos-delete-btn p-1 rounded hover:bg-red-100 transition-colors" title="Delete">
-                        <i class="ph ph-trash text-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div class="p-4 bg-green-50 rounded-lg border border-green-100">
-                  <div class="flex items-start justify-between">
-                    <div class="flex-1">
-                      <h3 class="font-semibold text-green-800 mb-1">Sneha Rao</h3>
-                      <p class="text-sm text-gray-700 mb-2">Thank you for going above and beyond to help the team meet the deadline. Your dedication is truly appreciated!</p>
-                      <div class="flex items-center gap-4 text-xs text-gray-500">
-                        <span>2025-05-26</span>
-                        <span>👍 38</span>
-                        <span>💬 4</span>
-                      </div>
-                    </div>
-                    <div class="flex gap-1">
-                      <button class="kudos-view-btn p-1 rounded hover:bg-blue-100 transition-colors" title="View">
-                        <i class="ph ph-eye text-sm"></i>
-                      </button>
-                      <button class="kudos-edit-btn p-1 rounded hover:bg-blue-100 transition-colors" title="Edit">
-                        <i class="ph ph-pencil text-sm"></i>
-                      </button>
-                      <button class="kudos-delete-btn p-1 rounded hover:bg-red-100 transition-colors" title="Delete">
-                        <i class="ph ph-trash text-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- People Section -->
-            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
-              <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
-                <i class="ph ph-users text-blue-600"></i>
-                People
-              </h2>
-              <div class="space-y-4 max-h-96 overflow-y-auto">
-                <div class="p-4 bg-purple-50 rounded-lg border border-purple-100">
-                  <div class="flex items-center justify-between">
                     <div>
-                      <h3 class="font-semibold text-purple-800">Amit Sharma</h3>
-                      <p class="text-sm text-gray-600">5 years experience</p>
+                    <h3 class="font-semibold text-purple-700 mb-2">Quarterly Plans</h3>
+                    <div id="quarterly-list"></div>
                     </div>
-                    <div class="text-right">
-                      <p class="text-sm text-gray-500">Jun 03</p>
-                      <div class="flex items-center gap-2 text-xs text-gray-500 mt-1">
-                        <span>👍 42</span>
-                        <span>💬 8</span>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="p-4 bg-purple-50 rounded-lg border border-purple-100">
-                  <div class="flex items-center justify-between">
-                    <div>
-                      <h3 class="font-semibold text-purple-800">Priya Singh</h3>
-                      <p class="text-sm text-gray-600">3 years experience</p>
-                    </div>
-                    <div class="text-right">
-                      <p class="text-sm text-gray-500">Jun 06</p>
-                      <div class="flex items-center gap-2 text-xs text-gray-500 mt-1">
-                        <span>👍 35</span>
-                        <span>💬 6</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="p-4 bg-purple-50 rounded-lg border border-purple-100">
-                  <div class="flex items-center justify-between">
-                    <div>
-                      <h3 class="font-semibold text-purple-800">Rahul Verma</h3>
-                      <p class="text-sm text-gray-600">7 years experience</p>
-                    </div>
-                    <div class="text-right">
-                      <p class="text-sm text-gray-500">Jun 04</p>
-                      <div class="flex items-center gap-2 text-xs text-gray-500 mt-1">
-                        <span>👍 48</span>
-                        <span>💬 10</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Revenue Section -->
-            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
-              <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
-                <i class="ph ph-trend-up text-blue-600"></i>
-                Revenue
-              </h2>
-              <div class="space-y-4 max-h-96 overflow-y-auto">
-                <div class="p-4 bg-orange-50 rounded-lg border border-orange-100">
-                  <h3 class="font-semibold text-orange-800 mb-3">Design Projects - ₹3.75 Cr</h3>
-                  <div class="space-y-2">
-                    <div class="flex justify-between text-sm">
-                      <span class="text-gray-700">Arjun Desai (PixelCraft India)</span>
-                      <span class="font-semibold text-green-600">₹2.5 Cr</span>
-                    </div>
-                    <div class="flex justify-between text-sm">
-                      <span class="text-gray-700">Meera Kapoor (Creative Minds Pvt Ltd)</span>
-                      <span class="font-semibold text-green-600">₹1.25 Cr</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="p-4 bg-blue-50 rounded-lg border border-blue-100">
-                  <h3 class="font-semibold text-blue-800 mb-3">Development Services - ₹2.33 Cr</h3>
-                  <div class="space-y-2">
-                    <div class="flex justify-between text-sm">
-                      <span class="text-gray-700">Rohit Sinha (TechNova Solutions)</span>
-                      <span class="font-semibold text-green-600">₹1.5 Cr</span>
-                    </div>
-                    <div class="flex justify-between text-sm">
-                      <span class="text-gray-700">Anjali Menon (DevWorks India)</span>
-                      <span class="font-semibold text-green-600">₹83.3 L</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="p-4 bg-green-50 rounded-lg border border-green-100">
-                  <h3 class="font-semibold text-green-800 mb-3">Consulting - ₹1.46 Cr</h3>
-                  <div class="space-y-2">
-                    <div class="flex justify-between text-sm">
-                      <span class="text-gray-700">Siddharth Jain (ConsultPro India)</span>
-                      <span class="font-semibold text-green-600">₹1.46 Cr</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- My Work Section -->
-            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
-              <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
-                <i class="ph ph-calendar text-blue-600"></i>
-                My Work
-              </h2>
-              <div class="space-y-4 max-h-96 overflow-y-auto">
-                <div class="p-4 bg-indigo-50 rounded-lg border border-indigo-100">
-                  <div class="flex items-center justify-between">
-                    <div>
-                      <h3 class="font-semibold text-indigo-800">UI/UX Design System Implementation</h3>
-                      <span class="inline-block px-2 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">Design</span>
-                    </div>
-                    <span class="text-xs text-gray-500">Today</span>
-                  </div>
-                </div>
-                <div class="p-4 bg-blue-50 rounded-lg border border-blue-100">
-                  <div class="flex items-center justify-between">
-                    <div>
-                      <h3 class="font-semibold text-blue-800">Mobile App Development Sprint</h3>
-                      <span class="inline-block px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Development</span>
-                    </div>
-                    <span class="text-xs text-gray-500">Last week</span>
-                  </div>
-                </div>
-                <div class="p-4 bg-green-50 rounded-lg border border-green-100">
-                  <div class="flex items-center justify-between">
-                    <div>
-                      <h3 class="font-semibold text-green-800">Client Presentation Deck</h3>
-                      <span class="inline-block px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Marketing</span>
-                    </div>
-                    <span class="text-xs text-gray-500">Older</span>
-                  </div>
-                </div>
-                <div class="p-4 bg-yellow-50 rounded-lg border border-yellow-100">
-                  <div class="flex items-center justify-between">
-                    <div>
-                      <h3 class="font-semibold text-yellow-800">Team Training Workshop</h3>
-                      <span class="inline-block px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">HR</span>
-                    </div>
-                    <span class="text-xs text-gray-500">Older</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- My Plan Section -->
-            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
-              <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
-                <i class="ph ph-gear text-blue-600"></i>
-                My Plan
-              </h2>
-              <div class="space-y-6 max-h-96 overflow-y-auto">
-                <!-- Weekly Plans -->
-                <div class="weekly-plans-section">
-                  <h3 class="text-lg font-semibold text-gray-800 mb-3">Weekly Plans</h3>
-                  <div class="space-y-3">
-                    <div class="p-3 bg-blue-50 rounded-lg border border-blue-100">
-                      <div class="flex items-center justify-between">
-                        <div>
-                          <h4 class="font-medium text-blue-800">2025-06-02 to 06-08</h4>
-                          <p class="text-sm text-gray-600">Owner: Amit Sharma</p>
-                        </div>
-                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Published</span>
-                      </div>
-                    </div>
-                    <div class="p-3 bg-blue-50 rounded-lg border border-blue-100">
-                      <div class="flex items-center justify-between">
-                        <div>
-                          <h4 class="font-medium text-blue-800">2025-05-26 to 06-01</h4>
-                          <p class="text-sm text-gray-600">Owner: Priya Singh</p>
-                        </div>
-                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Published</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <!-- Quarterly Plans -->
-                <div class="quarterly-plans-section">
-                  <h3 class="text-lg font-semibold text-gray-800 mb-3">Quarterly Plans</h3>
-                  <div class="space-y-3">
-                    <div class="p-3 bg-purple-50 rounded-lg border border-purple-100">
-                      <div class="flex items-center justify-between">
-                        <div>
-                          <h4 class="font-medium text-purple-800">Q2 2025</h4>
-                          <p class="text-sm text-gray-600">Owner: Rahul Verma</p>
-                        </div>
-                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Published</span>
-                      </div>
-                    </div>
-                    <div class="p-3 bg-purple-50 rounded-lg border border-purple-100">
-                      <div class="flex items-center justify-between">
-                        <div>
-                          <h4 class="font-medium text-purple-800">Q1 2025</h4>
-                          <p class="text-sm text-gray-600">Owner: Sneha Rao</p>
-                        </div>
-                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Published</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
           </div>
         </div>
       </main>
@@ -421,15 +186,35 @@
       <div id="chatbot-root"></div>
       <script src="chatbot.js"></script>
       <script>
-        function includeHTML(id, file, cb) {
-          fetch(file)
-            .then(response => response.text())
-            .then(data => {
-              document.getElementById(id).innerHTML = data;
-              if (cb) cb();
-            });
+      console.log('Dashboard script loaded');
+      // Copy tabData and rendering logic from index.html
+      const tabData = { /* ... (same as before, omitted for brevity) ... */ };
+      function renderDashboardSections() {
+        console.log('Rendering dashboard sections...');
+        const grid = document.getElementById('dashboard-grid');
+        if (!grid) {
+          console.error('dashboard-grid element not found!');
+          document.body.insertAdjacentHTML('beforeend', '<div style="color:red">dashboard-grid element not found!</div>');
+          return;
         }
-        function setActiveMenu() {
+        // ... (rest of renderDashboardSections as before) ...
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        renderDashboardSections();
+        renderDashboardFeed();
+        renderDashboardWork();
+        renderDashboardPeople();
+        renderDashboardRevenue();
+        renderDashboardKudos();
+        renderDashboardPlans();
+        document.getElementById('add-weekly-btn')?.addEventListener('click', function() { showPlanModal('weekly', 'add'); });
+        document.getElementById('add-quarterly-btn')?.addEventListener('click', function() { showPlanModal('quarterly', 'add'); });
+      });
+      </script>
+    </div>
+    <script>
+      // Highlight active header menu item
+      (function() {
           var path = window.location.pathname.split('/').pop();
           if (!path) path = 'index.html';
           document.querySelectorAll('header nav a').forEach(function(link) {
@@ -450,463 +235,647 @@
               }
             }
           });
-        }
-        includeHTML('header', 'header.html', setActiveMenu);
-        includeHTML('footer', 'footer.html');
-
-        // Data persistence functions
-        function saveDataToStorage() {
-          localStorage.setItem('appData', JSON.stringify({
-            tabData: tabData,
-            weeklyPlans: weeklyPlans || [],
-            quarterlyPlans: quarterlyPlans || []
-          }));
-        }
-
-        function loadDataFromStorage() {
-          const savedData = localStorage.getItem('appData');
-          if (savedData) {
-            const data = JSON.parse(savedData);
-            if (data.tabData) {
-              Object.assign(tabData, data.tabData);
-            }
-            if (data.weeklyPlans) {
-              weeklyPlans = data.weeklyPlans;
-            }
-            if (data.quarterlyPlans) {
-              quarterlyPlans = data.quarterlyPlans;
-            }
-          }
-        }
-
-        // Initialize data
-        let tabData = {
-          feed: [
-            { title: 'Weekly Team Update - June 2025', desc: 'Latest updates from our team members and project progress', date: '2025-06-03', likes: 42, comments: 5, starred: true },
-            { title: 'Design System Workshop', desc: 'Join us for a deep dive into our new design system implementation', date: '2025-06-02', likes: 35, comments: 8 },
-            { title: 'New Office Location', desc: 'We\'re excited to announce our new office space in downtown!', date: '2025-05-29', likes: 56, comments: 12, starred: true },
-            { title: 'Summer Team Building Event', desc: 'Save the date for our annual summer team building activities', date: '2025-05-22', likes: 78, comments: 15, starred: true }
-          ],
-          kudos: [
+      })();
+    </script>
+    <script>
+    // --- KUDOS DATA (MATCHED TO INDEX) ---
+    let dashboardKudos = [
             { author: 'Riya Mehra', content: 'Amazing work on the new feature implementation! Your attention to detail and problem-solving skills really made a difference.', date: '2025-05-29', likes: 45, comments: 3 },
             { author: 'Vikas Patel', content: 'Outstanding presentation skills during the client meeting. You handled all the questions with confidence!', date: '2025-05-28', likes: 32, comments: 2 },
             { author: 'Sneha Rao', content: 'Thank you for going above and beyond to help the team meet the deadline. Your dedication is truly appreciated!', date: '2025-05-26', likes: 38, comments: 4 }
-          ],
-          people: [
-            { name: 'Amit Sharma', years: 5, date: 'Jun 03', likes: 42, comments: 8 },
-            { name: 'Priya Singh', years: 3, date: 'Jun 06', likes: 35, comments: 6 },
-            { name: 'Rahul Verma', years: 7, date: 'Jun 04', likes: 48, comments: 10 },
-            { name: 'Sneha Patel', years: 2, date: 'Jun 09', likes: 28, comments: 4 }
-          ],
-          revenue: [
-            { category: 'Design Projects', amount: '₹3.75 Cr', people: [ { name: 'Arjun Desai', company: 'PixelCraft India', amount: '₹2.5 Cr', date: '2025-06-03' }, { name: 'Meera Kapoor', company: 'Creative Minds Pvt Ltd', amount: '₹1.25 Cr', date: '2025-06-02' } ] },
-            { category: 'Development Services', amount: '₹2.33 Cr', people: [ { name: 'Rohit Sinha', company: 'TechNova Solutions', amount: '₹1.5 Cr', date: '2025-05-29' }, { name: 'Anjali Menon', company: 'DevWorks India', amount: '₹83.3 L', date: '2025-05-29' } ] },
-            { category: 'Consulting', amount: '₹1.46 Cr', people: [ { name: 'Siddharth Jain', company: 'ConsultPro India', amount: '₹1.46 Cr', date: '2025-05-29' } ] }
-          ],
-          work: [
-            { title: 'UI/UX Design System Implementation', category: 'Design', type: 'Today' },
-            { title: 'Mobile App Development Sprint', category: 'Development', type: 'Last week' },
-            { title: 'Client Presentation Deck', category: 'Marketing', type: 'Older' },
-            { title: 'Team Training Workshop', category: 'HR', type: 'Older' },
-            { title: 'Product Roadmap Planning', category: 'Strategy', type: 'Older' },
-            { title: 'Annual Performance Review', category: 'HR', type: 'Older' }
-          ],
-          plan: [
-            { week: '2025-06-02 to 06-08', owner: 'Amit Sharma', status: 'Published' },
-            { week: '2025-05-26 to 06-01', owner: 'Priya Singh', status: 'Published' },
-            { week: '2025-05-19 to 05-25', owner: 'Rahul Verma', status: 'Published' }
-          ]
-        };
-
-        let weeklyPlans = [
-          { week: '2025-06-03 to 06-09', createdDate: '2025-06-03', status: 'Published', owner: 'Amit Sharma', description: 'Completed sprint and planning for next week.' },
-          { week: '2025-05-27 to 06-02', createdDate: '2025-05-27', status: 'Published', owner: 'Priya Singh', description: 'Reviewed quarterly goals and set new targets.' }
-        ];
-        let quarterlyPlans = [
-          { quarter: 'Q2 2025', createdDate: '2025-04-01', status: 'Published', owner: 'Amit Sharma', description: 'Quarterly review and planning.' },
-          { quarter: 'Q1 2025', createdDate: '2025-01-01', status: 'Published', owner: 'Priya Singh', description: 'Q1 goals and achievements.' }
-        ];
-
-        // Load data on page load
-        loadDataFromStorage();
-
-        // Update dashboard content with current data
-        function updateDashboardContent() {
-          // Update Kudos section
-          const kudosContainer = document.querySelector('.kudos-section .space-y-4');
-          if (kudosContainer) {
-            kudosContainer.innerHTML = tabData.kudos.map((item, idx) => `
-              <div class="p-4 bg-green-50 rounded-lg border border-green-100">
-                <div class="flex items-start justify-between">
-                  <div class="flex-1">
-                    <h3 class="font-semibold text-green-800 mb-1">${item.author}</h3>
-                    <p class="text-sm text-gray-700 mb-2">${item.content}</p>
-                    <div class="flex items-center gap-4 text-xs text-gray-500">
-                      <span>${item.date}</span>
-                      <span>👍 ${item.likes}</span>
-                      <span>💬 ${item.comments}</span>
+    ];
+    function renderDashboardKudos() {
+      const kudosContainer = document.querySelector('.bento-kudos .flex.items-center.justify-between.mb-4 + div');
+      if (!kudosContainer) return;
+      kudosContainer.innerHTML = '';
+      if (dashboardKudos.length === 0) {
+        kudosContainer.innerHTML = '<div class="text-gray-500 text-center py-8">No kudos yet. Be the first to give kudos!</div>';
+        return;
+      }
+      dashboardKudos.forEach((kudo, idx) => {
+        const card = document.createElement('div');
+        card.className = 'p-4 bg-purple-50 rounded-lg border border-purple-100 mb-4';
+        card.innerHTML = `
+          <div class='flex items-start justify-between'>
+            <div class='flex-1'>
+              <div class="flex items-center gap-4">
+                <div class="bg-white rounded-full w-14 h-14 flex items-center justify-center text-2xl text-gray-400 border"><i class="ph ph-user"></i></div>
+                <div class="flex flex-col justify-center">
+                  <div class="font-bold text-lg text-purple-700">${kudo.author}</div>
+                  <div class="text-gray-600">${kudo.content}</div>
+                  <div class="flex items-center gap-4 mt-1">
+                    <span class="flex items-center gap-1 text-yellow-600 font-semibold"><i class="ph ph-thumbs-up"></i>${kudo.likes}</span>
+                    <span class="flex items-center gap-1 text-gray-700 font-semibold"><i class="ph ph-chat-centered"></i>${kudo.comments}</span>
                     </div>
                   </div>
-                  <div class="flex gap-1">
-                    <button class="kudos-view-btn p-1 rounded hover:bg-blue-100 transition-colors" data-idx="${idx}" title="View">
-                      <i class="ph ph-eye text-sm"></i>
-                    </button>
-                    <button class="kudos-edit-btn p-1 rounded hover:bg-blue-100 transition-colors" data-idx="${idx}" title="Edit">
-                      <i class="ph ph-pencil text-sm"></i>
-                    </button>
-                    <button class="kudos-delete-btn p-1 rounded hover:bg-red-100 transition-colors" data-idx="${idx}" title="Delete">
-                      <i class="ph ph-trash text-sm"></i>
-                    </button>
                   </div>
                 </div>
+            <div class='flex gap-2'>
+              <button class='kudos-edit-btn' title='Edit'><i class='ph ph-pencil'></i></button>
+              <button class='kudos-view-btn' title='View'><i class='ph ph-eye'></i></button>
+              <button class='kudos-delete-btn' title='Delete'><i class='ph ph-trash'></i></button>
               </div>
-            `).join('');
-          }
-
-          // Update Weekly Plans section
-          const weeklyPlansContainer = document.querySelector('.weekly-plans-section .space-y-3');
-          if (weeklyPlansContainer) {
-            weeklyPlansContainer.innerHTML = weeklyPlans.map((plan, idx) => `
-              <div class="p-3 bg-blue-50 rounded-lg border border-blue-100">
-                <div class="flex items-center justify-between">
-                  <div>
-                    <h4 class="font-medium text-blue-800">${plan.week}</h4>
-                    <p class="text-sm text-gray-600">Owner: ${plan.owner}</p>
-                    <p class="text-xs text-gray-500">Created: ${plan.createdDate}</p>
+          </div>
+        `;
+        kudosContainer.appendChild(card);
+      });
+      // Attach event handlers
+      document.querySelectorAll('.kudos-edit-btn').forEach((btn, idx) => {
+        btn.onclick = function(e) { e.stopPropagation(); showKudosModal('edit', idx); };
+      });
+      document.querySelectorAll('.kudos-view-btn').forEach((btn, idx) => {
+        btn.onclick = function(e) { e.stopPropagation(); showKudosModal('view', idx); };
+      });
+      document.querySelectorAll('.kudos-delete-btn').forEach((btn, idx) => {
+        btn.onclick = function(e) { e.stopPropagation(); dashboardKudos.splice(idx, 1); renderDashboardKudos(); };
+      });
+    }
+    function showKudosModal(mode = 'add', idx = null) {
+      let modal = document.getElementById('give-kudos-modal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'give-kudos-modal';
+        modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+        document.body.appendChild(modal);
+      }
+      let author = '', content = '';
+      if (mode === 'edit' && idx !== null && dashboardKudos[idx]) {
+        author = dashboardKudos[idx].author;
+        content = dashboardKudos[idx].content;
+      } else if (mode === 'view' && idx !== null && dashboardKudos[idx]) {
+        author = dashboardKudos[idx].author;
+        content = dashboardKudos[idx].content;
+      }
+      modal.innerHTML = `
+        <div class='bg-white rounded-xl shadow-lg p-8 max-w-md w-full mx-4'>
+          <h3 class='text-2xl font-bold mb-6 text-gray-800'>Give Kudos</h3>
+          <form id='give-kudos-form'>
+            <div class='mb-4'>
+              <label class='block text-gray-700 font-semibold mb-2'>Name</label>
+              <input type='text' id='kudos-name' class='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500' required value='${author}' ${mode==='view'?'readonly':''}>
                   </div>
-                  <div class="flex items-center gap-2">
-                    <span class="px-2 py-1 ${plan.status === 'Published' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'} text-xs rounded-full">${plan.status}</span>
-                    <div class="flex gap-1">
-                      <button class="plan-view-btn p-1 rounded hover:bg-blue-100 transition-colors" data-type="weekly" data-idx="${idx}" title="View">
-                        <i class="ph ph-eye text-sm"></i>
-                      </button>
-                      <button class="plan-edit-btn p-1 rounded hover:bg-blue-100 transition-colors" data-type="weekly" data-idx="${idx}" title="Edit">
-                        <i class="ph ph-pencil text-sm"></i>
-                      </button>
-                      <button class="plan-delete-btn p-1 rounded hover:bg-red-100 transition-colors" data-type="weekly" data-idx="${idx}" title="Delete">
-                        <i class="ph ph-trash text-sm"></i>
-                      </button>
+            <div class='mb-6'>
+              <label class='block text-gray-700 font-semibold mb-2'>Message</label>
+              <textarea id='kudos-comment' rows='4' class='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500' required ${mode==='view'?'readonly':''}>${content}</textarea>
                     </div>
+            <div class='flex gap-3'>
+              ${mode==='view' ? '' : `<button type='submit' class='flex-1 bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition'>Submit</button>`}
+              <button type='button' id='close-kudos-modal' class='flex-1 bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-400 transition'>Cancel</button>
                   </div>
+          </form>
                 </div>
-              </div>
-            `).join('');
-          }
-
-          // Update Quarterly Plans section
-          const quarterlyPlansContainer = document.querySelector('.quarterly-plans-section .space-y-3');
-          if (quarterlyPlansContainer) {
-            quarterlyPlansContainer.innerHTML = quarterlyPlans.map((plan, idx) => `
-              <div class="p-3 bg-purple-50 rounded-lg border border-purple-100">
-                <div class="flex items-center justify-between">
-                  <div>
-                    <h4 class="font-medium text-purple-800">${plan.quarter}</h4>
-                    <p class="text-sm text-gray-600">Owner: ${plan.owner}</p>
-                    <p class="text-xs text-gray-500">Created: ${plan.createdDate}</p>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <span class="px-2 py-1 ${plan.status === 'Published' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'} text-xs rounded-full">${plan.status}</span>
-                    <div class="flex gap-1">
-                      <button class="plan-view-btn p-1 rounded hover:bg-blue-100 transition-colors" data-type="quarterly" data-idx="${idx}" title="View">
-                        <i class="ph ph-eye text-sm"></i>
-                      </button>
-                      <button class="plan-edit-btn p-1 rounded hover:bg-blue-100 transition-colors" data-type="quarterly" data-idx="${idx}" title="Edit">
-                        <i class="ph ph-pencil text-sm"></i>
-                      </button>
-                      <button class="plan-delete-btn p-1 rounded hover:bg-red-100 transition-colors" data-type="quarterly" data-idx="${idx}" title="Delete">
-                        <i class="ph ph-trash text-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            `).join('');
-          }
+      `;
+      modal.classList.remove('hidden');
+      document.getElementById('close-kudos-modal').onclick = function() { modal.classList.add('hidden'); };
+      document.getElementById('give-kudos-form').onsubmit = function(e) {
+        e.preventDefault();
+        const name = document.getElementById('kudos-name').value;
+        const comment = document.getElementById('kudos-comment').value;
+        if (mode === 'edit' && idx !== null) {
+          dashboardKudos[idx].author = name;
+          dashboardKudos[idx].content = comment;
+        } else if (mode === 'add') {
+          dashboardKudos.unshift({ author: name, content: comment, date: new Date().toISOString().slice(0,10), likes: 0, comments: 0 });
         }
-
-        // Initialize dashboard content
-        updateDashboardContent();
-
-        // Add event listeners for kudos actions
-        document.addEventListener('click', function(e) {
-          if (e.target.closest('.kudos-edit-btn')) {
-            const idx = e.target.closest('.kudos-edit-btn').getAttribute('data-idx');
-            const kudos = tabData.kudos[idx];
-            // Open kudos modal for editing
-            openKudosModal('edit', idx, kudos);
-          }
-          if (e.target.closest('.kudos-view-btn')) {
-            const idx = e.target.closest('.kudos-view-btn').getAttribute('data-idx');
-            const kudos = tabData.kudos[idx];
-            // Open kudos modal for viewing
-            openKudosModal('view', idx, kudos);
-          }
-          if (e.target.closest('.kudos-delete-btn')) {
-            const idx = e.target.closest('.kudos-delete-btn').getAttribute('data-idx');
-            if (confirm('Are you sure you want to delete this kudos?')) {
-              tabData.kudos.splice(idx, 1);
-              saveDataToStorage();
-              updateDashboardContent();
-            }
-          }
-          
-          // Plan actions
-          if (e.target.closest('.plan-edit-btn')) {
-            const idx = e.target.closest('.plan-edit-btn').getAttribute('data-idx');
-            const type = e.target.closest('.plan-edit-btn').getAttribute('data-type');
-            const plan = (type === 'weekly' ? weeklyPlans : quarterlyPlans)[idx];
-            openPlanModal('edit', type, idx, plan);
-          }
-          if (e.target.closest('.plan-view-btn')) {
-            const idx = e.target.closest('.plan-view-btn').getAttribute('data-idx');
-            const type = e.target.closest('.plan-view-btn').getAttribute('data-type');
-            const plan = (type === 'weekly' ? weeklyPlans : quarterlyPlans)[idx];
-            openPlanModal('view', type, idx, plan);
-          }
-          if (e.target.closest('.plan-delete-btn')) {
-            const idx = e.target.closest('.plan-delete-btn').getAttribute('data-idx');
-            const type = e.target.closest('.plan-delete-btn').getAttribute('data-type');
-            if (confirm('Are you sure you want to delete this plan?')) {
-              if (type === 'weekly') {
-                weeklyPlans.splice(idx, 1);
-              } else {
-                quarterlyPlans.splice(idx, 1);
-              }
-              saveDataToStorage();
-              updateDashboardContent();
-            }
-          }
-        });
-
-        function openKudosModal(mode, idx, kudos) {
-          // Create modal if it doesn't exist
-          let modal = document.getElementById('kudos-modal');
-          if (!modal) {
-            modal = document.createElement('div');
-            modal.id = 'kudos-modal';
-            modal.className = 'fixed inset-0 bg-black/40 flex items-center justify-center z-50 hidden';
-            modal.innerHTML = `
-              <div class="bg-white rounded-xl shadow-lg p-8 w-full max-w-md mx-auto">
-                <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
-                  <i class="ph ph-thumbs-up"></i> 
-                  ${mode === 'edit' ? 'Edit Kudos' : 'View Kudos'}
-                </h3>
-                <form id="kudos-form" class="flex flex-col gap-4">
-                  <input id="kudos-name" type="text" placeholder="Name" class="border rounded px-3 py-2" ${mode === 'view' ? 'readonly' : ''} required />
-                  <textarea id="kudos-comment" placeholder="Comment" class="border rounded px-3 py-2" ${mode === 'view' ? 'readonly' : ''} required></textarea>
-                  <div class="flex justify-end gap-2">
-                    <button type="button" id="close-kudos-modal" class="px-4 py-2 bg-gray-200 rounded">Close</button>
-                    ${mode === 'edit' ? '<button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Update</button>' : ''}
+        modal.classList.add('hidden');
+        renderDashboardKudos();
+      };
+    }
+    document.getElementById('give-kudos-btn')?.addEventListener('click', function() { showKudosModal('add'); });
+    renderDashboardKudos();
+    // --- PLAN DATA (MATCHED TO INDEX) ---
+    let dashboardWeeklyPlans = [
+      { week: '2025-06-02 to 06-08', owner: 'Amit Sharma', status: 'Published' },
+      { week: '2025-05-26 to 06-01', owner: 'Priya Singh', status: 'Published' },
+      { week: '2025-05-19 to 05-25', owner: 'Rahul Verma', status: 'Published' }
+    ];
+    let dashboardQuarterlyPlans = [
+      { quarter: 'Q1 2025', owner: 'Amit Sharma', status: 'Published' },
+      { quarter: 'Q2 2025', owner: 'Priya Singh', status: 'Draft' },
+      { quarter: 'Q3 2025', owner: 'Rahul Verma', status: 'Forecast' }
+    ];
+    function renderDashboardPlans() {
+      // Weekly Plans
+      const weeklyContainer = document.getElementById('weekly-list');
+      if (weeklyContainer) {
+        weeklyContainer.innerHTML = '';
+        if (dashboardWeeklyPlans.length === 0) {
+          weeklyContainer.innerHTML = '<div class="text-gray-500 text-center py-8">No weekly plans yet. Add your first weekly plan!</div>';
+        } else {
+          dashboardWeeklyPlans.forEach((plan, idx) => {
+            const card = document.createElement('div');
+            card.className = 'p-3 bg-blue-50 rounded-lg border border-blue-100 mb-3';
+            card.innerHTML = `
+              <div class='flex items-center justify-between'>
+                  <div>
+                  <h4 class='font-medium text-blue-800'>${plan.week}</h4>
+                  <p class='text-sm text-gray-600'>Owner: ${plan.owner}</p>
                   </div>
-                </form>
+                <div class='flex items-center gap-2'>
+                  <span class='px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full'>${plan.status}</span>
+                  <div class='flex gap-2'>
+                    <button class='plan-edit-btn' data-type='weekly' data-idx='${idx}' title='Edit'><i class='ph ph-pencil'></i></button>
+                    <button class='plan-view-btn' data-type='weekly' data-idx='${idx}' title='View'><i class='ph ph-eye'></i></button>
+                    <button class='plan-delete-btn' data-type='weekly' data-idx='${idx}' title='Delete'><i class='ph ph-trash'></i></button>
+                    </div>
+                  </div>
+                </div>
+            `;
+            weeklyContainer.appendChild(card);
+          });
+        }
+      }
+      // Quarterly Plans
+      const quarterlyContainer = document.getElementById('quarterly-list');
+      if (quarterlyContainer) {
+        quarterlyContainer.innerHTML = '';
+        if (dashboardQuarterlyPlans.length === 0) {
+          quarterlyContainer.innerHTML = '<div class="text-gray-500 text-center py-8">No quarterly plans yet. Add your first quarterly plan!</div>';
+              } else {
+          dashboardQuarterlyPlans.forEach((plan, idx) => {
+            const card = document.createElement('div');
+            card.className = 'p-3 bg-purple-50 rounded-lg border border-purple-100 mb-3';
+            card.innerHTML = `
+              <div class='flex items-center justify-between'>
+                <div>
+                  <h4 class='font-medium text-purple-800'>${plan.quarter}</h4>
+                  <p class='text-sm text-gray-600'>Owner: ${plan.owner}</p>
+                  </div>
+                <div class='flex items-center gap-2'>
+                  <span class='px-2 py-1 ${plan.status === 'Published' ? 'bg-green-100 text-green-800' : plan.status === 'Draft' ? 'bg-blue-100 text-blue-800' : 'bg-yellow-100 text-yellow-800'} text-xs rounded-full'>${plan.status}</span>
+                  <div class='flex gap-2'>
+                    <button class='plan-edit-btn' data-type='quarterly' data-idx='${idx}' title='Edit'><i class='ph ph-pencil'></i></button>
+                    <button class='plan-view-btn' data-type='quarterly' data-idx='${idx}' title='View'><i class='ph ph-eye'></i></button>
+                    <button class='plan-delete-btn' data-type='quarterly' data-idx='${idx}' title='Delete'><i class='ph ph-trash'></i></button>
+                  </div>
+                </div>
               </div>
             `;
-            document.body.appendChild(modal);
-          }
-
-          // Set form values
-          document.getElementById('kudos-name').value = kudos.author;
-          document.getElementById('kudos-comment').value = kudos.content;
-
-          // Show modal
-          modal.classList.remove('hidden');
-
-          // Handle form submission
-          const form = document.getElementById('kudos-form');
-          form.onsubmit = function(e) {
-            e.preventDefault();
-            if (mode === 'edit') {
-              kudos.author = document.getElementById('kudos-name').value;
-              kudos.content = document.getElementById('kudos-comment').value;
-              saveDataToStorage();
-              updateDashboardContent();
-            }
-            modal.classList.add('hidden');
-          };
-
-          // Handle close button
-          document.getElementById('close-kudos-modal').onclick = function() {
-            modal.classList.add('hidden');
-          };
+            quarterlyContainer.appendChild(card);
+          });
         }
-
-        function openPlanModal(mode, type, idx, plan) {
-          // Create modal if it doesn't exist
+      }
+      // Re-bind event handlers for both weekly and quarterly
+      document.querySelectorAll('.plan-edit-btn').forEach((btn) => {
+        btn.onclick = function(e) {
+          e.stopPropagation();
+          showPlanModal(btn.dataset.type, 'edit', parseInt(btn.dataset.idx));
+        };
+      });
+      document.querySelectorAll('.plan-view-btn').forEach((btn, idx) => {
+        btn.onclick = function(e) {
+          e.stopPropagation();
+          showPlanModal(btn.dataset.type, 'view', parseInt(btn.dataset.idx));
+        };
+      });
+      document.querySelectorAll('.plan-delete-btn').forEach((btn, idx) => {
+        btn.onclick = function(e) {
+          e.stopPropagation();
+          const idx = parseInt(btn.dataset.idx);
+          if (btn.dataset.type === 'weekly') {
+            dashboardWeeklyPlans.splice(idx, 1);
+          } else {
+            dashboardQuarterlyPlans.splice(idx, 1);
+          }
+          renderDashboardPlans();
+        };
+      });
+    }
+    function showPlanModal(type, mode = 'add', idx = null) {
           let modal = document.getElementById('plan-modal');
           if (!modal) {
             modal = document.createElement('div');
             modal.id = 'plan-modal';
-            modal.className = 'fixed inset-0 bg-black/40 flex items-center justify-center z-50 hidden';
-            modal.innerHTML = `
-              <div class="bg-white rounded-xl shadow-lg p-8 w-full max-w-lg mx-auto">
-                <h3 id="plan-modal-title" class="text-xl font-bold mb-4 flex items-center gap-2">
-                  <i class="ph ph-gear"></i> 
-                  <span id="plan-modal-title-text"></span>
-                </h3>
-                <div id="plan-modal-content"></div>
-              </div>
-            `;
+        modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
             document.body.appendChild(modal);
           }
-
-          // Set modal title
-          const titleText = mode === 'edit' ? 
-            `Edit ${type === 'weekly' ? 'Weekly' : 'Quarterly'} Plan` : 
-            `View ${type === 'weekly' ? 'Weekly' : 'Quarterly'} Plan`;
-          document.getElementById('plan-modal-title-text').textContent = titleText;
-
-          // Set modal content
-          const today = new Date().toISOString().slice(0, 10);
-          let content = '';
-          
-          if (type === 'weekly') {
-            content = `
-              <form id="plan-form" class="space-y-4">
+      // Helper to get Monday from a date
+      function getMonday(d) {
+        d = new Date(d);
+        const day = d.getDay(), diff = d.getDate() - day + (day === 0 ? -6 : 1);
+        return new Date(d.setDate(diff));
+      }
+      function format(d) { return d.toISOString().slice(0, 10); }
+      const today = new Date();
+      const currMonday = getMonday(today);
+      const prevMonday = new Date(currMonday); prevMonday.setDate(prevMonday.getDate() - 7);
+      const nextMonday = new Date(currMonday); nextMonday.setDate(nextMonday.getDate() + 7);
+      const prevWeek = `${format(prevMonday)} to ${format(new Date(prevMonday.getTime() + 6 * 86400000))}`;
+      const currWeek = `${format(currMonday)} to ${format(new Date(currMonday.getTime() + 6 * 86400000))}`;
+      const nextWeek = `${format(nextMonday)} to ${format(new Date(nextMonday.getTime() + 6 * 86400000))}`;
+      let createdDate = format(today);
+      let weekValue = '';
+      let statusValue = 'Published';
+      let ownerValue = '';
+      let descValue = '';
+      let quarterValue = '';
+      if (mode === 'edit' && idx !== null && type === 'weekly') {
+        weekValue = dashboardWeeklyPlans[idx].week;
+        createdDate = dashboardWeeklyPlans[idx].createdDate || createdDate;
+        statusValue = dashboardWeeklyPlans[idx].status;
+        ownerValue = dashboardWeeklyPlans[idx].owner;
+        descValue = dashboardWeeklyPlans[idx].description || '';
+      }
+      if (mode === 'edit' && idx !== null && type === 'quarterly') {
+        quarterValue = dashboardQuarterlyPlans[idx].quarter;
+        createdDate = dashboardQuarterlyPlans[idx].createdDate || createdDate;
+        statusValue = dashboardQuarterlyPlans[idx].status;
+        ownerValue = dashboardQuarterlyPlans[idx].owner;
+        descValue = dashboardQuarterlyPlans[idx].description || '';
+      }
+      if (mode === 'view' && idx !== null && type === 'weekly') {
+        weekValue = dashboardWeeklyPlans[idx].week;
+        createdDate = dashboardWeeklyPlans[idx].createdDate || createdDate;
+        statusValue = dashboardWeeklyPlans[idx].status;
+        ownerValue = dashboardWeeklyPlans[idx].owner;
+        descValue = dashboardWeeklyPlans[idx].description || '';
+      }
+      if (mode === 'view' && idx !== null && type === 'quarterly') {
+        quarterValue = dashboardQuarterlyPlans[idx].quarter;
+        createdDate = dashboardQuarterlyPlans[idx].createdDate || createdDate;
+        statusValue = dashboardQuarterlyPlans[idx].status;
+        ownerValue = dashboardQuarterlyPlans[idx].owner;
+        descValue = dashboardQuarterlyPlans[idx].description || '';
+      }
+      // Quarter options
+      const quarterOptions = [
+        'Q1 2025', 'Q2 2025', 'Q3 2025', 'Q4 2025',
+        'Q1 2026', 'Q2 2026', 'Q3 2026', 'Q4 2026'
+      ].map(q => `<option value='${q}' ${quarterValue === q ? 'selected' : ''}>${q}</option>`).join('');
+      if (type === 'quarterly') {
+        modal.innerHTML = `
+          <div class='bg-white rounded-xl shadow-lg p-6 max-w-lg w-full mx-4 relative'>
+            <button id='close-plan-modal' class='absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl'>&times;</button>
+            <h3 class='text-2xl font-bold mb-4 text-gray-800'>${mode==='edit'?'Edit':mode==='view'?'View':'Add'} Quarterly Plan</h3>
+            <form id='plan-form' class='space-y-3 bg-blue-50 rounded p-3 mb-4'>
+              <div class='font-semibold mb-1 text-sm'>Current Quarter</div>
                 <div>
-                  <label class="block text-sm font-medium mb-1">Week:</label>
-                  <input name="week" type="text" class="w-full rounded border px-3 py-2" value="${plan ? plan.week : ''}" ${mode === 'view' ? 'readonly' : ''} required />
+                <label class='block text-xs font-medium mb-1'>Quarter:</label>
+                <select id='plan-quarter' class='w-full rounded border px-2 py-1 text-xs' ${mode==='view'?'disabled':''} required>
+                  <option value=''>Select Quarter</option>
+                  ${quarterOptions}
+                </select>
                 </div>
                 <div>
-                  <label class="block text-sm font-medium mb-1">Created Date:</label>
-                  <input name="createdDate" type="text" class="w-full rounded border px-3 py-2 bg-gray-100" value="${plan ? plan.createdDate : today}" readonly />
+                <label class='block text-xs font-medium mb-1'>Created Date:</label>
+                <input type='text' id='plan-created' class='w-full rounded border px-2 py-1 bg-gray-100 cursor-not-allowed text-xs' value='${createdDate}' readonly disabled />
                 </div>
                 <div>
-                  <label class="block text-sm font-medium mb-1">Status:</label>
-                  <select name="status" class="w-full rounded border px-3 py-2" ${mode === 'view' ? 'disabled' : ''}>
-                    <option value="Published" ${(plan && plan.status === 'Published') ? 'selected' : ''}>Published</option>
-                    <option value="Draft" ${(plan && plan.status === 'Draft') ? 'selected' : ''}>Draft</option>
-                    <option value="Forecast" ${(plan && plan.status === 'Forecast') ? 'selected' : ''}>Forecast</option>
+                <label class='block text-xs font-medium mb-1'>Status:</label>
+                <select id='plan-status' class='w-full rounded border px-2 py-1 text-xs' ${mode==='view'?'disabled':''}>
+                  <option value='Published' ${statusValue === 'Published' ? 'selected' : ''}>Published</option>
+                  <option value='Draft' ${statusValue === 'Draft' ? 'selected' : ''}>Draft</option>
+                  <option value='Forecast' ${statusValue === 'Forecast' ? 'selected' : ''}>Forecast</option>
                   </select>
                 </div>
                 <div>
-                  <label class="block text-sm font-medium mb-1">Owner:</label>
-                  <input name="owner" type="text" class="w-full rounded border px-3 py-2" value="${plan ? plan.owner : ''}" ${mode === 'view' ? 'readonly' : ''} required />
+                <label class='block text-xs font-medium mb-1'>Owner:</label>
+                <input type='text' id='plan-owner' class='w-full rounded border px-2 py-1 text-xs' placeholder='Owner name' value='${ownerValue}' ${mode==='view'?'readonly':''} required />
                 </div>
                 <div>
-                  <label class="block text-sm font-medium mb-1">Description:</label>
-                  <textarea name="description" class="w-full rounded border px-3 py-2" rows="3" ${mode === 'view' ? 'readonly' : ''}>${plan ? plan.description : ''}</textarea>
+                <label class='block text-xs font-medium mb-1'>Description:</label>
+                <textarea id='plan-desc' class='w-full rounded border px-2 py-1 text-xs' placeholder='Description' rows='2' ${mode==='view'?'readonly':''}>${descValue}</textarea>
                 </div>
-                ${mode !== 'view' ? '<div class="flex justify-end gap-2"><button type="button" id="close-plan-modal" class="px-4 py-2 bg-gray-200 rounded">Cancel</button><button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Update</button></div>' : '<div class="flex justify-end"><button type="button" id="close-plan-modal" class="px-4 py-2 bg-gray-200 rounded">Close</button></div>'}
+              <div class='flex justify-end'>
+                ${mode==='view' ? '<button type="button" id="close-plan-modal" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded">Close</button>' : `<button type='submit' class='px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded'>${mode==='edit'?'Save':'Add'}</button>`}
+              </div>
               </form>
+          </div>
             `;
           } else {
-            content = `
-              <form id="plan-form" class="space-y-4">
+        modal.innerHTML = `
+          <div class='bg-white rounded-xl shadow-lg p-6 max-w-lg w-full mx-4 relative'>
+            <button id='close-plan-modal' class='absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl'>&times;</button>
+            <h3 class='text-2xl font-bold mb-4 text-gray-800'>${mode==='edit'?'Edit':mode==='view'?'View':'Add'} Weekly Plan</h3>
+            <div class='bg-gray-100 rounded p-3 mb-4'>
+              <div class='font-semibold mb-1 text-sm'>Previous Week</div>
+              <div class='text-xs text-gray-700'>${prevWeek}</div>
+              <div class='text-xs text-gray-500'>Dummy: Review, Retrospective, Planning</div>
+            </div>
+            <form id='plan-form' class='space-y-3 bg-blue-50 rounded p-3 mb-4'>
+              <div class='font-semibold mb-1 text-sm'>Current Week</div>
                 <div>
-                  <label class="block text-sm font-medium mb-1">Quarter:</label>
-                  <select name="quarter" class="w-full rounded border px-3 py-2" ${mode === 'view' ? 'disabled' : ''} required>
-                    <option value="">Select Quarter</option>
-                    <option value="Q1 2025" ${(plan && plan.quarter === 'Q1 2025') ? 'selected' : ''}>Q1 2025</option>
-                    <option value="Q2 2025" ${(plan && plan.quarter === 'Q2 2025') ? 'selected' : ''}>Q2 2025</option>
-                    <option value="Q3 2025" ${(plan && plan.quarter === 'Q3 2025') ? 'selected' : ''}>Q3 2025</option>
-                    <option value="Q4 2025" ${(plan && plan.quarter === 'Q4 2025') ? 'selected' : ''}>Q4 2025</option>
+                <label class='block text-xs font-medium mb-1'>Week Start (Monday):</label>
+                <input type='date' id='plan-weekstart' class='w-full rounded border px-2 py-1 text-xs' min='2020-01-01' max='2100-12-31' ${mode==='view'?'readonly':''} required />
+                <div id='plan-week-label' class='text-xs text-gray-600 mt-1'></div>
+                </div>
+                <div>
+                <label class='block text-xs font-medium mb-1'>Created Date:</label>
+                <input type='text' id='plan-created' class='w-full rounded border px-2 py-1 bg-gray-100 cursor-not-allowed text-xs' value='${createdDate}' readonly disabled />
+                </div>
+                <div>
+                <label class='block text-xs font-medium mb-1'>Status:</label>
+                <select id='plan-status' class='w-full rounded border px-2 py-1 text-xs' ${mode==='view'?'disabled':''}>
+                  <option value='Published' ${statusValue === 'Published' ? 'selected' : ''}>Published</option>
+                  <option value='Draft' ${statusValue === 'Draft' ? 'selected' : ''}>Draft</option>
+                  <option value='Forecast' ${statusValue === 'Forecast' ? 'selected' : ''}>Forecast</option>
                   </select>
                 </div>
                 <div>
-                  <label class="block text-sm font-medium mb-1">Created Date:</label>
-                  <input name="createdDate" type="text" class="w-full rounded border px-3 py-2 bg-gray-100" value="${plan ? plan.createdDate : today}" readonly />
+                <label class='block text-xs font-medium mb-1'>Owner:</label>
+                <input type='text' id='plan-owner' class='w-full rounded border px-2 py-1 text-xs' placeholder='Owner name' value='${ownerValue}' ${mode==='view'?'readonly':''} required />
                 </div>
                 <div>
-                  <label class="block text-sm font-medium mb-1">Status:</label>
-                  <select name="status" class="w-full rounded border px-3 py-2" ${mode === 'view' ? 'disabled' : ''}>
-                    <option value="Published" ${(plan && plan.status === 'Published') ? 'selected' : ''}>Published</option>
-                    <option value="Draft" ${(plan && plan.status === 'Draft') ? 'selected' : ''}>Draft</option>
-                    <option value="Forecast" ${(plan && plan.status === 'Forecast') ? 'selected' : ''}>Forecast</option>
-                  </select>
+                <label class='block text-xs font-medium mb-1'>Description:</label>
+                <textarea id='plan-desc' class='w-full rounded border px-2 py-1 text-xs' placeholder='Description' rows='2' ${mode==='view'?'readonly':''}>${descValue}</textarea>
                 </div>
-                <div>
-                  <label class="block text-sm font-medium mb-1">Owner:</label>
-                  <input name="owner" type="text" class="w-full rounded border px-3 py-2" value="${plan ? plan.owner : ''}" ${mode === 'view' ? 'readonly' : ''} required />
-                </div>
-                <div>
-                  <label class="block text-sm font-medium mb-1">Description:</label>
-                  <textarea name="description" class="w-full rounded border px-3 py-2" rows="3" ${mode === 'view' ? 'readonly' : ''}>${plan ? plan.description : ''}</textarea>
-                </div>
-                ${mode !== 'view' ? '<div class="flex justify-end gap-2"><button type="button" id="close-plan-modal" class="px-4 py-2 bg-gray-200 rounded">Cancel</button><button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Update</button></div>' : '<div class="flex justify-end"><button type="button" id="close-plan-modal" class="px-4 py-2 bg-gray-200 rounded">Close</button></div>'}
+              <div class='flex justify-end'>
+                ${mode==='view' ? '<button type="button" id="close-plan-modal" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded">Close</button>' : `<button type='submit' class='px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded'>${mode==='edit'?'Save':'Add'}</button>`}
+              </div>
               </form>
-            `;
-          }
-
-          document.getElementById('plan-modal-content').innerHTML = content;
-
-          // Show modal
+            <div class='bg-gray-100 rounded p-3'>
+              <div class='font-semibold mb-1 text-sm'>Next Week</div>
+              <div class='text-xs text-gray-700'>${nextWeek}</div>
+              <div class='text-xs text-gray-500'>Dummy: Forecast, Planning, Goals</div>
+            </div>
+          </div>
+        `;
+      }
           modal.classList.remove('hidden');
-
-          // Handle form submission
-          const form = document.getElementById('plan-form');
-          if (form) {
-            form.onsubmit = function(e) {
-              e.preventDefault();
-              if (mode === 'edit') {
-                const data = Object.fromEntries(new FormData(form));
                 if (type === 'weekly') {
-                  weeklyPlans[idx] = data;
+        // Week start logic
+        const weekStartInput = document.getElementById('plan-weekstart');
+        const weekLabel = document.getElementById('plan-week-label');
+        if (weekValue) {
+          // If editing, set week start to the first date
+          weekStartInput.value = weekValue.split(' to ')[0];
+          weekLabel.textContent = 'Week: ' + weekValue;
                 } else {
-                  quarterlyPlans[idx] = data;
-                }
-                saveDataToStorage();
-                updateDashboardContent();
-              }
+          weekStartInput.value = format(currMonday);
+          weekLabel.textContent = 'Week: ' + currWeek;
+        }
+        weekStartInput.onchange = function(e) {
+          const start = new Date(e.target.value);
+          const end = new Date(start.getTime() + 6 * 86400000);
+          weekLabel.textContent = 'Week: ' + format(start) + ' to ' + format(end);
+        };
+      }
+      document.getElementById('close-plan-modal').onclick = function() {
               modal.classList.add('hidden');
             };
-          }
-
-          // Handle close button
-          document.getElementById('close-plan-modal').onclick = function() {
-            modal.classList.add('hidden');
-          };
+      document.getElementById('plan-form').onsubmit = function(e) {
+        e.preventDefault();
+        if (mode === 'view') {
+          modal.classList.add('hidden');
+          return;
         }
-
-        // Refine Apps dropdown: Only open on direct hover of the button, not blank space
-        document.addEventListener('DOMContentLoaded', function() {
-          const appsBtn = document.getElementById('apps-menu-btn');
-          const appsDropdown = document.getElementById('apps-menu-dropdown');
-          let dropdownTimeout;
-          if (appsBtn && appsDropdown) {
-            function showDropdown() {
-              clearTimeout(dropdownTimeout);
-              appsDropdown.classList.remove('opacity-0', 'pointer-events-none');
-              appsDropdown.classList.add('opacity-100');
-            }
-            function hideDropdown() {
-              clearTimeout(dropdownTimeout);
-              dropdownTimeout = setTimeout(() => {
-                appsDropdown.classList.add('opacity-0', 'pointer-events-none');
-                appsDropdown.classList.remove('opacity-100');
-              }, 250); // Slightly longer delay for user experience
-            }
-            appsBtn.addEventListener('mouseenter', showDropdown);
-            appsBtn.addEventListener('mouseleave', hideDropdown);
-            appsDropdown.addEventListener('mouseenter', showDropdown);
-            appsDropdown.addEventListener('mouseleave', hideDropdown);
+        if (type === 'weekly') {
+          const weekStart = document.getElementById('plan-weekstart').value;
+          const week = document.getElementById('plan-week-label').textContent.replace('Week: ', '');
+          const owner = document.getElementById('plan-owner').value;
+          const status = document.getElementById('plan-status').value;
+          const desc = document.getElementById('plan-desc').value;
+          if (mode === 'edit' && idx !== null) {
+            dashboardWeeklyPlans[idx].week = week;
+            dashboardWeeklyPlans[idx].owner = owner;
+            dashboardWeeklyPlans[idx].status = status;
+            dashboardWeeklyPlans[idx].description = desc;
+            dashboardWeeklyPlans[idx].createdDate = createdDate;
+          } else if (mode === 'add') {
+            dashboardWeeklyPlans.unshift({ week: week, owner: owner, status: status, description: desc, createdDate: createdDate });
           }
-        });
-      </script>
+        } else if (type === 'quarterly') {
+          const quarter = document.getElementById('plan-quarter').value;
+          const owner = document.getElementById('plan-owner').value;
+          const status = document.getElementById('plan-status').value;
+          const desc = document.getElementById('plan-desc').value;
+          if (mode === 'edit' && idx !== null) {
+            dashboardQuarterlyPlans[idx].quarter = quarter;
+            dashboardQuarterlyPlans[idx].owner = owner;
+            dashboardQuarterlyPlans[idx].status = status;
+            dashboardQuarterlyPlans[idx].description = desc;
+            dashboardQuarterlyPlans[idx].createdDate = createdDate;
+          } else if (mode === 'add') {
+            dashboardQuarterlyPlans.unshift({ quarter: quarter, owner: owner, status: status, description: desc, createdDate: createdDate });
+          }
+        }
+        renderDashboardPlans();
+        modal.classList.add('hidden');
+      };
+    }
+    // --- FEED DATA (MATCHED TO INDEX) ---
+    let dashboardFeed = [
+      { title: 'Weekly Team Update - June 2025', desc: 'Latest updates from our team members and project progress', date: '2025-06-03', likes: 42, comments: 5, starred: true },
+      { title: 'Design System Workshop', desc: 'Join us for a deep dive into our new design system implementation', date: '2025-06-02', likes: 35, comments: 8 },
+      { title: 'New Office Location', desc: 'We\'re excited to announce our new office space in downtown!', date: '2025-05-29', likes: 56, comments: 12, starred: true },
+      { title: 'Summer Team Building Event', desc: 'Save the date for our annual summer team building activities', date: '2025-05-22', likes: 78, comments: 15, starred: true }
+    ];
+    function renderDashboardFeed() {
+      const feedContainer = document.getElementById('feed-list');
+      if (!feedContainer) return;
+      feedContainer.innerHTML = '';
+      if (dashboardFeed.length === 0) {
+        feedContainer.innerHTML = '<div class="text-gray-500 text-center py-8">No feed items yet.</div>';
+        return;
+      }
+      dashboardFeed.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'p-4 bg-blue-50 rounded-lg border border-blue-100 mb-4';
+        card.innerHTML = `
+          <div class='flex items-start justify-between'>
+            <div class='flex-1'>
+              <h3 class='font-semibold text-blue-800 mb-2'>${item.title}</h3>
+              <p class='text-sm text-gray-700 mb-2'>${item.desc}</p>
+              <div class='flex items-center gap-4 text-xs text-gray-500'>
+                <span>${item.date}</span>
+                <span class="flex items-center gap-1 text-yellow-600 font-semibold"><i class="ph ph-thumbs-up"></i>${item.likes}</span>
+                <span class="flex items-center gap-1 text-gray-700 font-semibold"><i class="ph ph-chat-centered"></i>${item.comments}</span>
+              </div>
+            </div>
+            ${item.starred ? "<div class='text-yellow-500'><i class='ph ph-star-fill'></i></div>" : ''}
+          </div>
+        `;
+        feedContainer.appendChild(card);
+      });
+    }
+    renderDashboardFeed();
+    // --- WORK DATA (MATCHED TO INDEX) ---
+    let dashboardWork = [
+      { title: 'UI/UX Design System Implementation', category: 'Design', type: 'Today' },
+      { title: 'Mobile App Development Sprint', category: 'Development', type: 'Last week' },
+      { title: 'Client Presentation Deck', category: 'Marketing', type: 'Older' },
+      { title: 'Team Training Workshop', category: 'HR', type: 'Older' },
+      { title: 'Product Roadmap Planning', category: 'Strategy', type: 'Older' },
+      { title: 'Annual Performance Review', category: 'HR', type: 'Older' }
+    ];
+    function renderDashboardWork() {
+      const workContainer = document.getElementById('work-list');
+      if (!workContainer) return;
+      workContainer.innerHTML = '';
+      if (dashboardWork.length === 0) {
+        workContainer.innerHTML = '<div class="text-gray-500 text-center py-8">No work items yet.</div>';
+        return;
+      }
+      dashboardWork.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'p-4 bg-blue-50 rounded-lg border border-blue-100 mb-4';
+        card.innerHTML = `<h3 class='font-semibold text-blue-800 mb-1'>${item.title}</h3><div class='text-xs text-gray-500 mb-1'>${item.category} &middot; ${item.type}</div>`;
+        workContainer.appendChild(card);
+      });
+    }
+    renderDashboardWork();
+    // --- REVENUE DATA (MATCHED TO INDEX) ---
+    let dashboardRevenue = [
+      { category: 'Auto', amount: '₹4.20 Cr', people: [
+        { name: 'Amit Sharma', company: 'AutoMakers Ltd', amount: '₹2.00 Cr', date: '2025-06-01' },
+        { name: 'Priya Singh', company: 'Speedster Motors', amount: '₹2.20 Cr', date: '2025-06-03' }
+      ] },
+      { category: 'Consumer goods', amount: '₹3.10 Cr', people: [
+        { name: 'Rahul Verma', company: 'FreshGoods Pvt Ltd', amount: '₹1.50 Cr', date: '2025-06-02' },
+        { name: 'Sneha Patel', company: 'DailyNeeds Inc', amount: '₹1.60 Cr', date: '2025-06-04' }
+      ] },
+      { category: 'Emerging (Restaurant, Public services)', amount: '₹2.75 Cr', people: [
+        { name: 'Vikram Desai', company: 'UrbanEats', amount: '₹1.25 Cr', date: '2025-06-05' },
+        { name: 'Ananya Iyer', company: 'CityServe', amount: '₹1.50 Cr', date: '2025-06-06' }
+      ] },
+      { category: 'Entertainment & Media', amount: '₹2.00 Cr', people: [
+        { name: 'Rohan Mehra', company: 'MediaWorks', amount: '₹1.00 Cr', date: '2025-06-07' },
+        { name: 'Meera Nair', company: 'FunTimes Studios', amount: '₹1.00 Cr', date: '2025-06-08' }
+      ] },
+      { category: 'Pharma', amount: '₹1.80 Cr', people: [
+        { name: 'Arjun Desai', company: 'HealthFirst', amount: '₹1.00 Cr', date: '2025-06-09' },
+        { name: 'Meera Kapoor', company: 'PharmaPlus', amount: '₹0.80 Cr', date: '2025-06-10' }
+      ] },
+      { category: 'Retail', amount: '₹2.50 Cr', people: [
+        { name: 'Siddharth Jain', company: 'ShopEase', amount: '₹1.20 Cr', date: '2025-06-11' },
+        { name: 'Anjali Menon', company: 'RetailMart', amount: '₹1.30 Cr', date: '2025-06-12' }
+      ] }
+    ];
+    function renderDashboardRevenue() {
+      const revenueContainer = document.getElementById('revenue-list');
+      if (!revenueContainer) return;
+      revenueContainer.innerHTML = '';
+      if (dashboardRevenue.length === 0) {
+        revenueContainer.innerHTML = '<div class="text-gray-500 text-center py-8">No revenue data yet.</div>';
+        return;
+      }
+      const categoryOrder = [
+        'Auto',
+        'Consumer goods',
+        'Emerging (Restaurant, Public services)',
+        'Entertainment & Media',
+        'Pharma',
+        'Retail'
+      ];
+      categoryOrder.forEach(category => {
+        const item = dashboardRevenue.find(i => i.category === category);
+        if (!item) return;
+        const card = document.createElement('div');
+        card.className = 'mb-6';
+        card.innerHTML = `
+          <div class='p-4 bg-blue-50 rounded-lg border border-blue-100 mb-2'>
+            <div class="mb-3 font-semibold text-gray-800">${item.category} - ${item.amount}</div>
+            <div class="space-y-2">
+              ${item.people.map(person => `
+                <div class="flex items-center justify-between text-sm">
+                  <div>
+                    <span class="font-semibold text-blue-800">${person.name}</span>
+                    <span class="text-gray-500 ml-2">(${person.company})</span>
     </div>
-    <script>
-      // Highlight active header menu item
-      (function() {
-        var path = window.location.pathname.split('/').pop();
-        if (!path) path = 'index.html';
-        document.querySelectorAll('header nav a').forEach(function(link) {
-          var icon = link.querySelector('i');
-          if (link.getAttribute('href') === path) {
-            link.classList.remove('text-gray-700');
-            link.classList.add('text-blue-600', 'font-bold');
-            if (icon) {
-              icon.classList.remove('text-gray-700');
-              icon.classList.add('text-blue-600', 'font-bold');
-            }
-          } else {
-            link.classList.remove('text-blue-600', 'font-bold');
-            link.classList.add('text-gray-700');
-            if (icon) {
-              icon.classList.remove('text-blue-600', 'font-bold');
-              icon.classList.add('text-gray-700');
-            }
-          }
-        });
-      })();
+                  <div class="font-semibold text-gray-700">${person.amount}</div>
+                  <div class="text-xs text-gray-400">${person.date}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+        revenueContainer.appendChild(card);
+      });
+    }
+    renderDashboardRevenue();
+    // --- PEOPLE DATA (MATCHED TO INDEX) ---
+    let dashboardPeople = {
+      anniversaries: [
+        { name: 'Amit Sharma', years: 5, date: 'Jun 03', likes: 42, comments: 8 },
+        { name: 'Priya Singh', years: 3, date: 'Jun 06', likes: 35, comments: 6 },
+        { name: 'Rahul Verma', years: 7, date: 'Jun 04', likes: 48, comments: 10 },
+        { name: 'Sneha Patel', years: 2, date: 'Jun 09', likes: 28, comments: 4 }
+      ],
+      birthdays: [
+        { name: 'Vikram Desai', date: 'Jun 05', likes: 32, comments: 5 },
+        { name: 'Ananya Iyer', date: 'Jun 08', likes: 29, comments: 3 },
+        { name: 'Rohan Mehra', date: 'Jun 08', likes: 25, comments: 2 },
+        { name: 'Meera Nair', date: 'Jun 08', likes: 27, comments: 4 }
+      ],
+      announcements: [
+        {
+          title: 'New Team Member - Saurabh Gupta',
+          starred: true,
+          desc: 'Welcome to our newest team member who will be joining the Design team!',
+          date: '2025-06-03',
+          likes: 45,
+          comments: 8
+        },
+        {
+          title: 'Office Renovation Complete',
+          starred: true,
+          desc: 'Our newly renovated office space is now open for everyone!',
+          date: '2025-05-27',
+          likes: 56,
+          comments: 12
+        }
+      ]
+    };
+    function renderDashboardPeople() {
+      const peopleContainer = document.getElementById('people-list');
+      if (!peopleContainer) return;
+      peopleContainer.innerHTML = '';
+      let html = `<div class='mb-8'>
+        <h3 class='text-lg font-semibold flex items-center gap-2 mb-3'><i class='ph ph-calendar'></i> Work Anniversaries</h3>
+        ${dashboardPeople.anniversaries.map(item => `
+          <div class='p-4 bg-purple-50 rounded-lg border border-purple-100 mb-4 flex items-center gap-4'>
+            <div class='bg-white rounded-full w-12 h-12 flex items-center justify-center text-2xl text-gray-400 border'><i class='ph ph-user'></i></div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-semibold text-purple-800">${item.name}</span>
+              </div>
+              <p class='text-sm text-gray-600'>${item.years} years, ${item.date}</p>
+              <div class='flex items-center gap-4 text-xs text-gray-500 mt-1'>
+                <span class="flex items-center gap-1 text-yellow-600 font-semibold"><i class="ph ph-thumbs-up"></i>${item.likes}</span>
+                <span class="flex items-center gap-1 text-gray-700 font-semibold"><i class="ph ph-chat-centered"></i>${item.comments}</span>
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>`;
+      html += `<div class='mb-8'>
+        <h3 class='text-lg font-semibold flex items-center gap-2 mb-3'><i class='ph ph-cake'></i> Birthdays</h3>
+        ${dashboardPeople.birthdays.map(item => `
+          <div class='p-4 bg-purple-50 rounded-lg border border-purple-100 mb-4 flex items-center gap-4'>
+            <div class='bg-white rounded-full w-12 h-12 flex items-center justify-center text-2xl text-gray-400 border'><i class='ph ph-user'></i></div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-semibold text-purple-800">${item.name}</span>
+              </div>
+              <p class='text-sm text-gray-600'>${item.date}</p>
+              <div class='flex items-center gap-4 text-xs text-gray-500 mt-1'>
+                <span class="flex items-center gap-1 text-yellow-600 font-semibold"><i class="ph ph-thumbs-up"></i>${item.likes}</span>
+                <span class="flex items-center gap-1 text-gray-700 font-semibold"><i class="ph ph-chat-centered"></i>${item.comments}</span>
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>`;
+      html += `<div>
+        <h3 class='text-lg font-semibold flex items-center gap-2 mb-3'><i class='ph ph-megaphone'></i> Personal Announcements</h3>
+        ${dashboardPeople.announcements.map(item => `
+          <div class='p-4 bg-pink-50 rounded-lg border border-pink-100 mb-4'>
+            <div class='flex items-center gap-2 mb-1'>
+              <h4 class='font-semibold text-pink-800'>${item.title}</h4>
+              ${item.starred ? "<span class='text-yellow-500'><i class='ph ph-star-fill'></i></span>" : ''}
+            </div>
+            <p class='text-sm text-gray-600 mb-2'>${item.desc}</p>
+            <div class='flex items-center gap-4 text-xs text-gray-500'>
+              <span>${item.date}</span>
+              <span class="flex items-center gap-1 text-yellow-600 font-semibold"><i class="ph ph-thumbs-up"></i>${item.likes}</span>
+              <span class="flex items-center gap-1 text-gray-700 font-semibold"><i class="ph ph-chat-centered"></i>${item.comments}</span>
+            </div>
+          </div>
+        `).join('')}
+      </div>`;
+      peopleContainer.innerHTML = `<div class='flex flex-col'>${html}</div>`;
+    }
+    renderDashboardPeople();
     </script>
   </body>
 </html> 
