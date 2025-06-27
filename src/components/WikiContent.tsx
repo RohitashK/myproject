@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -252,13 +251,13 @@ const pageContent = {
     )
   },
   'settings': {
-    title: 'Application Settings',
+    title: 'User Settings',
     lastUpdated: '2024-06-15',
     author: 'Config Team',
     content: (
       <div className="space-y-6">
         <p className="text-gray-700">
-          Configure your application settings for optimal performance and user experience.
+          Configure your user settings and preferences for optimal experience.
         </p>
         
         <Card>

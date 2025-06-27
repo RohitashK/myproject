@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -37,7 +36,7 @@ const menuItems = [
     items: [
       { id: 'user-management', title: 'User Management', icon: Users },
       { id: 'permissions', title: 'Permissions', icon: Shield },
-      { id: 'settings', title: 'Settings', icon: Settings },
+      { id: 'settings', title: 'User Settings', icon: Settings },
     ]
   },
   {

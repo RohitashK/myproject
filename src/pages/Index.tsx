@@ -738,7 +738,7 @@ const Index = () => {
                   </NavigationMenuItem>
                   <NavigationMenuItem>
                     <button className="text-white bg-transparent border-0 rounded-md px-2 py-2 text-base font-medium transition-colors focus:outline-none hover:bg-white hover:text-blue-600 focus:bg-white focus:text-blue-600 flex items-center gap-1" onClick={() => setDummyPage('Settings')}>
-                      <Settings className="w-5 h-5" /> Settings
+                      <Settings className="w-5 h-5" /> User Settings
                     </button>
                   </NavigationMenuItem>
                   <NavigationMenuItem>
@@ -916,7 +916,7 @@ const Index = () => {
                   <button onClick={() => setDummyPage('Reports')}><TrendingUp className="w-5 h-5 mr-2 inline" />Reports</button>
                 </Button>
                 <Button variant="ghost" className="w-full text-left text-white hover:bg-white/20 justify-start" asChild>
-                  <button onClick={() => setDummyPage('Settings')}><Settings className="w-5 h-5 mr-2 inline" />Settings</button>
+                  <button onClick={() => setDummyPage('Settings')}><Settings className="w-5 h-5 mr-2 inline" />User Settings</button>
                 </Button>
                 <Button variant="ghost" className="w-full text-left text-white hover:bg-white/20 justify-start" asChild>
                   <button onClick={() => setDummyPage('Help')}><Bell className="w-5 h-5 mr-2 inline" />Help</button>
