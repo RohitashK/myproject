@@ -1,0 +1,35 @@
+<header class="fixed-header bg-white shadow p-4 flex items-center justify-between">
+  <div class="flex items-center gap-2">
+    <div class="h-16 w-16 flex items-center justify-center bg-white">
+      <img src="public/logo.jpg" alt="Logo" class="h-full w-full object-contain" />
+    </div>
+  </div>
+  <nav class="flex items-center gap-8">
+    <a href="index.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-house"></i> Home</a>
+    <a href="Dashboard.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-layout"></i> Dashboard</a>
+    <a href="Projects.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-book-open"></i> Projects</a>
+    <a href="Reports.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-trend-up"></i> Reports</a>
+    <a href="Help.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-question"></i> Help</a>
+    <div class="relative inline-block align-middle">
+      <button id="apps-menu-btn" class="flex items-center gap-1 text-gray-700 hover:text-blue-600 focus:outline-none px-2 py-1 rounded relative z-20">
+        <i class="ph ph-grid-four"></i> Apps
+        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+      <div id="apps-menu-dropdown" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg opacity-0 pointer-events-none transition-opacity z-10">
+        <a href="https://expo.dev" class="block px-4 py-2 hover:bg-gray-100">Expo</a>
+        <a href="https://chat.openai.com" class="block px-4 py-2 hover:bg-gray-100">ChatGPT</a>
+        <a href="https://claude.ai" class="block px-4 py-2 hover:bg-gray-100">Claude</a>
+        <a href="https://gemini.google.com" class="block px-4 py-2 hover:bg-gray-100">Gemini</a>
+        <a href="https://copilot.microsoft.com" class="block px-4 py-2 hover:bg-gray-100">Copilot</a>
+        <a href="https://www.midjourney.com" class="block px-4 py-2 hover:bg-gray-100">Midjourney</a>
+        <a href="https://openai.com/dall-e-2" class="block px-4 py-2 hover:bg-gray-100">DALL-E</a>
+        <a href="https://stability.ai" class="block px-4 py-2 hover:bg-gray-100">Stable Diffusion</a>
+      </div>
+    </div>
+    <div class="flex items-center gap-2 ml-4">
+      <img src="public/profile.png" alt="Profile" class="w-10 h-10 rounded-full cursor-pointer hover:opacity-80 transition-opacity border-2 border-gray-200" onclick="window.location.href='Settings.html'" title="Settings" />
+    </div>
+  </nav>
+</header> 

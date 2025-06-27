@@ -1,0 +1,412 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* My Plan tab icon persistent blue style */
+.myplan-action-btn {
+  @apply text-white/60 hover:text-blue-500 transition-colors flex items-center justify-center h-10 w-10 rounded-xl;
+}
+
+.myplan-action-btn:hover {
+  @apply bg-white/90 shadow border border-gray-200;
+}
+
+/* Liquid Tabs Panel */
+.liquid-tabs-list {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255,255,255,0.13);
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.08);
+  border: 1.5px solid rgba(255,255,255,0.25);
+}
+
+.liquid-tab-trigger {
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+  background: transparent !important;
+  border-radius: 9999px;
+  transition: none;
+}
+
+.liquid-tab-trigger:hover,
+.liquid-tab-trigger:focus,
+.liquid-tab-trigger:active {
+  background: #fff !important;
+  color: #2563eb !important;
+}
+
+.liquid-tab-trigger:hover .fa-icon,
+.liquid-tab-trigger:focus .fa-icon,
+.liquid-tab-trigger:active .fa-icon {
+  color: #2563eb !important;
+}
+
+.liquid-tab-trigger[data-state="active"] {
+  background: #fff !important;
+  color: #2563eb !important;
+}
+
+.liquid-tab-trigger[data-state="active"] .fa-icon {
+  color: #2563eb !important;
+}
+
+/* Remove all animations */
+.liquid-tab-trigger::before,
+.liquid-tab-trigger[data-state="active"]::before,
+.liquid-tab-trigger:hover::before,
+.liquid-tab-trigger:focus::before {
+  display: none !important;
+}
+
+/* Disable all animations globally */
+* {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* TabsContent animation override */
+[role="tabpanel"] {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Set global transition duration to 5s */
+* {
+  transition-duration: 5s !important;
+}
+
+/* Utility class to disable animation/transition */
+.no-animation, .no-animation * {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Sidebar icon rollover: icons blue on hover/focus/active */
+.peer\/menu-button:hover,
+.peer\/menu-button:focus,
+.peer\/menu-button:active {
+  background: #fff !important;
+  color: #2563eb !important;
+}
+
+.peer\/menu-button[data-active="true"] {
+  background: #fff !important;
+  color: #2563eb !important;
+}
+
+.peer\/menu-button[data-active="true"] svg {
+  color: #2563eb !important;
+}
+
+/* Chat Bot Mobile Zoom Prevention */
+/* Prevent zooming on mobile devices when interacting with chat bot */
+@media (max-width: 768px) {
+  /* Prevent zoom on input focus */
+  input[type="text"], 
+  input[type="email"], 
+  input[type="password"], 
+  textarea, 
+  select {
+    font-size: 16px !important;
+    transform: none !important;
+  }
+  
+  /* Ensure chat bot dialog maintains proper scaling */
+  .fixed.bottom-6.right-6 {
+    transform: none !important;
+    -webkit-transform: none !important;
+  }
+  
+  /* Prevent any zoom animations on chat bot elements */
+  .fixed.bottom-6.right-6 * {
+    transform: none !important;
+    -webkit-transform: none !important;
+    transition: none !important;
+  }
+  
+  /* Ensure chat dialog doesn't cause viewport issues */
+  .fixed.bottom-6.right-6.z-50 {
+    max-width: calc(100vw - 2rem) !important;
+    max-height: calc(100vh - 2rem) !important;
+  }
+  
+  /* Prevent double-tap zoom on chat bot icon */
+  .fixed.bottom-6.right-6 {
+    touch-action: manipulation !important;
+  }
+  
+  /* Ensure proper touch handling for chat bot */
+  .fixed.bottom-6.right-6 button,
+  .fixed.bottom-6.right-6 input {
+    touch-action: manipulation !important;
+  }
+  
+  /* Make dialogs more compact on mobile */
+  [role="dialog"] {
+    margin: 0.25rem !important;
+    max-width: calc(100vw - 0.5rem) !important;
+    max-height: calc(100vh - 0.5rem) !important;
+    width: calc(100vw - 0.5rem) !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    -webkit-transform: translate(-50%, -50%) !important;
+  }
+  
+  /* Compact spacing for dialog content */
+  [role="dialog"] > div {
+    padding: 0.5rem !important;
+    gap: 0.25rem !important;
+  }
+  
+  /* Smaller text and spacing for mobile dialogs */
+  [role="dialog"] h2 {
+    font-size: 0.875rem !important;
+    line-height: 1.3 !important;
+    margin-bottom: 0.25rem !important;
+  }
+  
+  [role="dialog"] label {
+    font-size: 0.6875rem !important;
+    margin-bottom: 0.125rem !important;
+  }
+  
+  [role="dialog"] input,
+  [role="dialog"] select,
+  [role="dialog"] textarea {
+    font-size: 16px !important;
+    padding: 0.25rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+  
+  /* Compact form sections */
+  [role="dialog"] .space-y-4 > div {
+    margin-bottom: 0.375rem !important;
+  }
+  
+  [role="dialog"] .space-y-6 > div {
+    margin-bottom: 0.5rem !important;
+  }
+  
+  [role="dialog"] .space-y-3 > div {
+    margin-bottom: 0.375rem !important;
+  }
+  
+  [role="dialog"] .space-y-2 > div {
+    margin-bottom: 0.25rem !important;
+  }
+  
+  /* Smaller buttons in dialogs */
+  [role="dialog"] button {
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.6875rem !important;
+  }
+  
+  /* Prevent zoom on dialog inputs */
+  [role="dialog"] input:focus,
+  [role="dialog"] select:focus,
+  [role="dialog"] textarea:focus {
+    transform: none !important;
+    -webkit-transform: none !important;
+  }
+  
+  /* Touch action for dialog elements */
+  [role="dialog"] * {
+    touch-action: manipulation !important;
+  }
+  
+  /* Compact dialog sections */
+  [role="dialog"] .bg-gray-100,
+  [role="dialog"] .bg-gray-50,
+  [role="dialog"] .bg-blue-50 {
+    padding: 0.375rem !important;
+    margin-bottom: 0.375rem !important;
+  }
+  
+  /* Smaller text for dialog sections */
+  [role="dialog"] .text-sm {
+    font-size: 0.625rem !important;
+  }
+  
+  [role="dialog"] .text-xs {
+    font-size: 0.5rem !important;
+  }
+  
+  /* Compact dialog footer */
+  [role="dialog"] footer {
+    padding-top: 0.25rem !important;
+    gap: 0.25rem !important;
+  }
+  
+  /* Ensure dialog is centered */
+  [role="dialog"] {
+    position: fixed !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    -webkit-transform: translate(-50%, -50%) !important;
+  }
+  
+  /* Reduce max height for better mobile fit */
+  [role="dialog"] {
+    max-height: 65vh !important;
+  }
+  
+  /* Ensure input[type='date'] inside dialogs is always 100% width and fits the dialog on mobile devices */
+  [role="dialog"] input[type="date"] {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    display: block !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background-color: #fff !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 0.375rem !important;
+    padding: 0.25rem 0.5rem !important;
+  }
+  
+  /* Safari-specific: Remove extra padding */
+  @media not all and (min-resolution:.001dpcm) { @supports (-webkit-appearance:none) {
+    [role="dialog"] input[type="date"] {
+      padding-right: 0 !important;
+    }
+  }}
+  
+  [role="dialog"] .w-full,
+  [role="dialog"] .max-w-xs,
+  [role="dialog"] .max-w-full {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+  [role="dialog"] .flex,
+  [role="dialog"] .items-center {
+    flex-wrap: nowrap !important;
+    gap: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+@media (max-width: 2000px) {
+  [role="dialog"] input[type="date"] {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    display: block !important;
+  }
+}

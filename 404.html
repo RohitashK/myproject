@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 Not Found</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="min-h-screen flex items-center justify-center bg-gray-100">
+    <header class="fixed-header bg-white shadow p-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="h-16 w-16 flex items-center justify-center bg-white">
+          <img src="public/logo.jpg" alt="Logo" class="h-full w-full object-contain" />
+        </div>
+      </div>
+      <nav class="flex items-center gap-8">
+        <a href="index.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-house"></i> Home</a>
+        <a href="Dashboard.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-layout"></i> Dashboard</a>
+        <a href="Projects.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-book-open"></i> Projects</a>
+        <a href="Reports.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-trend-up"></i> Reports</a>
+        <a href="Help.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-question"></i> Help</a>
+        <div class="relative inline-block align-middle">
+          <button id="apps-menu-btn" class="flex items-center gap-1 text-gray-700 hover:text-blue-600 focus:outline-none px-2 py-1 rounded relative z-20">
+            <i class="ph ph-grid-four"></i> Apps
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div id="apps-menu-dropdown" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg opacity-0 pointer-events-none transition-opacity z-10">
+            <a href="https://expo.dev" class="block px-4 py-2 hover:bg-gray-100">Expo</a>
+            <a href="https://chat.openai.com" class="block px-4 py-2 hover:bg-gray-100">ChatGPT</a>
+            <a href="https://claude.ai" class="block px-4 py-2 hover:bg-gray-100">Claude</a>
+            <a href="https://gemini.google.com" class="block px-4 py-2 hover:bg-gray-100">Gemini</a>
+            <a href="https://copilot.microsoft.com" class="block px-4 py-2 hover:bg-gray-100">Copilot</a>
+            <a href="https://www.midjourney.com" class="block px-4 py-2 hover:bg-gray-100">Midjourney</a>
+            <a href="https://openai.com/dall-e-2" class="block px-4 py-2 hover:bg-gray-100">DALL-E</a>
+            <a href="https://stability.ai" class="block px-4 py-2 hover:bg-gray-100">Stable Diffusion</a>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 ml-4">
+          <img src="public/profile.png" alt="Profile" class="w-10 h-10 rounded-full cursor-pointer hover:opacity-80 transition-opacity border-2 border-gray-200" onclick="window.location.href='Settings.html'" title="Settings" />
+        </div>
+      </nav>
+    </header>
+    <div class="text-center">
+      <h1 class="text-4xl font-bold mb-4">404</h1>
+      <p class="text-xl text-gray-600 mb-4">Oops! Page not found</p>
+      <a href="index.html" class="text-blue-500 hover:text-blue-700 underline">Return to Home</a>
+    </div>
+    <footer class="bg-white text-center p-4 shadow fixed bottom-0 left-0 w-full z-30">
+      &copy; 2024 Personal Project. All rights reserved.
+    </footer>
+    <script>
+      // Highlight active header menu item
+      (function() {
+        var path = window.location.pathname.split('/').pop();
+        if (!path) path = 'index.html';
+        document.querySelectorAll('header nav a').forEach(function(link) {
+          var icon = link.querySelector('i');
+          if (link.getAttribute('href') === path) {
+            link.classList.remove('text-gray-700');
+            link.classList.add('text-blue-600', 'font-bold');
+            if (icon) {
+              icon.classList.remove('text-gray-700');
+              icon.classList.add('text-blue-600', 'font-bold');
+            }
+          } else {
+            link.classList.remove('text-blue-600', 'font-bold');
+            link.classList.add('text-gray-700');
+            if (icon) {
+              icon.classList.remove('text-blue-600', 'font-bold');
+              icon.classList.add('text-gray-700');
+            }
+          }
+        });
+      })();
+
+      document.addEventListener('DOMContentLoaded', function() {
+        const appsBtn = document.getElementById('apps-menu-btn');
+        const appsDropdown = document.getElementById('apps-menu-dropdown');
+        let dropdownTimeout;
+        if (appsBtn && appsDropdown) {
+          function showDropdown() {
+            clearTimeout(dropdownTimeout);
+            appsDropdown.classList.remove('opacity-0', 'pointer-events-none');
+            appsDropdown.classList.add('opacity-100');
+          }
+          function hideDropdown() {
+            clearTimeout(dropdownTimeout);
+            dropdownTimeout = setTimeout(() => {
+              appsDropdown.classList.add('opacity-0', 'pointer-events-none');
+              appsDropdown.classList.remove('opacity-100');
+            }, 250); // Slightly longer delay for user experience
+          }
+          appsBtn.addEventListener('mouseenter', showDropdown);
+          appsBtn.addEventListener('mouseleave', hideDropdown);
+          appsDropdown.addEventListener('mouseenter', showDropdown);
+          appsDropdown.addEventListener('mouseleave', hideDropdown);
+        }
+      });
+    </script>
+  </body>
+</html> 

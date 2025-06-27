@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0" />
+    <title>Personal Project</title>
+    <meta name="description" content="Modern corporate wiki and knowledge management platform" />
+    <meta name="author" content="Exponential" />
+    <link rel="icon" href="public/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+      body { background: #f3f4f6; }
+      .fixed-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 40; }
+      .fixed-sidebar { position: fixed; top: 80px; left: 0; height: calc(100vh - 80px); z-index: 30; }
+      .main-content-scroll {
+        margin-top: 96px;
+        padding: 2rem;
+        background: transparent;
+        min-width: 0;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        width: calc(100vw - 340px);
+        box-sizing: border-box;
+        margin-left: 340px;
+      }
+      @media (max-width: 1024px) {
+        .fixed-sidebar { position: static; height: auto; width: 100%; margin-bottom: 1rem; }
+        .main-content-scroll {
+          margin-left: 0;
+          width: 100vw;
+          min-height: 0;
+          height: auto;
+          padding: 1rem;
+          align-items: stretch;
+        }
+      }
+      /* Ensure only one white background for the right panel */
+      .tab-content-single-bg > div.bg-white {
+        background: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 bg-opacity-80 font-sans">
+    <div class="min-h-screen">
+      <header class="fixed-header bg-white shadow p-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="h-16 w-16 flex items-center justify-center bg-white">
+            <img src="public/logo.jpg" alt="Logo" class="h-full w-full object-contain" />
+          </div>
+        </div>
+        <nav class="flex items-center gap-8">
+          <a href="index.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-house"></i> Home</a>
+          <a href="Dashboard.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-layout"></i> Dashboard</a>
+          <a href="Projects.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-book-open"></i> Projects</a>
+          <a href="Reports.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-trend-up"></i> Reports</a>
+          <a href="Help.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-question"></i> Help</a>
+          <div class="relative inline-block align-middle">
+            <button id="apps-menu-btn" class="flex items-center gap-1 text-gray-700 hover:text-blue-600 focus:outline-none px-2 py-1 rounded relative z-20">
+              <i class="ph ph-grid-four"></i> Apps
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div id="apps-menu-dropdown" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg opacity-0 pointer-events-none transition-opacity z-10">
+              <a href="https://expo.dev" class="block px-4 py-2 hover:bg-gray-100">Expo</a>
+              <a href="https://chat.openai.com" class="block px-4 py-2 hover:bg-gray-100">ChatGPT</a>
+              <a href="https://claude.ai" class="block px-4 py-2 hover:bg-gray-100">Claude</a>
+              <a href="https://gemini.google.com" class="block px-4 py-2 hover:bg-gray-100">Gemini</a>
+              <a href="https://copilot.microsoft.com" class="block px-4 py-2 hover:bg-gray-100">Copilot</a>
+              <a href="https://www.midjourney.com" class="block px-4 py-2 hover:bg-gray-100">Midjourney</a>
+              <a href="https://openai.com/dall-e-2" class="block px-4 py-2 hover:bg-gray-100">DALL-E</a>
+              <a href="https://stability.ai" class="block px-4 py-2 hover:bg-gray-100">Stable Diffusion</a>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 ml-4">
+            <img src="public/profile.png" alt="Profile" class="w-10 h-10 rounded-full cursor-pointer hover:opacity-80 transition-opacity border-2 border-gray-200" onclick="window.location.href='Settings.html'" title="Settings" />
+          </div>
+        </nav>
+      </header>
+      <!-- Side Panel (Tabbed) -->
+      <aside class="fixed-sidebar bg-white shadow-lg w-80 p-6 rounded-r-2xl border-r border-gray-200 hidden lg:block">
+        <div>
+          <h2 class="text-xl font-bold mb-4">Menu</h2>
+          <ul id="tab-menu">
+            <li class="mb-2"><button class="w-full flex items-center gap-2 text-left py-2 px-4 rounded hover:bg-blue-50" data-tab="feed"><i class="ph ph-book-open"></i> My Feed</button></li>
+            <li class="mb-2"><button class="w-full flex items-center gap-2 text-left py-2 px-4 rounded hover:bg-blue-50" data-tab="kudos"><i class="ph ph-thumbs-up"></i> Kudos</button></li>
+            <li class="mb-2"><button class="w-full flex items-center gap-2 text-left py-2 px-4 rounded hover:bg-blue-50" data-tab="people"><i class="ph ph-users"></i> People</button></li>
+            <li class="mb-2"><button class="w-full flex items-center gap-2 text-left py-2 px-4 rounded hover:bg-blue-50" data-tab="revenue"><i class="ph ph-trend-up"></i> Revenue</button></li>
+            <li class="mb-2"><button class="w-full flex items-center gap-2 text-left py-2 px-4 rounded hover:bg-blue-50" data-tab="work"><i class="ph ph-calendar"></i> My Task</button></li>
+            <li class="mb-2"><button class="w-full flex items-center gap-2 text-left py-2 px-4 rounded hover:bg-blue-50" data-tab="plan"><i class="ph ph-gear"></i> My Plan</button></li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Main Content (Right Panel) -->
+      <main class="main-content-scroll">
+        <div class="single-bg-panel bg-white rounded-xl shadow-lg border border-gray-200 p-6 mx-auto" style="width: 1200px; min-height: 600px;">
+          <h2 id="tab-title" class="text-3xl font-bold mb-6 flex items-center gap-2"><i class="ph ph-book-open"></i> My Task</h2>
+          <div id="tab-content" class="tab-content-single-bg">
+            <!-- Tab content will be rendered here by JS -->
+          </div>
+        </div>
+      </main>
+
+      <footer class="bg-white text-center p-4 shadow fixed bottom-0 left-0 w-full z-30">
+        &copy; 2024 Personal Project. All rights reserved.
+      </footer>
+    </div>
+    <div id="chatbot-root"></div>
+    <script>
+      // Restore tabData and renderTab logic
+      const tabData = {
+        feed: [
+          { title: 'Weekly Team Update - June 2025', desc: 'Latest updates from our team members and project progress', date: '2025-06-03', likes: 42, comments: 5, starred: true },
+          { title: 'Design System Workshop', desc: 'Join us for a deep dive into our new design system implementation', date: '2025-06-02', likes: 35, comments: 8 },
+          { title: 'New Office Location', desc: 'We\'re excited to announce our new office space in downtown!', date: '2025-05-29', likes: 56, comments: 12, starred: true },
+          { title: 'Summer Team Building Event', desc: 'Save the date for our annual summer team building activities', date: '2025-05-22', likes: 78, comments: 15, starred: true }
+        ],
+        kudos: [
+          { author: 'Riya Mehra', content: 'Amazing work on the new feature implementation! Your attention to detail and problem-solving skills really made a difference.', date: '2025-05-29', likes: 45, comments: 3 },
+          { author: 'Vikas Patel', content: 'Outstanding presentation skills during the client meeting. You handled all the questions with confidence!', date: '2025-05-28', likes: 32, comments: 2 },
+          { author: 'Sneha Rao', content: 'Thank you for going above and beyond to help the team meet the deadline. Your dedication is truly appreciated!', date: '2025-05-26', likes: 38, comments: 4 }
+        ],
+        people: {
+          anniversaries: [
+            { name: 'Amit Sharma', years: 5, date: 'Jun 03', likes: 42, comments: 8 },
+            { name: 'Priya Singh', years: 3, date: 'Jun 06', likes: 35, comments: 6 },
+            { name: 'Rahul Verma', years: 7, date: 'Jun 04', likes: 48, comments: 10 },
+            { name: 'Sneha Patel', years: 2, date: 'Jun 09', likes: 28, comments: 4 }
+          ],
+          birthdays: [
+            { name: 'Vikram Desai', date: 'Jun 05', likes: 32, comments: 5 },
+            { name: 'Ananya Iyer', date: 'Jun 08', likes: 29, comments: 3 },
+            { name: 'Rohan Mehra', date: 'Jun 08', likes: 25, comments: 2 },
+            { name: 'Meera Nair', date: 'Jun 08', likes: 27, comments: 4 }
+          ],
+          announcements: [
+            {
+              title: 'New Team Member - Saurabh Gupta',
+              starred: true,
+              desc: 'Welcome to our newest team member who will be joining the Design team!',
+              date: '2025-06-03',
+              likes: 45,
+              comments: 8
+            },
+            {
+              title: 'Office Renovation Complete',
+              starred: true,
+              desc: 'Our newly renovated office space is now open for everyone!',
+              date: '2025-05-27',
+              likes: 56,
+              comments: 12
+            }
+          ]
+        },
+        revenue: [
+          { category: 'Auto', amount: '₹4.20 Cr', people: [
+            { name: 'Amit Sharma', company: 'AutoMakers Ltd', amount: '₹2.00 Cr', date: '2025-06-01' },
+            { name: 'Priya Singh', company: 'Speedster Motors', amount: '₹2.20 Cr', date: '2025-06-03' }
+          ] },
+          { category: 'Consumer goods', amount: '₹3.10 Cr', people: [
+            { name: 'Rahul Verma', company: 'FreshGoods Pvt Ltd', amount: '₹1.50 Cr', date: '2025-06-02' },
+            { name: 'Sneha Patel', company: 'DailyNeeds Inc', amount: '₹1.60 Cr', date: '2025-06-04' }
+          ] },
+          { category: 'Emerging (Restaurant, Public services)', amount: '₹2.75 Cr', people: [
+            { name: 'Vikram Desai', company: 'UrbanEats', amount: '₹1.25 Cr', date: '2025-06-05' },
+            { name: 'Ananya Iyer', company: 'CityServe', amount: '₹1.50 Cr', date: '2025-06-06' }
+          ] },
+          { category: 'Entertainment & Media', amount: '₹2.00 Cr', people: [
+            { name: 'Rohan Mehra', company: 'MediaWorks', amount: '₹1.00 Cr', date: '2025-06-07' },
+            { name: 'Meera Nair', company: 'FunTimes Studios', amount: '₹1.00 Cr', date: '2025-06-08' }
+          ] },
+          { category: 'Pharma', amount: '₹1.80 Cr', people: [
+            { name: 'Arjun Desai', company: 'HealthFirst', amount: '₹1.00 Cr', date: '2025-06-09' },
+            { name: 'Meera Kapoor', company: 'PharmaPlus', amount: '₹0.80 Cr', date: '2025-06-10' }
+          ] },
+          { category: 'Retail', amount: '₹2.50 Cr', people: [
+            { name: 'Siddharth Jain', company: 'ShopEase', amount: '₹1.20 Cr', date: '2025-06-11' },
+            { name: 'Anjali Menon', company: 'RetailMart', amount: '₹1.30 Cr', date: '2025-06-12' }
+          ] }
+        ],
+        work: [
+          { title: 'UI/UX Design System Implementation', category: 'Design', type: 'Today' },
+          { title: 'Mobile App Development Sprint', category: 'Development', type: 'Last week' },
+          { title: 'Client Presentation Deck', category: 'Marketing', type: 'Older' },
+          { title: 'Team Training Workshop', category: 'HR', type: 'Older' },
+          { title: 'Product Roadmap Planning', category: 'Strategy', type: 'Older' },
+          { title: 'Annual Performance Review', category: 'HR', type: 'Older' }
+        ],
+        plan: [
+          { week: '2025-06-02 to 06-08', owner: 'Amit Sharma', status: 'Published' },
+          { week: '2025-05-26 to 06-01', owner: 'Priya Singh', status: 'Published' },
+          { week: '2025-05-19 to 05-25', owner: 'Rahul Verma', status: 'Published' }
+        ],
+        quarterlyPlanArr: [
+          { quarter: 'Q1 2025', owner: 'Amit Sharma', status: 'Published' },
+          { quarter: 'Q2 2025', owner: 'Priya Singh', status: 'Draft' },
+          { quarter: 'Q3 2025', owner: 'Rahul Verma', status: 'Forecast' }
+        ]
+      };
+
+      const tabOrder = ['feed', 'kudos', 'people', 'revenue', 'work', 'plan'];
+      let activeTab = 'feed';
+      let autoLoop = null;
+      let isAutoLooping = true;
+
+      function renderTab(tab) {
+        activeTab = tab;
+        document.querySelectorAll('#tab-menu button').forEach(btn => {
+          btn.classList.toggle('bg-blue-100', btn.dataset.tab === tab);
+          btn.classList.toggle('font-bold', btn.dataset.tab === tab);
+        });
+        let html = '';
+        if (tab === 'feed') {
+          html = `<div class='bg-white rounded-xl shadow-lg border border-gray-200 p-6'>
+            <h2 class='text-2xl font-bold mb-6 flex items-center gap-2'><i class='ph ph-book-open'></i> My Feed</h2>` +
+            tabData.feed.map(item => `
+              <div class='p-4 bg-blue-50 rounded-lg border border-blue-100 mb-4'>
+                <div class='flex items-start justify-between'>
+                  <div class='flex-1'>
+                    <h3 class='font-semibold text-blue-800 mb-2'>${item.title}</h3>
+                    <p class='text-sm text-gray-700 mb-2'>${item.desc}</p>
+                    <div class='flex items-center gap-4 text-xs text-gray-500'>
+                      <span>${item.date}</span>
+                      <span class="flex items-center gap-1 text-yellow-600 font-semibold"><i class="ph ph-thumbs-up"></i>${item.likes}</span>
+                      <span class="flex items-center gap-1 text-gray-700 font-semibold"><i class="ph ph-chat-centered"></i>${item.comments}</span>
+                    </div>
+                  </div>
+                  ${item.starred ? "<div class='text-yellow-500'><i class='ph ph-star-fill'></i></div>" : ''}
+                </div>
+              </div>
+            `).join('') + `</div>`;
+        } else if (tab === 'kudos') {
+          html = `<div class='bg-white rounded-xl shadow-lg border border-gray-200 p-6'>
+            <div class='flex items-center justify-between mb-6'>
+              <h2 class='text-2xl font-bold flex items-center gap-2'><i class='ph ph-thumbs-up'></i> Kudos</h2>
+              <button id='give-kudos-btn' class='bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition flex items-center gap-2'><i class='ph ph-thumbs-up'></i> Give Kudos</button>
+            </div>
+            <div id='kudos-list'>` +
+            tabData.kudos.map((item, idx) => `
+              <div class='p-4 bg-purple-50 rounded-lg border border-purple-100 mb-4'>
+                <div class='flex items-start justify-between'>
+                  <div class='flex-1'>
+                    <div class="flex items-center gap-4">
+                      <div class="bg-white rounded-full w-14 h-14 flex items-center justify-center text-2xl text-gray-400 border"><i class="ph ph-user"></i></div>
+                      <div class="flex flex-col justify-center">
+                        <div class="font-bold text-lg text-purple-700">${item.author}</div>
+                        <div class="text-gray-600">${item.content}</div>
+                        <div class="flex items-center gap-4 mt-1">
+                          <span class="flex items-center gap-1 text-yellow-600 font-semibold"><i class="ph ph-thumbs-up"></i>${item.likes}</span>
+                          <span class="flex items-center gap-1 text-gray-700 font-semibold"><i class="ph ph-chat-centered"></i>${item.comments}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class='flex gap-2'>
+                    <button class='kudos-edit-btn' data-idx='${idx}' title='Edit'><i class='ph ph-pencil'></i></button>
+                    <button class='kudos-view-btn' data-idx='${idx}' title='View'><i class='ph ph-eye'></i></button>
+                    <button class='kudos-delete-btn' data-idx='${idx}' title='Delete'><i class='ph ph-trash'></i></button>
+                  </div>
+                </div>
+              </div>
+            `).join('') + `</div></div>`;
+        } else if (tab === 'people') {
+          html = `<div class='bg-white rounded-xl shadow-lg border border-gray-200 p-6'>
+            <h2 class='text-2xl font-bold mb-6 flex items-center gap-2'><i class='ph ph-users'></i> People</h2>
+            <div class='grid grid-cols-1 md:grid-cols-3 gap-6'>
+              <div>
+                <h3 class='text-lg font-semibold flex items-center gap-2 mb-3'><i class='ph ph-calendar'></i> Work Anniversaries</h3>
+                ${tabData.people.anniversaries.map(item => `
+                  <div class='p-4 bg-purple-50 rounded-lg border border-purple-100 mb-4 flex items-center gap-4'>
+                    <div class='bg-white rounded-full w-12 h-12 flex items-center justify-center text-2xl text-gray-400 border'><i class='ph ph-user'></i></div>
+                    <div>
+                      <div class="flex items-center gap-2">
+                        <span class="font-semibold text-purple-800">${item.name}</span>
+                      </div>
+                      <p class='text-sm text-gray-600'>${item.years} years, ${item.date}</p>
+                      <div class='flex items-center gap-4 text-xs text-gray-500 mt-1'>
+                        <span class="flex items-center gap-1 text-yellow-600 font-semibold"><i class="ph ph-thumbs-up"></i>${item.likes}</span>
+                        <span class="flex items-center gap-1 text-gray-700 font-semibold"><i class="ph ph-chat-centered"></i>${item.comments}</span>
+                      </div>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+              <div>
+                <h3 class='text-lg font-semibold flex items-center gap-2 mb-3'><i class='ph ph-cake'></i> Birthdays</h3>
+                ${tabData.people.birthdays.map(item => `
+                  <div class='p-4 bg-purple-50 rounded-lg border border-purple-100 mb-4 flex items-center gap-4'>
+                    <div class='bg-white rounded-full w-12 h-12 flex items-center justify-center text-2xl text-gray-400 border'><i class='ph ph-user'></i></div>
+                    <div>
+                      <div class="flex items-center gap-2">
+                        <span class="font-semibold text-purple-800">${item.name}</span>
+                      </div>
+                      <p class='text-sm text-gray-600'>${item.date}</p>
+                      <div class='flex items-center gap-4 text-xs text-gray-500 mt-1'>
+                        <span class="flex items-center gap-1 text-yellow-600 font-semibold"><i class="ph ph-thumbs-up"></i>${item.likes}</span>
+                        <span class="flex items-center gap-1 text-gray-700 font-semibold"><i class="ph ph-chat-centered"></i>${item.comments}</span>
+                      </div>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+              <div>
+                <h3 class='text-lg font-semibold flex items-center gap-2 mb-3'><i class='ph ph-megaphone'></i> Personal Announcements</h3>
+                ${tabData.people.announcements.map(item => `
+                  <div class='p-4 bg-pink-50 rounded-lg border border-pink-100 mb-4'>
+                    <div class='flex items-center gap-2 mb-1'>
+                      <h4 class='font-semibold text-pink-800'>${item.title}</h4>
+                      ${item.starred ? "<span class='text-yellow-500'><i class='ph ph-star-fill'></i></span>" : ''}
+                    </div>
+                    <p class='text-sm text-gray-600 mb-2'>${item.desc}</p>
+                    <div class='flex items-center gap-4 text-xs text-gray-500'>
+                      <span>${item.date}</span>
+                      <span class="flex items-center gap-1 text-yellow-600 font-semibold"><i class="ph ph-thumbs-up"></i>${item.likes}</span>
+                      <span class="flex items-center gap-1 text-gray-700 font-semibold"><i class="ph ph-chat-centered"></i>${item.comments}</span>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>`;
+        } else if (tab === 'revenue') {
+          const categoryOrder = [
+            'Auto',
+            'Consumer goods',
+            'Emerging (Restaurant, Public services)',
+            'Entertainment & Media',
+            'Pharma',
+            'Retail'
+          ];
+          html = `<div class='bg-white rounded-xl shadow-lg border border-gray-200 p-6'>
+            <h2 class='text-2xl font-bold mb-6 flex items-center gap-2'><i class='ph ph-trend-up'></i> Revenue</h2>` +
+            categoryOrder.map(category => {
+              const item = tabData.revenue.find(i => i.category === category);
+              if (!item) return '';
+              return `
+                <div class='mb-6'>
+                  <div class='p-4 bg-blue-50 rounded-lg border border-blue-100 mb-2'>
+                    <div class="mb-3 font-semibold text-gray-800">${item.category} - ${item.amount}</div>
+                    <div class='space-y-2'>
+                      ${item.people.map(p => `
+                        <div class='flex items-center gap-3 p-2 rounded-lg hover:bg-blue-100 transition'>
+                          <div class="bg-white rounded-full w-10 h-10 flex items-center justify-center text-xl text-gray-700 border">
+                            <i class="ph ph-user"></i>
+                          </div>
+                          <div class="flex-1">
+                            <div class="font-semibold text-gray-800">${p.name}</div>
+                            <div class="text-sm text-gray-600">${p.company} <span class="ml-2">${p.date}</span></div>
+                          </div>
+                          <div class="text-green-600 font-bold text-lg">${p.amount}</div>
+                        </div>
+                      `).join('')}
+                    </div>
+                  </div>
+                </div>
+              `;
+            }).join('') + `</div>`;
+        } else if (tab === 'work') {
+          html = `<div class='grid grid-cols-1 md:grid-cols-3 gap-6'>
+            <div>
+              <h3 class='text-lg font-semibold mb-3'>Recently worked on</h3>
+              <div class='space-y-4'>
+                ${tabData.work.map(item => `
+                  <div class='p-4 bg-blue-50 rounded-lg border border-blue-100'>
+                    <div class='font-semibold text-gray-800'>${item.title}</div>
+                    <div class='text-sm text-gray-600'>${item.type}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+            <div>
+              <h3 class='text-lg font-semibold mb-3'>Recently visited</h3>
+              <div class='space-y-4'>
+                ${tabData.work.map(item => `
+                  <div class='p-4 bg-blue-50 rounded-lg border border-blue-100'>
+                    <div class='font-semibold text-gray-800'>${item.title}</div>
+                    <div class='text-sm text-gray-600'>${item.category}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+            <div>
+              <h3 class='text-lg font-semibold mb-3'>Favourites</h3>
+              <div class='space-y-4'>
+                ${tabData.work.map(item => `
+                  <div class='p-4 bg-blue-50 rounded-lg border border-blue-100'>
+                    <div class='font-semibold text-gray-800'>${item.title}</div>
+                    <div class='text-sm text-gray-600'>${item.category}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>`;
+        } else if (tab === 'plan') {
+          html = `<div class='bg-white rounded-xl shadow-lg border border-gray-200 p-6'>
+            <div class='flex items-center justify-between mb-6'>
+              <h2 class='text-2xl font-bold flex items-center gap-2'><i class='ph ph-gear'></i> My Plan</h2>
+              <div class='flex gap-3'>
+                <button id='add-weekly-btn' class='bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition flex items-center gap-2'><i class='ph ph-calendar'></i> Add Weekly Plan</button>
+                <button id='add-quarterly-btn' class='bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition flex items-center gap-2'><i class='ph ph-gear'></i> Add Quarterly Plan</button>
+              </div>
+            </div>
+            <div class='space-y-6'>
+              <div class='weekly-plans-section'>
+                <h3 class='text-lg font-semibold text-gray-800 mb-3'>Weekly Plans</h3>
+                <div class='space-y-3' id='weekly-list'>
+                  ${tabData.plan.map((item, idx) => `
+                    <div class='p-3 bg-blue-50 rounded-lg border border-blue-100'>
+                      <div class='flex items-center justify-between'>
+                        <div>
+                          <h4 class='font-medium text-blue-800'>${item.week}</h4>
+                          <p class='text-sm text-gray-600'>Owner: ${item.owner}</p>
+                        </div>
+                        <div class='flex items-center gap-2'>
+                          <span class='px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full'>${item.status}</span>
+                          <div class='flex gap-2'>
+                            <button class='plan-edit-btn' data-type='weekly' data-idx='${idx}' title='Edit'><i class='ph ph-pencil'></i></button>
+                            <button class='plan-view-btn' data-type='weekly' data-idx='${idx}' title='View'><i class='ph ph-eye'></i></button>
+                            <button class='plan-delete-btn' data-type='weekly' data-idx='${idx}' title='Delete'><i class='ph ph-trash'></i></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+              <div class='quarterly-plans-section'>
+                <h3 class='text-lg font-semibold text-gray-800 mb-3'>Quarterly Plans</h3>
+                <div class='space-y-3' id='quarterly-list'>
+                  ${(tabData.quarterlyPlanArr || []).map((item, idx) => `
+                    <div class='p-3 bg-purple-50 rounded-lg border border-purple-100'>
+                      <div class='flex items-center justify-between'>
+                        <div>
+                          <h4 class='font-medium text-purple-800'>${item.quarter}</h4>
+                          <p class='text-sm text-gray-600'>Owner: ${item.owner}</p>
+                        </div>
+                        <div class='flex items-center gap-2'>
+                          <span class='px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full'>${item.status}</span>
+                          <div class='flex gap-2'>
+                            <button class='plan-edit-btn' data-type='quarterly' data-idx='${idx}' title='Edit'><i class='ph ph-pencil'></i></button>
+                            <button class='plan-view-btn' data-type='quarterly' data-idx='${idx}' title='View'><i class='ph ph-eye'></i></button>
+                            <button class='plan-delete-btn' data-type='quarterly' data-idx='${idx}' title='Delete'><i class='ph ph-trash'></i></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+          </div>`;
+        }
+        document.getElementById('tab-title').innerHTML = ''; // You can set a dynamic title if needed
+        document.getElementById('tab-content').innerHTML = html;
+
+        // Attach direct event listeners for Kudos
+        if (tab === 'kudos') {
+          document.querySelectorAll('.kudos-edit-btn').forEach(btn => {
+            btn.onclick = function(e) {
+              e.stopPropagation();
+              showKudosModal('edit', this.dataset.idx);
+            };
+          });
+          document.querySelectorAll('.kudos-view-btn').forEach(btn => {
+            btn.onclick = function(e) {
+              e.stopPropagation();
+              showKudosModal('view', this.dataset.idx);
+            };
+          });
+          document.querySelectorAll('.kudos-delete-btn').forEach(btn => {
+            btn.onclick = function(e) {
+              e.stopPropagation();
+              tabData.kudos.splice(this.dataset.idx, 1);
+              renderTab('kudos');
+            };
+          });
+        }
+        // Attach direct event listeners for Plan
+        if (tab === 'plan') {
+          document.querySelectorAll('.plan-edit-btn').forEach(btn => {
+            btn.onclick = function(e) {
+              e.stopPropagation();
+              showPlanModal(this.dataset.type, 'edit', this.dataset.idx);
+            };
+          });
+          document.querySelectorAll('.plan-view-btn').forEach(btn => {
+            btn.onclick = function(e) {
+              e.stopPropagation();
+              showPlanModal(this.dataset.type, 'view', this.dataset.idx);
+            };
+          });
+          document.querySelectorAll('.plan-delete-btn').forEach(btn => {
+            btn.onclick = function(e) {
+              e.stopPropagation();
+              if (this.dataset.type === 'weekly') tabData.plan.splice(this.dataset.idx, 1);
+              else (tabData.quarterlyPlanArr || []).splice(this.dataset.idx, 1);
+              renderTab('plan');
+            };
+          });
+        }
+      }
+
+      // Tab click handlers and auto-loop logic
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('#tab-menu button').forEach(btn => {
+          btn.addEventListener('click', function() {
+            renderTab(this.dataset.tab);
+            stopAutoLoop();
+          });
+        });
+        renderTab('feed');
+        startAutoLoop();
+      });
+      function startAutoLoop() {
+        if (autoLoop) clearInterval(autoLoop);
+        isAutoLooping = true;
+        autoLoop = setInterval(() => {
+          let idx = tabOrder.indexOf(activeTab);
+          let nextIdx = (idx + 1) % tabOrder.length;
+          renderTab(tabOrder[nextIdx]);
+        }, 5000);
+      }
+      function stopAutoLoop() {
+        if (autoLoop) clearInterval(autoLoop);
+        isAutoLooping = false;
+      }
+
+      // Give Kudos Modal logic
+      function showKudosModal(mode = 'add', idx = null) {
+        let modal = document.getElementById('give-kudos-modal');
+        if (!modal) {
+          modal = document.createElement('div');
+          modal.id = 'give-kudos-modal';
+          modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+          modal.innerHTML = `
+            <div class='bg-white rounded-xl shadow-lg p-8 max-w-md w-full mx-4'>
+              <h3 class='text-2xl font-bold mb-6 text-gray-800'>Give Kudos</h3>
+              <form id='give-kudos-form'>
+                <div class='mb-4'>
+                  <label class='block text-gray-700 font-semibold mb-2'>Name</label>
+                  <input type='text' id='kudos-name' class='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500' required>
+                </div>
+                <div class='mb-6'>
+                  <label class='block text-gray-700 font-semibold mb-2'>Message</label>
+                  <textarea id='kudos-comment' rows='4' class='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500' required></textarea>
+                </div>
+                <div class='flex gap-3'>
+                  <button type='submit' class='flex-1 bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition'>Submit</button>
+                  <button type='button' id='close-kudos-modal' class='flex-1 bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-400 transition'>Cancel</button>
+                </div>
+              </form>
+            </div>
+          `;
+          document.body.appendChild(modal);
+        }
+        modal.classList.remove('hidden');
+        const nameInput = document.getElementById('kudos-name');
+        const commentInput = document.getElementById('kudos-comment');
+        if (mode === 'edit' && idx !== null) {
+          nameInput.value = tabData.kudos[idx].author;
+          commentInput.value = tabData.kudos[idx].content;
+          nameInput.readOnly = false;
+          commentInput.readOnly = false;
+        } else if (mode === 'view' && idx !== null) {
+          nameInput.value = tabData.kudos[idx].author;
+          commentInput.value = tabData.kudos[idx].content;
+          nameInput.readOnly = true;
+          commentInput.readOnly = true;
+        } else {
+          nameInput.value = '';
+          commentInput.value = '';
+          nameInput.readOnly = false;
+          commentInput.readOnly = false;
+        }
+        document.getElementById('close-kudos-modal').onclick = function() {
+          modal.classList.add('hidden');
+        };
+        document.getElementById('give-kudos-form').onsubmit = function(e) {
+          e.preventDefault();
+          const name = nameInput.value;
+          const comment = commentInput.value;
+          if (mode === 'edit' && idx !== null) {
+            tabData.kudos[idx].author = name;
+            tabData.kudos[idx].content = comment;
+          } else if (mode === 'add') {
+            tabData.kudos.unshift({ author: name, content: comment, date: new Date().toISOString().slice(0,10), likes: 0, comments: 0, isNew: true });
+          }
+          renderTab('kudos');
+          modal.classList.add('hidden');
+        };
+      }
+
+      // Plan Modal logic
+      function showPlanModal(type, mode = 'add', idx = null) {
+        let modal = document.getElementById('plan-modal');
+        if (!modal) {
+          modal = document.createElement('div');
+          modal.id = 'plan-modal';
+          modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+          document.body.appendChild(modal);
+        }
+        // Helper to get Monday from a date
+        function getMonday(d) {
+          d = new Date(d);
+          const day = d.getDay(), diff = d.getDate() - day + (day === 0 ? -6 : 1);
+          return new Date(d.setDate(diff));
+        }
+        function format(d) { return d.toISOString().slice(0, 10); }
+        const today = new Date();
+        const currMonday = getMonday(today);
+        const prevMonday = new Date(currMonday); prevMonday.setDate(prevMonday.getDate() - 7);
+        const nextMonday = new Date(currMonday); nextMonday.setDate(nextMonday.getDate() + 7);
+        const prevWeek = `${format(prevMonday)} to ${format(new Date(prevMonday.getTime() + 6 * 86400000))}`;
+        const currWeek = `${format(currMonday)} to ${format(new Date(currMonday.getTime() + 6 * 86400000))}`;
+        const nextWeek = `${format(nextMonday)} to ${format(new Date(nextMonday.getTime() + 6 * 86400000))}`;
+        let createdDate = format(today);
+        let weekValue = '';
+        let statusValue = 'Published';
+        let ownerValue = '';
+        let descValue = '';
+        let quarterValue = '';
+        if (mode === 'edit' && idx !== null && type === 'weekly') {
+          weekValue = tabData.plan[idx].week;
+          createdDate = tabData.plan[idx].createdDate || createdDate;
+          statusValue = tabData.plan[idx].status;
+          ownerValue = tabData.plan[idx].owner;
+          descValue = tabData.plan[idx].description || '';
+        }
+        if (mode === 'edit' && idx !== null && type === 'quarterly') {
+          quarterValue = (tabData.quarterlyPlanArr || [])[idx].quarter;
+          createdDate = (tabData.quarterlyPlanArr || [])[idx].createdDate || createdDate;
+          statusValue = (tabData.quarterlyPlanArr || [])[idx].status;
+          ownerValue = (tabData.quarterlyPlanArr || [])[idx].owner;
+          descValue = (tabData.quarterlyPlanArr || [])[idx].description || '';
+        }
+        // Generate quarter options
+        const year = today.getFullYear();
+        let quarterOptions = '';
+        for (let y = year - 2; y <= year + 2; y++) {
+          for (let q = 1; q <= 4; q++) {
+            const val = `Q${q} ${y}`;
+            quarterOptions = `<option value='${val}' ${quarterValue === val ? 'selected' : ''}>${val}</option>` + quarterOptions;
+          }
+        }
+        if (type === 'quarterly') {
+          modal.innerHTML = `
+            <div class='bg-white rounded-xl shadow-lg p-6 max-w-lg w-full mx-4 relative'>
+              <button id='close-plan-modal' class='absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl'>&times;</button>
+              <h3 class='text-2xl font-bold mb-4 text-gray-800'>Add Quarterly Plan</h3>
+              <form id='plan-form' class='space-y-3 bg-blue-50 rounded p-3 mb-4'>
+                <div class='font-semibold mb-1 text-sm'>Current Quarter</div>
+                <div>
+                  <label class='block text-xs font-medium mb-1'>Quarter:</label>
+                  <select id='plan-quarter' class='w-full rounded border px-2 py-1 text-xs'>
+                    <option value=''>Select Quarter</option>
+                    ${quarterOptions}
+                  </select>
+                </div>
+                <div>
+                  <label class='block text-xs font-medium mb-1'>Created Date:</label>
+                  <input type='text' id='plan-created' class='w-full rounded border px-2 py-1 bg-gray-100 cursor-not-allowed text-xs' value='${createdDate}' readonly disabled />
+                </div>
+                <div>
+                  <label class='block text-xs font-medium mb-1'>Status:</label>
+                  <select id='plan-status' class='w-full rounded border px-2 py-1 text-xs'>
+                    <option value='Published' ${statusValue === 'Published' ? 'selected' : ''}>Published</option>
+                    <option value='Draft' ${statusValue === 'Draft' ? 'selected' : ''}>Draft</option>
+                    <option value='Forecast' ${statusValue === 'Forecast' ? 'selected' : ''}>Forecast</option>
+                  </select>
+                </div>
+                <div>
+                  <label class='block text-xs font-medium mb-1'>Owner:</label>
+                  <input type='text' id='plan-owner' class='w-full rounded border px-2 py-1 text-xs' placeholder='Owner name' value='${ownerValue}' required />
+                </div>
+                <div>
+                  <label class='block text-xs font-medium mb-1'>Description:</label>
+                  <textarea id='plan-desc' class='w-full rounded border px-2 py-1 text-xs' placeholder='Description' rows='2'>${descValue}</textarea>
+                </div>
+                <div class='flex justify-end'>
+                  <button type='submit' class='px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded'>Add</button>
+                </div>
+              </form>
+            </div>
+          `;
+        } else {
+          modal.innerHTML = `
+            <div class='bg-white rounded-xl shadow-lg p-6 max-w-lg w-full mx-4 relative'>
+              <button id='close-plan-modal' class='absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl'>&times;</button>
+              <h3 class='text-2xl font-bold mb-4 text-gray-800'>Add Weekly Plan</h3>
+              <div class='bg-gray-100 rounded p-3 mb-4'>
+                <div class='font-semibold mb-1 text-sm'>Previous Week</div>
+                <div class='text-xs text-gray-700'>${prevWeek}</div>
+                <div class='text-xs text-gray-500'>Dummy: Review, Retrospective, Planning</div>
+              </div>
+              <form id='plan-form' class='space-y-3 bg-blue-50 rounded p-3 mb-4'>
+                <div class='font-semibold mb-1 text-sm'>Current Week</div>
+                <div>
+                  <label class='block text-xs font-medium mb-1'>Week Start (Monday):</label>
+                  <input type='date' id='plan-weekstart' class='w-full rounded border px-2 py-1 text-xs' min='2020-01-01' max='2100-12-31' required />
+                  <div id='plan-week-label' class='text-xs text-gray-600 mt-1'></div>
+                </div>
+                <div>
+                  <label class='block text-xs font-medium mb-1'>Created Date:</label>
+                  <input type='text' id='plan-created' class='w-full rounded border px-2 py-1 bg-gray-100 cursor-not-allowed text-xs' value='${createdDate}' readonly disabled />
+                </div>
+                <div>
+                  <label class='block text-xs font-medium mb-1'>Status:</label>
+                  <select id='plan-status' class='w-full rounded border px-2 py-1 text-xs'>
+                    <option value='Published' ${statusValue === 'Published' ? 'selected' : ''}>Published</option>
+                    <option value='Draft' ${statusValue === 'Draft' ? 'selected' : ''}>Draft</option>
+                    <option value='Forecast' ${statusValue === 'Forecast' ? 'selected' : ''}>Forecast</option>
+                  </select>
+                </div>
+                <div>
+                  <label class='block text-xs font-medium mb-1'>Owner:</label>
+                  <input type='text' id='plan-owner' class='w-full rounded border px-2 py-1 text-xs' placeholder='Owner name' value='${ownerValue}' required />
+                </div>
+                <div>
+                  <label class='block text-xs font-medium mb-1'>Description:</label>
+                  <textarea id='plan-desc' class='w-full rounded border px-2 py-1 text-xs' placeholder='Description' rows='2'>${descValue}</textarea>
+                </div>
+                <div class='flex justify-end'>
+                  <button type='submit' class='px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded'>Add</button>
+                </div>
+              </form>
+              <div class='bg-gray-100 rounded p-3'>
+                <div class='font-semibold mb-1 text-sm'>Next Week</div>
+                <div class='text-xs text-gray-700'>${nextWeek}</div>
+                <div class='text-xs text-gray-500'>Dummy: Forecast, Planning, Goals</div>
+              </div>
+            </div>
+          `;
+        }
+        modal.classList.remove('hidden');
+        if (type === 'weekly') {
+          // Week start logic
+          const weekStartInput = document.getElementById('plan-weekstart');
+          const weekLabel = document.getElementById('plan-week-label');
+          if (weekValue) {
+            // If editing, set week start to the first date
+            weekStartInput.value = weekValue.split(' to ')[0];
+            weekLabel.textContent = 'Week: ' + weekValue;
+          } else {
+            weekStartInput.value = format(currMonday);
+            weekLabel.textContent = 'Week: ' + currWeek;
+          }
+          weekStartInput.onchange = function(e) {
+            const start = new Date(e.target.value);
+            const end = new Date(start.getTime() + 6 * 86400000);
+            weekLabel.textContent = 'Week: ' + format(start) + ' to ' + format(end);
+          };
+        }
+        document.getElementById('close-plan-modal').onclick = function() {
+          modal.classList.add('hidden');
+        };
+        document.getElementById('plan-form').onsubmit = function(e) {
+          e.preventDefault();
+          if (type === 'weekly') {
+            const weekStart = document.getElementById('plan-weekstart').value;
+            const week = document.getElementById('plan-week-label').textContent.replace('Week: ', '');
+            const owner = document.getElementById('plan-owner').value;
+            const status = document.getElementById('plan-status').value;
+            const desc = document.getElementById('plan-desc').value;
+            if (mode === 'edit' && idx !== null) {
+              tabData.plan[idx].week = week;
+              tabData.plan[idx].owner = owner;
+              tabData.plan[idx].status = status;
+              tabData.plan[idx].description = desc;
+              tabData.plan[idx].createdDate = createdDate;
+            } else if (mode === 'add') {
+              tabData.plan.unshift({ week: week, owner: owner, status: status, description: desc, createdDate: createdDate, isNew: true });
+            }
+          } else if (type === 'quarterly') {
+            const quarter = document.getElementById('plan-quarter').value;
+            const owner = document.getElementById('plan-owner').value;
+            const status = document.getElementById('plan-status').value;
+            const desc = document.getElementById('plan-desc').value;
+            if (mode === 'edit' && idx !== null) {
+              (tabData.quarterlyPlanArr || [])[idx].quarter = quarter;
+              (tabData.quarterlyPlanArr || [])[idx].owner = owner;
+              (tabData.quarterlyPlanArr || [])[idx].status = status;
+              (tabData.quarterlyPlanArr || [])[idx].description = desc;
+              (tabData.quarterlyPlanArr || [])[idx].createdDate = createdDate;
+            } else if (mode === 'add') {
+              if (!tabData.quarterlyPlanArr) tabData.quarterlyPlanArr = [];
+              tabData.quarterlyPlanArr.unshift({ quarter: quarter, owner: owner, status: status, description: desc, createdDate: createdDate, isNew: true });
+            }
+          }
+          renderTab('plan');
+          modal.classList.add('hidden');
+        };
+      }
+
+      // Attach modal openers after rendering
+      document.addEventListener('click', function(e) {
+        if (e.target && e.target.id === 'give-kudos-btn') {
+          showKudosModal();
+        }
+        if (e.target && e.target.id === 'add-weekly-btn') {
+          showPlanModal('weekly');
+        }
+        if (e.target && e.target.id === 'add-quarterly-btn') {
+          showPlanModal('quarterly');
+        }
+      });
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const appsBtn = document.getElementById('apps-menu-btn');
+        const appsDropdown = document.getElementById('apps-menu-dropdown');
+        let dropdownTimeout;
+        if (appsBtn && appsDropdown) {
+          function showDropdown() {
+            clearTimeout(dropdownTimeout);
+            appsDropdown.classList.remove('opacity-0', 'pointer-events-none');
+            appsDropdown.classList.add('opacity-100');
+          }
+          function hideDropdown() {
+            clearTimeout(dropdownTimeout);
+            dropdownTimeout = setTimeout(() => {
+              appsDropdown.classList.add('opacity-0', 'pointer-events-none');
+              appsDropdown.classList.remove('opacity-100');
+            }, 250); // Slightly longer delay for user experience
+          }
+          appsBtn.addEventListener('mouseenter', showDropdown);
+          appsBtn.addEventListener('mouseleave', hideDropdown);
+          appsDropdown.addEventListener('mouseenter', showDropdown);
+          appsDropdown.addEventListener('mouseleave', hideDropdown);
+        }
+      });
+    </script>
+    <script src="header.js"></script>
+    <script src="chatbot.js"></script>
+    <script>
+      // Highlight active header menu item
+      (function() {
+        var path = window.location.pathname.split('/').pop();
+        if (!path) path = 'index.html';
+        document.querySelectorAll('header nav a').forEach(function(link) {
+          var icon = link.querySelector('i');
+          if (link.getAttribute('href') === path) {
+            link.classList.remove('text-gray-700');
+            link.classList.add('text-blue-600', 'font-bold');
+            if (icon) {
+              icon.classList.remove('text-gray-700');
+              icon.classList.add('text-blue-600', 'font-bold');
+            }
+          } else {
+            link.classList.remove('text-blue-600', 'font-bold');
+            link.classList.add('text-gray-700');
+            if (icon) {
+              icon.classList.remove('text-blue-600', 'font-bold');
+              icon.classList.add('text-gray-700');
+            }
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

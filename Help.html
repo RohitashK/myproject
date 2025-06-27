@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0" />
+    <title>Help - Personal Project</title>
+    <meta name="description" content="Help and support documentation" />
+    <meta name="author" content="Exponential" />
+    <link rel="icon" href="public/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+      body { background: #ffffff; }
+      .fixed-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 40; }
+      .main-content { margin-top: 96px; min-height: calc(100vh - 96px); }
+      .faq-item { border-bottom: 1px solid #e5e7eb; }
+      .faq-item:last-child { border-bottom: none; }
+      .faq-question { cursor: pointer; }
+      .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+      .faq-answer.active { max-height: 200px; }
+    </style>
+  </head>
+  <body class="bg-white font-sans">
+    <header class="fixed-header bg-white shadow p-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="h-16 w-16 flex items-center justify-center bg-white">
+          <img src="public/logo.jpg" alt="Logo" class="h-full w-full object-contain" />
+        </div>
+      </div>
+      <nav class="flex items-center gap-8">
+        <a href="index.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-house"></i> Home</a>
+        <a href="Dashboard.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-layout"></i> Dashboard</a>
+        <a href="Projects.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-book-open"></i> Projects</a>
+        <a href="Reports.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-trend-up"></i> Reports</a>
+        <a href="Help.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-question"></i> Help</a>
+        <div class="relative inline-block align-middle">
+          <button id="apps-menu-btn" class="flex items-center gap-1 text-gray-700 hover:text-blue-600 focus:outline-none px-2 py-1 rounded relative z-20">
+            <i class="ph ph-grid-four"></i> Apps
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div id="apps-menu-dropdown" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg opacity-0 pointer-events-none transition-opacity z-10">
+            <a href="https://expo.dev" class="block px-4 py-2 hover:bg-gray-100">Expo</a>
+            <a href="https://chat.openai.com" class="block px-4 py-2 hover:bg-gray-100">ChatGPT</a>
+            <a href="https://claude.ai" class="block px-4 py-2 hover:bg-gray-100">Claude</a>
+            <a href="https://gemini.google.com" class="block px-4 py-2 hover:bg-gray-100">Gemini</a>
+            <a href="https://copilot.microsoft.com" class="block px-4 py-2 hover:bg-gray-100">Copilot</a>
+            <a href="https://www.midjourney.com" class="block px-4 py-2 hover:bg-gray-100">Midjourney</a>
+            <a href="https://openai.com/dall-e-2" class="block px-4 py-2 hover:bg-gray-100">DALL-E</a>
+            <a href="https://stability.ai" class="block px-4 py-2 hover:bg-gray-100">Stable Diffusion</a>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 ml-4">
+          <img src="public/profile.png" alt="Profile" class="w-10 h-10 rounded-full cursor-pointer hover:opacity-80 transition-opacity border-2 border-gray-200" onclick="window.location.href='Settings.html'" title="Settings" />
+        </div>
+      </nav>
+    </header>
+
+    <div class="min-h-screen">
+      <main class="main-content p-8">
+        <div class="max-w-4xl mx-auto">
+          <!-- Page Header -->
+          <div class="mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2 flex items-center gap-3">
+              <i class="ph ph-question text-blue-600"></i>
+              Help & Support
+            </h1>
+            <p class="text-gray-600 text-lg">Find answers to common questions and get support</p>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6 text-center">
+              <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <i class="ph ph-book text-blue-600 text-xl"></i>
+              </div>
+              <h3 class="text-lg font-bold text-gray-800 mb-2">Documentation</h3>
+              <p class="text-gray-600 text-sm mb-4">Browse our comprehensive documentation</p>
+              <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                View Docs
+              </button>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6 text-center">
+              <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <i class="ph ph-chat-circle text-green-600 text-xl"></i>
+              </div>
+              <h3 class="text-lg font-bold text-gray-800 mb-2">Live Chat</h3>
+              <p class="text-gray-600 text-sm mb-4">Get instant help from our support team</p>
+              <button class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                Start Chat
+              </button>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6 text-center">
+              <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <i class="ph ph-envelope text-purple-600 text-xl"></i>
+              </div>
+              <h3 class="text-lg font-bold text-gray-800 mb-2">Email Support</h3>
+              <p class="text-gray-600 text-sm mb-4">Send us an email for detailed assistance</p>
+              <button class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
+                Send Email
+              </button>
+            </div>
+          </div>
+
+          <!-- FAQ Section -->
+          <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+              <i class="ph ph-lightbulb text-blue-600"></i>
+              Frequently Asked Questions
+            </h2>
+            <div class="space-y-4">
+              <div class="faq-item">
+                <div class="faq-question p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors" onclick="toggleFAQ(this)">
+                  <div class="flex items-center justify-between">
+                    <h3 class="font-semibold text-gray-800">How do I navigate between different sections?</h3>
+                    <i class="ph ph-caret-down text-gray-500"></i>
+                  </div>
+                </div>
+                <div class="faq-answer p-4">
+                  <p class="text-gray-600">You can navigate between sections using the sidebar tabs on the left. Each tab represents a different section like My Feed, Kudos, People, Revenue, My Work, and My Plan. You can also use the Dashboard view to see all sections at once.</p>
+                </div>
+              </div>
+              
+              <div class="faq-item">
+                <div class="faq-question p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors" onclick="toggleFAQ(this)">
+                  <div class="flex items-center justify-between">
+                    <h3 class="font-semibold text-gray-800">How do I add a new Kudos entry?</h3>
+                    <i class="ph ph-caret-down text-gray-500"></i>
+                  </div>
+                </div>
+                <div class="faq-answer p-4">
+                  <p class="text-gray-600">In the Kudos section, click the "Give Kudos" button. This will open a modal where you can enter the recipient's name and your message. Click "Submit" to save the kudos entry.</p>
+                </div>
+              </div>
+              
+              <div class="faq-item">
+                <div class="faq-question p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors" onclick="toggleFAQ(this)">
+                  <div class="flex items-center justify-between">
+                    <h3 class="font-semibold text-gray-800">How do I create a new plan?</h3>
+                    <i class="ph ph-caret-down text-gray-500"></i>
+                  </div>
+                </div>
+                <div class="faq-answer p-4">
+                  <p class="text-gray-600">In the My Plan section, you can add both Weekly and Quarterly plans. Click the "Add Weekly Plan" or "Add Quarterly Plan" button, fill in the required information, and submit. The system will automatically validate for duplicate entries.</p>
+                </div>
+              </div>
+              
+              <div class="faq-item">
+                <div class="faq-question p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors" onclick="toggleFAQ(this)">
+                  <div class="flex items-center justify-between">
+                    <h3 class="font-semibold text-gray-800">What is the difference between Home and Dashboard views?</h3>
+                    <i class="ph ph-caret-down text-gray-500"></i>
+                  </div>
+                </div>
+                <div class="faq-answer p-4">
+                  <p class="text-gray-600">The Home view shows one section at a time with auto-rotating tabs, while the Dashboard view displays all sections in a grid layout without auto-rotation. Both views share the same data, so changes in one will reflect in the other.</p>
+                </div>
+              </div>
+              
+              <div class="faq-item">
+                <div class="faq-question p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors" onclick="toggleFAQ(this)">
+                  <div class="flex items-center justify-between">
+                    <h3 class="font-semibold text-gray-800">How do I access the chatbot?</h3>
+                    <i class="ph ph-caret-down text-gray-500"></i>
+                  </div>
+                </div>
+                <div class="faq-answer p-4">
+                  <p class="text-gray-600">The chatbot is accessible via the chat icon in the bottom-right corner of the screen. Click on it to open the chat interface. You can minimize or close the chat window using the buttons in the chat header.</p>
+                </div>
+              </div>
+              
+              <div class="faq-item">
+                <div class="faq-question p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors" onclick="toggleFAQ(this)">
+                  <div class="flex items-center justify-between">
+                    <h3 class="font-semibold text-gray-800">How do I edit or delete entries?</h3>
+                    <i class="ph ph-caret-down text-gray-500"></i>
+                  </div>
+                </div>
+                <div class="faq-answer p-4">
+                  <p class="text-gray-600">Each entry has action icons (edit, view, delete) on the right side. Click the edit icon to modify an entry, the view icon to see details, or the delete icon to remove an entry. A confirmation dialog will appear for deletions.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Information -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+              <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <i class="ph ph-phone text-blue-600"></i>
+                Contact Information
+              </h2>
+              <div class="space-y-3">
+                <div class="flex items-center gap-3">
+                  <i class="ph ph-envelope text-gray-500"></i>
+                  <span class="text-gray-700">support.india@example.com</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <i class="ph ph-phone text-gray-500"></i>
+                  <span class="text-gray-700">+91-9876543210</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <i class="ph ph-clock text-gray-500"></i>
+                  <span class="text-gray-700">Mon-Fri 9AM-6PM EST</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <i class="ph ph-map-pin text-gray-500"></i>
+                  <span class="text-gray-700">Mumbai, India</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+              <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <i class="ph ph-users text-blue-600"></i>
+                Support Team
+              </h2>
+              <div class="space-y-4">
+                <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                  <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                    <i class="ph ph-user text-blue-600"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-medium text-gray-800">Amit Sharma</h3>
+                    <p class="text-sm text-gray-600">Technical Support Lead</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                  <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                    <i class="ph ph-user text-green-600"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-medium text-gray-800">Priya Singh</h3>
+                    <p class="text-sm text-gray-600">Customer Success Manager</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                  <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                    <i class="ph ph-user text-purple-600"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-medium text-gray-800">Vikas Patel</h3>
+                    <p class="text-sm text-gray-600">Product Specialist</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video Tutorials -->
+          <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6 mt-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+              <i class="ph ph-play-circle text-blue-600"></i>
+              Video Tutorials
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="bg-gray-50 rounded-lg p-4">
+                <div class="w-full h-32 bg-gray-200 rounded-lg mb-3 flex items-center justify-center">
+                  <i class="ph ph-play text-gray-400 text-2xl"></i>
+                </div>
+                <h3 class="font-semibold text-gray-800 mb-2">Getting Started</h3>
+                <p class="text-sm text-gray-600 mb-3">Learn the basics of navigating the application</p>
+                <button class="text-blue-600 hover:text-blue-700 text-sm font-medium">Watch Video</button>
+              </div>
+              <div class="bg-gray-50 rounded-lg p-4">
+                <div class="w-full h-32 bg-gray-200 rounded-lg mb-3 flex items-center justify-center">
+                  <i class="ph ph-play text-gray-400 text-2xl"></i>
+                </div>
+                <h3 class="font-semibold text-gray-800 mb-2">Managing Kudos</h3>
+                <p class="text-sm text-gray-600 mb-3">How to give, edit, and manage kudos entries</p>
+                <button class="text-blue-600 hover:text-blue-700 text-sm font-medium">Watch Video</button>
+              </div>
+              <div class="bg-gray-50 rounded-lg p-4">
+                <div class="w-full h-32 bg-gray-200 rounded-lg mb-3 flex items-center justify-center">
+                  <i class="ph ph-play text-gray-400 text-2xl"></i>
+                </div>
+                <h3 class="font-semibold text-gray-800 mb-2">Planning & Reports</h3>
+                <p class="text-sm text-gray-600 mb-3">Creating plans and understanding reports</p>
+                <button class="text-blue-600 hover:text-blue-700 text-sm font-medium">Watch Video</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="bg-white text-center p-4 shadow fixed bottom-0 left-0 w-full z-30">
+        &copy; 2024 Personal Project. All rights reserved.
+      </footer>
+      
+      <!-- Chat Bot Placeholder -->
+      <div id="chatbot-root"></div>
+      <script src="chatbot.js"></script>
+    </div>
+
+    <script>
+      function toggleFAQ(element) {
+        const answer = element.nextElementSibling;
+        const icon = element.querySelector('i');
+        
+        if (answer.classList.contains('active')) {
+          answer.classList.remove('active');
+          icon.className = 'ph ph-caret-down text-gray-500';
+        } else {
+          answer.classList.add('active');
+          icon.className = 'ph ph-caret-up text-gray-500';
+        }
+      }
+
+      // Handle support buttons
+      document.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', function() {
+          const text = this.textContent;
+          if (text.includes('View Docs')) {
+            alert('Opening documentation...');
+          } else if (text.includes('Start Chat')) {
+            alert('Opening live chat...');
+          } else if (text.includes('Send Email')) {
+            window.location.href = 'mailto:support@personalproject.com';
+          } else if (text.includes('Watch Video')) {
+            alert('Opening video tutorial...');
+          }
+        });
+      });
+
+      document.addEventListener('DOMContentLoaded', function() {
+        const appsBtn = document.getElementById('apps-menu-btn');
+        const appsDropdown = document.getElementById('apps-menu-dropdown');
+        let dropdownTimeout;
+        if (appsBtn && appsDropdown) {
+          function showDropdown() {
+            clearTimeout(dropdownTimeout);
+            appsDropdown.classList.remove('opacity-0', 'pointer-events-none');
+            appsDropdown.classList.add('opacity-100');
+          }
+          function hideDropdown() {
+            clearTimeout(dropdownTimeout);
+            dropdownTimeout = setTimeout(() => {
+              appsDropdown.classList.add('opacity-0', 'pointer-events-none');
+              appsDropdown.classList.remove('opacity-100');
+            }, 250); // Slightly longer delay for user experience
+          }
+          appsBtn.addEventListener('mouseenter', showDropdown);
+          appsBtn.addEventListener('mouseleave', hideDropdown);
+          appsDropdown.addEventListener('mouseenter', showDropdown);
+          appsDropdown.addEventListener('mouseleave', hideDropdown);
+        }
+      });
+
+      // Highlight active header menu item
+      (function() {
+        var path = window.location.pathname.split('/').pop();
+        if (!path) path = 'index.html';
+        document.querySelectorAll('header nav a').forEach(function(link) {
+          var icon = link.querySelector('i');
+          if (link.getAttribute('href') === path) {
+            link.classList.remove('text-gray-700');
+            link.classList.add('text-blue-600', 'font-bold');
+            if (icon) {
+              icon.classList.remove('text-gray-700');
+              icon.classList.add('text-blue-600', 'font-bold');
+            }
+          } else {
+            link.classList.remove('text-blue-600', 'font-bold');
+            link.classList.add('text-gray-700');
+            if (icon) {
+              icon.classList.remove('text-blue-600', 'font-bold');
+              icon.classList.add('text-gray-700');
+            }
+          }
+        });
+      })();
+    </script>
+  </body>
+</html> 

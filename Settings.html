@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0" />
+    <title>Settings - Personal Project</title>
+    <meta name="description" content="Application settings and preferences" />
+    <meta name="author" content="Exponential" />
+    <link rel="icon" href="public/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+      body { background: #ffffff; }
+      .fixed-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 40; }
+      .main-content { margin-top: 96px; min-height: calc(100vh - 96px); }
+      .toggle-switch { position: relative; display: inline-block; width: 60px; height: 34px; }
+      .toggle-switch input { opacity: 0; width: 0; height: 0; }
+      .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
+      .slider:before { position: absolute; content: ""; height: 26px; width: 26px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+      input:checked + .slider { background-color: #2196F3; }
+      input:checked + .slider:before { transform: translateX(26px); }
+    </style>
+  </head>
+  <body class="bg-white font-sans">
+    <div class="min-h-screen">
+      <!-- Top Navigation -->
+      <header class="fixed-header bg-white shadow p-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="h-16 w-16 flex items-center justify-center bg-white">
+            <img src="public/logo.jpg" alt="Logo" class="h-full w-full object-contain" />
+          </div>
+        </div>
+        <nav class="flex items-center gap-8">
+          <a href="index.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-house"></i> Home</a>
+          <a href="Dashboard.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-layout"></i> Dashboard</a>
+          <a href="Projects.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-book-open"></i> Projects</a>
+          <a href="Reports.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-trend-up"></i> Reports</a>
+          <a href="Help.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-question"></i> Help</a>
+          <div class="relative inline-block align-middle">
+            <button id="apps-menu-btn" class="flex items-center gap-1 text-gray-700 hover:text-blue-600 focus:outline-none px-2 py-1 rounded relative z-20">
+              <i class="ph ph-grid-four"></i> Apps
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div id="apps-menu-dropdown" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg opacity-0 pointer-events-none transition-opacity z-10">
+              <a href="https://expo.dev" class="block px-4 py-2 hover:bg-gray-100">Expo</a>
+              <a href="https://chat.openai.com" class="block px-4 py-2 hover:bg-gray-100">ChatGPT</a>
+              <a href="https://claude.ai" class="block px-4 py-2 hover:bg-gray-100">Claude</a>
+              <a href="https://gemini.google.com" class="block px-4 py-2 hover:bg-gray-100">Gemini</a>
+              <a href="https://copilot.microsoft.com" class="block px-4 py-2 hover:bg-gray-100">Copilot</a>
+              <a href="https://www.midjourney.com" class="block px-4 py-2 hover:bg-gray-100">Midjourney</a>
+              <a href="https://openai.com/dall-e-2" class="block px-4 py-2 hover:bg-gray-100">DALL-E</a>
+              <a href="https://stability.ai" class="block px-4 py-2 hover:bg-gray-100">Stable Diffusion</a>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 ml-4">
+            <img src="public/profile.png" alt="Profile" class="w-10 h-10 rounded-full cursor-pointer hover:opacity-80 transition-opacity border-2 border-gray-200" onclick="window.location.href='Settings.html'" title="Settings" />
+          </div>
+        </nav>
+      </header>
+
+      <main class="main-content p-8">
+        <div class="max-w-4xl mx-auto">
+          <!-- Page Header -->
+          <div class="mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2 flex items-center gap-3">
+              <i class="ph ph-gear text-blue-600"></i>
+              Settings
+            </h1>
+            <p class="text-gray-600 text-lg">Configure your application preferences and account settings</p>
+          </div>
+
+          <!-- Settings Sections -->
+          <div class="space-y-8">
+            
+            <!-- Profile Settings -->
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+              <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                <i class="ph ph-user text-blue-600"></i>
+                Profile Settings
+              </h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Profile Picture</label>
+                  <div class="flex items-center gap-4">
+                    <img src="public/profile.png" alt="Profile" class="w-16 h-16 rounded-full border-2 border-gray-200" />
+                    <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                      Change Photo
+                    </button>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Display Name</label>
+                  <input type="text" value="Amit Sharma" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                  <input type="email" value="amit.sharma@example.com" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Job Title</label>
+                  <input type="text" value="AI Engineer" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Notification Settings -->
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+              <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                <i class="ph ph-bell text-blue-600"></i>
+                Notification Settings
+              </h2>
+              <div class="space-y-4">
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                  <div>
+                    <h3 class="font-medium text-gray-800">Email Notifications</h3>
+                    <p class="text-sm text-gray-600">Receive updates via email</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                  </label>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                  <div>
+                    <h3 class="font-medium text-gray-800">Push Notifications</h3>
+                    <p class="text-sm text-gray-600">Receive browser notifications</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                  </label>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                  <div>
+                    <h3 class="font-medium text-gray-800">Weekly Reports</h3>
+                    <p class="text-sm text-gray-600">Get weekly summary emails</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                  </label>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                  <div>
+                    <h3 class="font-medium text-gray-800">Project Updates</h3>
+                    <p class="text-sm text-gray-600">Notifications for project changes</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Appearance Settings -->
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+              <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                <i class="ph ph-palette text-blue-600"></i>
+                Appearance
+              </h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Theme</label>
+                  <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option>Light</option>
+                    <option>Dark</option>
+                    <option>Auto</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Language</label>
+                  <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option>English</option>
+                    <option>Spanish</option>
+                    <option>French</option>
+                    <option>German</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Time Zone</label>
+                  <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option>UTC-5 (Eastern Time)</option>
+                    <option>UTC-8 (Pacific Time)</option>
+                    <option>UTC+0 (GMT)</option>
+                    <option>UTC+1 (Central European Time)</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Date Format</label>
+                  <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option>MM/DD/YYYY</option>
+                    <option>DD/MM/YYYY</option>
+                    <option>YYYY-MM-DD</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Privacy Settings -->
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+              <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                <i class="ph ph-shield text-blue-600"></i>
+                Privacy & Security
+              </h2>
+              <div class="space-y-4">
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                  <div>
+                    <h3 class="font-medium text-gray-800">Two-Factor Authentication</h3>
+                    <p class="text-sm text-gray-600">Add an extra layer of security</p>
+                  </div>
+                  <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                    Enable
+                  </button>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                  <div>
+                    <h3 class="font-medium text-gray-800">Data Analytics</h3>
+                    <p class="text-sm text-gray-600">Allow anonymous usage data collection</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                  </label>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                  <div>
+                    <h3 class="font-medium text-gray-800">Auto-Save</h3>
+                    <p class="text-sm text-gray-600">Automatically save your work</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Data Management -->
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+              <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                <i class="ph ph-database text-blue-600"></i>
+                Data Management
+              </h2>
+              <div class="space-y-4">
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                  <div>
+                    <h3 class="font-medium text-gray-800">Export Data</h3>
+                    <p class="text-sm text-gray-600">Download all your data as JSON</p>
+                  </div>
+                  <button class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                    Export
+                  </button>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                  <div>
+                    <h3 class="font-medium text-gray-800">Clear Cache</h3>
+                    <p class="text-sm text-gray-600">Remove temporary files and data</p>
+                  </div>
+                  <button class="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors">
+                    Clear
+                  </button>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-red-50 rounded-lg border border-red-200">
+                  <div>
+                    <h3 class="font-medium text-red-800">Delete Account</h3>
+                    <p class="text-sm text-red-600">Permanently delete your account and all data</p>
+                  </div>
+                  <button class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Save Button -->
+            <div class="flex justify-end gap-4">
+              <button class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                Cancel
+              </button>
+              <button class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                Save Changes
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="bg-white text-center p-4 shadow fixed bottom-0 left-0 w-full z-30">
+        &copy; 2024 Personal Project. All rights reserved.
+      </footer>
+      
+      <!-- Chat Bot Placeholder -->
+      <div id="chatbot-root"></div>
+      <script src="chatbot.js"></script>
+    </div>
+
+    <script>
+      // Handle toggle switches
+      document.querySelectorAll('.toggle-switch input').forEach(toggle => {
+        toggle.addEventListener('change', function() {
+          const slider = this.nextElementSibling;
+          if (this.checked) {
+            slider.style.backgroundColor = '#2196F3';
+          } else {
+            slider.style.backgroundColor = '#ccc';
+          }
+        });
+      });
+
+      // Handle save button
+      document.querySelector('button:contains("Save Changes")').addEventListener('click', function() {
+        // Show success message
+        alert('Settings saved successfully!');
+      });
+
+      // Highlight active header menu item
+      (function() {
+        var path = window.location.pathname.split('/').pop();
+        if (!path) path = 'index.html';
+        document.querySelectorAll('header nav a').forEach(function(link) {
+          var icon = link.querySelector('i');
+          if (link.getAttribute('href') === path) {
+            link.classList.remove('text-gray-700');
+            link.classList.add('text-blue-600', 'font-bold');
+            if (icon) {
+              icon.classList.remove('text-gray-700');
+              icon.classList.add('text-blue-600', 'font-bold');
+            }
+          } else {
+            link.classList.remove('text-blue-600', 'font-bold');
+            link.classList.add('text-gray-700');
+            if (icon) {
+              icon.classList.remove('text-blue-600', 'font-bold');
+              icon.classList.add('text-gray-700');
+            }
+          }
+        });
+      })();
+
+      document.addEventListener('DOMContentLoaded', function() {
+        const appsBtn = document.getElementById('apps-menu-btn');
+        const appsDropdown = document.getElementById('apps-menu-dropdown');
+        let dropdownTimeout;
+        if (appsBtn && appsDropdown) {
+          function showDropdown() {
+            clearTimeout(dropdownTimeout);
+            appsDropdown.classList.remove('opacity-0', 'pointer-events-none');
+            appsDropdown.classList.add('opacity-100');
+          }
+          function hideDropdown() {
+            clearTimeout(dropdownTimeout);
+            dropdownTimeout = setTimeout(() => {
+              appsDropdown.classList.add('opacity-0', 'pointer-events-none');
+              appsDropdown.classList.remove('opacity-100');
+            }, 250); // Slightly longer delay for user experience
+          }
+          appsBtn.addEventListener('mouseenter', showDropdown);
+          appsBtn.addEventListener('mouseleave', hideDropdown);
+          appsDropdown.addEventListener('mouseenter', showDropdown);
+          appsDropdown.addEventListener('mouseleave', hideDropdown);
+        }
+      });
+    </script>
+  </body>
+</html> 
