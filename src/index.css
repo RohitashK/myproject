@@ -410,3 +410,63 @@
     display: block !important;
   }
 }
+
+body.dark .bg-blue-600,
+body.dark .hover\:bg-blue-700:hover,
+body.dark .bg-blue-700,
+body.dark button.bg-blue-600,
+body.dark button.bg-blue-700,
+body.dark button[type="submit"].bg-blue-600,
+body.dark button[type="submit"].hover\:bg-blue-700:hover {
+  background-color: #2563eb !important;
+  border-color: #2563eb !important;
+  color: #fff !important;
+}
+body.dark button.bg-gray-300,
+body.dark button.hover\:bg-gray-400:hover,
+body.dark button[type="button"].bg-gray-300,
+body.dark button[type="button"].hover\:bg-gray-400:hover {
+  background-color: #374151 !important;
+  color: #fff !important;
+  border-color: #374151 !important;
+}
+
+body.dark [role="dialog"] button.bg-blue-600,
+body.dark [role="dialog"] button.bg-blue-700,
+body.dark [role="dialog"] button[type="submit"].bg-blue-600,
+body.dark [role="dialog"] button[type="submit"].hover\:bg-blue-700:hover {
+  background-color: #2563eb !important;
+  border-color: #2563eb !important;
+  color: #fff !important;
+}
+body.dark [role="dialog"] button.bg-gray-300,
+body.dark [role="dialog"] button.hover\:bg-gray-400:hover,
+body.dark [role="dialog"] button[type="button"].bg-gray-300,
+body.dark [role="dialog"] button[type="button"].hover\:bg-gray-400:hover {
+  background-color: #374151 !important;
+  color: #fff !important;
+  border-color: #374151 !important;
+}
+
+body.dark .fixed.inset-0 .bg-blue-600,
+body.dark .fixed.inset-0 .bg-blue-700,
+body.dark .fixed.inset-0 button.bg-blue-600,
+body.dark .fixed.inset-0 button.bg-blue-700,
+body.dark .fixed.inset-0 button[type="submit"].bg-blue-600,
+body.dark .fixed.inset-0 button[type="submit"].hover\:bg-blue-700:hover,
+body.dark .bg-white.rounded-xl.shadow-lg .bg-blue-600,
+body.dark .bg-white.rounded-xl.shadow-lg .bg-blue-700,
+body.dark .bg-white.rounded-xl.shadow-lg button.bg-blue-600,
+body.dark .bg-white.rounded-xl.shadow-lg button.bg-blue-700,
+body.dark .bg-white.rounded-xl.shadow-lg button[type="submit"].bg-blue-600,
+body.dark .bg-white.rounded-xl.shadow-lg button[type="submit"].hover\:bg-blue-700:hover,
+body.dark .z-50 .bg-blue-600,
+body.dark .z-50 .bg-blue-700,
+body.dark .z-50 button.bg-blue-600,
+body.dark .z-50 button.bg-blue-700,
+body.dark .z-50 button[type="submit"].bg-blue-600,
+body.dark .z-50 button[type="submit"].hover\:bg-blue-700:hover {
+  background-color: #2563eb !important;
+  border-color: #2563eb !important;
+  color: #fff !important;
+}

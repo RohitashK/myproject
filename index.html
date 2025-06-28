@@ -691,7 +691,7 @@
                   <textarea id='kudos-comment' rows='4' class='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500' required></textarea>
                 </div>
                 <div class='flex gap-3'>
-                  <button type='submit' class='flex-1 bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition'>Submit</button>
+                  <button type='submit' class='flex-1 bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition dark:bg-blue-600 dark:hover:bg-blue-700 dark:text-white'>Submit</button>
                   <button type='button' id='close-kudos-modal' class='flex-1 bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-400 transition'>Cancel</button>
                 </div>
               </form>
@@ -840,7 +840,7 @@
                   <textarea id='plan-desc' class='w-full rounded border px-2 py-1 text-xs' placeholder='Description' rows='2' ${mode==='view'?'readonly':''}>${descValue}</textarea>
                 </div>
                 <div class='flex justify-end'>
-                  ${mode==='view' ? '<button type="button" id="close-plan-modal" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded">Close</button>' : `<button type='submit' class='px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded'>${mode==='edit'?'Save':'Add'}</button>`}
+                  ${mode==='view' ? '<button type="button" id="close-plan-modal" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded">Close</button>' : `<button type='submit' class='px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded dark:bg-blue-600 dark:hover:bg-blue-700 dark:text-white'>${mode==='edit'?'Save':'Add'}</button>`}
                 </div>
               </form>
             </div>
@@ -883,7 +883,7 @@
                   <textarea id='plan-desc' class='w-full rounded border px-2 py-1 text-xs' placeholder='Description' rows='2' ${mode==='view'?'readonly':''}>${descValue}</textarea>
                 </div>
                 <div class='flex justify-end'>
-                  ${mode==='view' ? '<button type="button" id="close-plan-modal" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded">Close</button>' : `<button type='submit' class='px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded'>${mode==='edit'?'Save':'Add'}</button>`}
+                  ${mode==='view' ? '<button type="button" id="close-plan-modal" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded">Close</button>' : `<button type='submit' class='px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded dark:bg-blue-600 dark:hover:bg-blue-700 dark:text-white'>${mode==='edit'?'Save':'Add'}</button>`}
                 </div>
               </form>
               <div class='bg-gray-100 rounded p-3'>
@@ -1144,6 +1144,32 @@
           });
         }
       })();
+    </script>
+    <script>
+    function forceBlueModalButtonsDarkMode() {
+      if (!document.body.classList.contains('dark')) return;
+      // Select all visible modal overlays
+      document.querySelectorAll('.fixed.inset-0, .z-50').forEach(modal => {
+        modal.querySelectorAll('button.bg-blue-600, button.bg-blue-700, button[type="submit"].bg-blue-600, button[type="submit"].bg-blue-700').forEach(btn => {
+          btn.style.backgroundColor = '#2563eb';
+          btn.style.borderColor = '#2563eb';
+          btn.style.color = '#fff';
+        });
+      });
+    }
+    // Run on modal open
+    const origShowKudosModal = window.showKudosModal;
+    window.showKudosModal = function(...args) {
+      origShowKudosModal.apply(this, args);
+      setTimeout(forceBlueModalButtonsDarkMode, 10);
+    };
+    const origShowPlanModal = window.showPlanModal;
+    window.showPlanModal = function(...args) {
+      origShowPlanModal.apply(this, args);
+      setTimeout(forceBlueModalButtonsDarkMode, 10);
+    };
+    // Also run on DOMContentLoaded in case a modal is open by default
+    window.addEventListener('DOMContentLoaded', forceBlueModalButtonsDarkMode);
     </script>
   </body>
 </html>
