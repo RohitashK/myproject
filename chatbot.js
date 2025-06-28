@@ -112,25 +112,24 @@
     });
   }
 
-  function createMessageBubble(text, isUser = false) {
+  function createMessageBubble(text, isUser = false, isHTML = false) {
     const messageDiv = document.createElement('div');
     messageDiv.className = `flex ${isUser ? 'justify-end' : 'justify-start'} mb-3`;
-    
     const bubbleDiv = document.createElement('div');
     bubbleDiv.className = `max-w-xs px-3 py-2 rounded-2xl ${isUser ? 'bg-blue-500 text-white' : 'bg-white text-gray-800'} shadow-sm`;
-    
     const textDiv = document.createElement('div');
     textDiv.className = 'text-sm';
-    textDiv.textContent = text;
-    
+    if (isHTML) {
+      textDiv.innerHTML = text;
+    } else {
+      textDiv.textContent = text;
+    }
     const timeDiv = document.createElement('div');
     timeDiv.className = `text-xs mt-1 ${isUser ? 'text-blue-100' : 'text-gray-500'}`;
     timeDiv.textContent = getCurrentTime();
-    
     bubbleDiv.appendChild(textDiv);
     bubbleDiv.appendChild(timeDiv);
     messageDiv.appendChild(bubbleDiv);
-    
     return messageDiv;
   }
 
@@ -191,15 +190,87 @@
         welcomeContent.style.display = 'none';
         isFirstMessage = false;
       }
-      
       // Add user message bubble
       const userMsg = createMessageBubble(input.value, true);
       messages.appendChild(userMsg);
-      
-      // Add bot message bubble
-      const botMsg = createMessageBubble('I can help you with Tech content management, search, and documentation tasks. What would you like to know?', false);
-      messages.appendChild(botMsg);
-      
+      // All website content and sections for full-site search
+      const searchableContent = [
+        {
+          name: 'Projects',
+          href: 'Projects.html',
+          content: 'Project management, collaboration, create new project, assign tasks, deadlines, milestones, copy, team, deliverables.'
+        },
+        {
+          name: 'Reports',
+          href: 'Reports.html',
+          content: 'Data, analytics, report, summary, performance, statistics, charts, export, download, insights.'
+        },
+        {
+          name: 'Help',
+          href: 'Help.html',
+          content: 'Help, FAQ, support, guide, documentation, assistance, questions, troubleshooting, contact.'
+        },
+        {
+          name: 'Dashboard',
+          href: 'Dashboard.html',
+          content: 'Dashboard, overview, activity, feed, summary, main, quick access, widgets, analytics.'
+        },
+        {
+          name: 'User Settings',
+          href: 'Settings.html',
+          content: 'User, settings, preferences, profile, account, configuration, password, notifications.'
+        },
+        // Dashboard sections
+        {
+          name: 'My Feed (Dashboard)',
+          href: 'Dashboard.html#feed',
+          content: 'Feed, updates, notifications, recent activity, news, timeline.'
+        },
+        {
+          name: 'Kudos (Dashboard)',
+          href: 'Dashboard.html#kudos',
+          content: 'Kudos, appreciation, recognition, praise, thanks, awards.'
+        },
+        {
+          name: 'People (Dashboard)',
+          href: 'Dashboard.html#people',
+          content: 'People, team, members, users, contacts, colleagues, staff.'
+        },
+        {
+          name: 'Revenue (Dashboard)',
+          href: 'Dashboard.html#revenue',
+          content: 'Revenue, earnings, financial summary, sales, income, profit, money.'
+        },
+        {
+          name: 'My Task (Dashboard)',
+          href: 'Dashboard.html#mywork',
+          content: 'Task, tasks, to-do, assignments, work, checklist, progress.'
+        },
+        {
+          name: 'My Plan (Dashboard)',
+          href: 'Dashboard.html#myplan',
+          content: 'Plan, planning, schedule, roadmap, goals, objectives, strategy.'
+        },
+      ];
+      // Fuzzy/partial word matching for keywords in all website content
+      const msg = input.value.toLowerCase();
+      const msgWords = msg.split(/\s+/).filter(Boolean);
+      const matchedContent = searchableContent.filter(item => {
+        const content = (item.content + ' ' + item.name).toLowerCase();
+        return msgWords.some(word => content.includes(word));
+      });
+      if (matchedContent.length > 0) {
+        const links = matchedContent.map(item => `<a href="${item.href}" class="text-blue-600 underline chatbot-page-link">${item.name}</a>`).join(', ');
+        const reply = matchedContent.length === 1
+          ? `You can find <b>${input.value}</b> in ${links}.`
+          : `You can find <b>${input.value}</b> in these sections/pages: ${links}`;
+        const botMsg = createMessageBubble(reply, false, true);
+        messages.appendChild(botMsg);
+      } else {
+        // Add bot message bubble
+        const botMsg = createMessageBubble('No matching content found. I can help you with Tech content management, search, and documentation tasks. What would you like to know?', false);
+        messages.appendChild(botMsg);
+      }
       input.value = '';
       messages.scrollTop = messages.scrollHeight;
     }
