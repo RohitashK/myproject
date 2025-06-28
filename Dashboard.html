@@ -448,6 +448,20 @@
       { quarter: 'Q2 2025', owner: 'Priya Singh', status: 'Draft' },
       { quarter: 'Q3 2025', owner: 'Rahul Verma', status: 'Forecast' }
     ];
+
+    // Duplicate validation functions
+    function isWeeklyPlanDuplicate(week) {
+      return dashboardWeeklyPlans.some(plan => plan.week === week);
+    }
+
+    function isQuarterlyPlanDuplicate(quarter) {
+      return dashboardQuarterlyPlans.some(plan => plan.quarter === quarter);
+    }
+
+    function showDuplicateAlert(planType, planValue) {
+      alert(`A ${planType} plan for "${planValue}" already exists. Please choose a different ${planType === 'weekly' ? 'week' : 'quarter'} or edit the existing plan.`);
+    }
+
     function renderDashboardPlans() {
       // Weekly Plans
       const weeklyContainer = document.getElementById('weekly-list');
@@ -736,6 +750,11 @@
             dashboardWeeklyPlans[idx].description = desc;
             dashboardWeeklyPlans[idx].createdDate = createdDate;
           } else if (mode === 'add') {
+            // Check for duplicate weekly plan
+            if (isWeeklyPlanDuplicate(week)) {
+              showDuplicateAlert('weekly', week);
+              return;
+            }
             dashboardWeeklyPlans.unshift({ week: week, owner: owner, status: status, description: desc, createdDate: createdDate });
           }
         } else if (type === 'quarterly') {
@@ -750,6 +769,11 @@
             dashboardQuarterlyPlans[idx].description = desc;
             dashboardQuarterlyPlans[idx].createdDate = createdDate;
           } else if (mode === 'add') {
+            // Check for duplicate quarterly plan
+            if (isQuarterlyPlanDuplicate(quarter)) {
+              showDuplicateAlert('quarterly', quarter);
+              return;
+            }
             dashboardQuarterlyPlans.unshift({ quarter: quarter, owner: owner, status: status, description: desc, createdDate: createdDate });
           }
         }

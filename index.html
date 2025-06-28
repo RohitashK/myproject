@@ -218,6 +218,19 @@
         ]
       };
 
+      // Duplicate validation functions
+      function isWeeklyPlanDuplicate(week) {
+        return tabData.plan.some(plan => plan.week === week);
+      }
+
+      function isQuarterlyPlanDuplicate(quarter) {
+        return (tabData.quarterlyPlanArr || []).some(plan => plan.quarter === quarter);
+      }
+
+      function showDuplicateAlert(planType, planValue) {
+        alert(`A ${planType} plan for "${planValue}" already exists. Please choose a different ${planType === 'weekly' ? 'week' : 'quarter'} or edit the existing plan.`);
+      }
+
       const tabOrder = ['feed', 'kudos', 'people', 'revenue', 'work', 'plan'];
       let activeTab = 'feed';
       let autoLoop = null;
@@ -825,6 +838,11 @@
               tabData.plan[idx].description = desc;
               tabData.plan[idx].createdDate = createdDate;
             } else if (mode === 'add') {
+              // Check for duplicate weekly plan
+              if (isWeeklyPlanDuplicate(week)) {
+                showDuplicateAlert('weekly', week);
+                return;
+              }
               tabData.plan.unshift({ week: week, owner: owner, status: status, description: desc, createdDate: createdDate, isNew: true });
             }
           } else if (type === 'quarterly') {
@@ -839,6 +857,11 @@
               (tabData.quarterlyPlanArr || [])[idx].description = desc;
               (tabData.quarterlyPlanArr || [])[idx].createdDate = createdDate;
             } else if (mode === 'add') {
+              // Check for duplicate quarterly plan
+              if (isQuarterlyPlanDuplicate(quarter)) {
+                showDuplicateAlert('quarterly', quarter);
+                return;
+              }
               if (!tabData.quarterlyPlanArr) tabData.quarterlyPlanArr = [];
               tabData.quarterlyPlanArr.unshift({ quarter: quarter, owner: owner, status: status, description: desc, createdDate: createdDate, isNew: true });
             }
@@ -851,12 +874,15 @@
       // Attach modal openers after rendering
       document.addEventListener('click', function(e) {
         if (e.target && e.target.id === 'give-kudos-btn') {
+          stopAutoLoop();
           showKudosModal();
         }
         if (e.target && e.target.id === 'add-weekly-btn') {
+          stopAutoLoop();
           showPlanModal('weekly');
         }
         if (e.target && e.target.id === 'add-quarterly-btn') {
+          stopAutoLoop();
           showPlanModal('quarterly');
         }
       });
