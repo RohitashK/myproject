@@ -168,6 +168,104 @@
         flex: 1 1 0;
         min-width: 0;
       }
+      /* --- DARK MODE CSS START --- */
+      body.dark, body.dark * {
+        background-color: #18191a !important;
+        color: #fff !important;
+        border-color: #333 !important;
+      }
+      body.dark .bg-white,
+      body.dark .bg-gray-100,
+      body.dark .bg-gray-50,
+      body.dark .main-content,
+      body.dark .main-content-scroll,
+      body.dark .fixed-sidebar,
+      body.dark .single-bg-panel,
+      body.dark .rounded-xl,
+      body.dark .shadow-lg,
+      body.dark .border,
+      body.dark .p-6,
+      body.dark .p-4,
+      body.dark .p-3,
+      body.dark .p-8,
+      body.dark .w-80,
+      body.dark .min-h-screen,
+      body.dark .footer,
+      body.dark .header,
+      body.dark aside,
+      body.dark main,
+      body.dark .card,
+      body.dark .tab-content-single-bg > div,
+      body.dark .tab-content-single-bg > div.bg-white,
+      body.dark .sidebar,
+      body.dark .left-panel,
+      body.dark .right-panel {
+        background: #23272b !important;
+        color: #fff !important;
+        border-color: #333 !important;
+      }
+      body.dark .rounded-xl,
+      body.dark .shadow-lg,
+      body.dark .single-bg-panel,
+      body.dark .card,
+      body.dark .tab-content-single-bg > div,
+      body.dark .tab-content-single-bg > div.bg-white {
+        background: #23272b !important;
+        color: #fff !important;
+        border-color: #333 !important;
+      }
+      body.dark .text-gray-700,
+      body.dark .text-gray-800,
+      body.dark .text-gray-600,
+      body.dark .text-blue-600,
+      body.dark .text-blue-700,
+      body.dark .text-blue-800,
+      body.dark .text-black,
+      body.dark .text-gray-500,
+      body.dark .font-bold,
+      body.dark .font-semibold {
+        color: #fff !important;
+      }
+      body.dark i,
+      body.dark .material-icons,
+      body.dark .ph {
+        color: #fff !important;
+        fill: #fff !important;
+      }
+      body.dark input,
+      body.dark textarea,
+      body.dark select,
+      body.dark .border-gray-300,
+      body.dark .border-gray-200 {
+        background: #23272b !important;
+        color: #fff !important;
+        border-color: #444 !important;
+      }
+      body.dark .bg-blue-600,
+      body.dark .hover\:bg-blue-700:hover,
+      body.dark .bg-green-600,
+      body.dark .hover\:bg-green-700:hover,
+      body.dark .bg-orange-600,
+      body.dark .hover\:bg-orange-700:hover,
+      body.dark .bg-red-600,
+      body.dark .hover\:bg-red-700:hover {
+        background: #2563eb !important;
+        color: #fff !important;
+      }
+      body.dark .shadow,
+      body.dark .shadow-lg {
+        box-shadow: none !important;
+      }
+      body.dark a,
+      body.dark .hover\:text-blue-600:hover {
+        color: #90cdf4 !important;
+      }
+      body.dark .border,
+      body.dark .border-gray-200,
+      body.dark .border-gray-300 {
+        border-color: #333 !important;
+      }
+      /* --- DARK MODE CSS END --- */
     </style>
   </head>
   <body class="bg-white font-sans">
@@ -205,7 +303,7 @@
             </div>
           </div>
           <div class="flex items-center gap-2 ml-4">
-            <img src="public/profile.png" alt="Profile" class="w-10 h-10 rounded-full cursor-pointer hover:opacity-80 transition-opacity border-2 border-gray-200" onclick="window.location.href='Settings.html'" title="Settings" />
+            <img src="public/profile.png" alt="Profile" class="w-10 h-10 rounded-full cursor-pointer hover:opacity-80 transition-opacity border-2 border-gray-200 ring-2 ring-blue-500" onclick="window.location.href='Settings.html'" title="Settings" />
           </div>
         </nav>
       </header>
@@ -1010,6 +1108,28 @@
       peopleContainer.innerHTML = `<div class='flex flex-col'>${html}</div>`;
     }
     renderDashboardPeople();
+    </script>
+    <script>
+    // Global dark mode JS for all pages
+    (function() {
+      const settings = JSON.parse(localStorage.getItem('userSettings') || 'null');
+      if (settings && settings.theme === 'dark') {
+        document.body.classList.add('dark');
+      } else {
+        document.body.classList.remove('dark');
+      }
+    })();
+    </script>
+    <script>
+    (function() {
+      // Get user settings from localStorage
+      const settings = JSON.parse(localStorage.getItem('userSettings') || 'null');
+      if (settings && settings.photo) {
+        document.querySelectorAll('header img[alt="Profile"]').forEach(function(img) {
+          img.src = settings.photo;
+        });
+      }
+    })();
     </script>
   </body>
 </html> 

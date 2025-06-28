@@ -13,6 +13,17 @@
     .animate-zoom {
       animation: zoomInOut 1.5s ease-in-out infinite;
     }
+    body.dark #chatbot-root .fixed.bottom-6.right-6,
+    body.dark #chatbot-root .fixed.bottom-6.right-6 * {
+      background: #007aff !important;
+      color: #fff !important;
+      fill: #fff !important;
+      border-color: #007aff !important;
+    }
+    body.dark #chatbot-root svg {
+      color: #007aff !important;
+      fill: #fff !important;
+    }
   `;
   document.head.appendChild(style);
 

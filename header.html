@@ -29,7 +29,36 @@
       </div>
     </div>
     <div class="flex items-center gap-2 ml-4">
-      <img src="public/profile.png" alt="Profile" class="w-10 h-10 rounded-full cursor-pointer hover:opacity-80 transition-opacity border-2 border-gray-200" onclick="window.location.href='Settings.html'" title="Settings" />
+      <img src="public/profile.png" alt="Profile" class="w-10 h-10 rounded-full cursor-pointer hover:opacity-80 transition-opacity border-2 border-gray-200 ring-2 ring-blue-500" onclick="window.location.href='Settings.html'" title="Settings" />
     </div>
   </nav>
-</header> 
+</header>
+
+<style>
+  /* Existing header styles ... */
+  /* Add dark mode support for header */
+  body.dark header.fixed-header,
+  body.dark header.bg-white,
+  body.dark .fixed-header {
+    background: #23272b !important;
+    color: #fff !important;
+    border-color: #333 !important;
+  }
+  body.dark header.fixed-header a,
+  body.dark header.fixed-header .ph,
+  body.dark header.fixed-header .material-icons,
+  body.dark header.fixed-header nav a {
+    color: #fff !important;
+    fill: #fff !important;
+  }
+  body.dark header.fixed-header nav a.text-blue-600 {
+    color: #90cdf4 !important;
+  }
+  body.dark header.fixed-header nav a:hover {
+    color: #90cdf4 !important;
+  }
+  body.dark header.fixed-header img {
+    background: #23272b !important;
+    border-color: #333 !important;
+  }
+</style> 

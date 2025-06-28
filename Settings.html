@@ -20,6 +20,104 @@
       .slider:before { position: absolute; content: ""; height: 26px; width: 26px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
       input:checked + .slider { background-color: #2196F3; }
       input:checked + .slider:before { transform: translateX(26px); }
+      /* --- DARK MODE CSS START --- */
+      body.dark, body.dark * {
+        background-color: #18191a !important;
+        color: #fff !important;
+        border-color: #333 !important;
+      }
+      body.dark .bg-white,
+      body.dark .bg-gray-100,
+      body.dark .bg-gray-50,
+      body.dark .main-content,
+      body.dark .main-content-scroll,
+      body.dark .fixed-sidebar,
+      body.dark .single-bg-panel,
+      body.dark .rounded-xl,
+      body.dark .shadow-lg,
+      body.dark .border,
+      body.dark .p-6,
+      body.dark .p-4,
+      body.dark .p-3,
+      body.dark .p-8,
+      body.dark .w-80,
+      body.dark .min-h-screen,
+      body.dark .footer,
+      body.dark .header,
+      body.dark aside,
+      body.dark main,
+      body.dark .card,
+      body.dark .tab-content-single-bg > div,
+      body.dark .tab-content-single-bg > div.bg-white,
+      body.dark .sidebar,
+      body.dark .left-panel,
+      body.dark .right-panel {
+        background: #23272b !important;
+        color: #fff !important;
+        border-color: #333 !important;
+      }
+      body.dark .rounded-xl,
+      body.dark .shadow-lg,
+      body.dark .single-bg-panel,
+      body.dark .card,
+      body.dark .tab-content-single-bg > div,
+      body.dark .tab-content-single-bg > div.bg-white {
+        background: #23272b !important;
+        color: #fff !important;
+        border-color: #333 !important;
+      }
+      body.dark .text-gray-700,
+      body.dark .text-gray-800,
+      body.dark .text-gray-600,
+      body.dark .text-blue-600,
+      body.dark .text-blue-700,
+      body.dark .text-blue-800,
+      body.dark .text-black,
+      body.dark .text-gray-500,
+      body.dark .font-bold,
+      body.dark .font-semibold {
+        color: #fff !important;
+      }
+      body.dark i,
+      body.dark .material-icons,
+      body.dark .ph {
+        color: #fff !important;
+        fill: #fff !important;
+      }
+      body.dark input,
+      body.dark textarea,
+      body.dark select,
+      body.dark .border-gray-300,
+      body.dark .border-gray-200 {
+        background: #23272b !important;
+        color: #fff !important;
+        border-color: #444 !important;
+      }
+      body.dark .bg-blue-600,
+      body.dark .hover\:bg-blue-700:hover,
+      body.dark .bg-green-600,
+      body.dark .hover\:bg-green-700:hover,
+      body.dark .bg-orange-600,
+      body.dark .hover\:bg-orange-700:hover,
+      body.dark .bg-red-600,
+      body.dark .hover\:bg-red-700:hover {
+        background: #2563eb !important;
+        color: #fff !important;
+      }
+      body.dark .shadow,
+      body.dark .shadow-lg {
+        box-shadow: none !important;
+      }
+      body.dark a,
+      body.dark .hover\:text-blue-600:hover {
+        color: #90cdf4 !important;
+      }
+      body.dark .border,
+      body.dark .border-gray-200,
+      body.dark .border-gray-300 {
+        border-color: #333 !important;
+      }
+      /* --- DARK MODE CSS END --- */
     </style>
   </head>
   <body class="bg-white font-sans">
@@ -58,12 +156,12 @@
             </div>
           </div>
           <div class="flex items-center gap-2 ml-4">
-            <img src="public/profile.png" alt="Profile" class="w-10 h-10 rounded-full cursor-pointer hover:opacity-80 transition-opacity border-2 border-gray-200" onclick="window.location.href='Settings.html'" title="Settings" />
+            <img src="public/profile.png" alt="Profile" class="w-10 h-10 rounded-full cursor-pointer hover:opacity-80 transition-opacity border-2 border-gray-200 ring-2 ring-blue-500" onclick="window.location.href='Settings.html'" title="Settings" />
           </div>
         </nav>
       </header>
 
-      <main class="main-content p-8">
+      <main class="main-content p-8 pb-32">
         <div class="max-w-4xl mx-auto">
           <!-- Page Header -->
           <div class="mb-8">
@@ -87,23 +185,24 @@
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-2">Profile Picture</label>
                   <div class="flex items-center gap-4">
-                    <img src="public/profile.png" alt="Profile" class="w-16 h-16 rounded-full border-2 border-gray-200" />
-                    <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                    <img id="profile-photo-preview" src="public/profile.png" alt="Profile" class="w-16 h-16 rounded-full border-2 border-gray-200 ring-2 ring-blue-500" />
+                    <input type="file" id="profile-photo-input" accept="image/*" class="hidden" />
+                    <button type="button" id="change-photo-btn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
                       Change Photo
                     </button>
                   </div>
                 </div>
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-2">Display Name</label>
-                  <input type="text" value="Amit Sharma" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                  <input type="text" id="user-name" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
                 </div>
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-                  <input type="email" value="amit.sharma@example.com" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                  <input type="email" id="user-email" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
                 </div>
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-2">Job Title</label>
-                  <input type="text" value="AI Engineer" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                  <input type="text" id="user-designation" value="AI Engineer" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
                 </div>
               </div>
             </div>
@@ -167,10 +266,9 @@
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-2">Theme</label>
-                  <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                    <option>Light</option>
-                    <option>Dark</option>
-                    <option>Auto</option>
+                  <select id="theme-select" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
                   </select>
                 </div>
                 <div>
@@ -202,88 +300,12 @@
               </div>
             </div>
 
-            <!-- Privacy Settings -->
-            <div class="bg-gray-100 rounded-xl shadow-lg border border-gray-200 p-6">
-              <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
-                <i class="ph ph-shield text-blue-600"></i>
-                Privacy & Security
-              </h2>
-              <div class="space-y-4">
-                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                  <div>
-                    <h3 class="font-medium text-gray-800">Two-Factor Authentication</h3>
-                    <p class="text-sm text-gray-600">Add an extra layer of security</p>
-                  </div>
-                  <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                    Enable
-                  </button>
-                </div>
-                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                  <div>
-                    <h3 class="font-medium text-gray-800">Data Analytics</h3>
-                    <p class="text-sm text-gray-600">Allow anonymous usage data collection</p>
-                  </div>
-                  <label class="toggle-switch">
-                    <input type="checkbox" checked>
-                    <span class="slider"></span>
-                  </label>
-                </div>
-                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                  <div>
-                    <h3 class="font-medium text-gray-800">Auto-Save</h3>
-                    <p class="text-sm text-gray-600">Automatically save your work</p>
-                  </div>
-                  <label class="toggle-switch">
-                    <input type="checkbox" checked>
-                    <span class="slider"></span>
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <!-- Data Management -->
-            <div class="bg-gray-100 rounded-xl shadow-lg border border-gray-200 p-6">
-              <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
-                <i class="ph ph-database text-blue-600"></i>
-                Data Management
-              </h2>
-              <div class="space-y-4">
-                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                  <div>
-                    <h3 class="font-medium text-gray-800">Export Data</h3>
-                    <p class="text-sm text-gray-600">Download all your data as JSON</p>
-                  </div>
-                  <button class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-                    Export
-                  </button>
-                </div>
-                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                  <div>
-                    <h3 class="font-medium text-gray-800">Clear Cache</h3>
-                    <p class="text-sm text-gray-600">Remove temporary files and data</p>
-                  </div>
-                  <button class="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors">
-                    Clear
-                  </button>
-                </div>
-                <div class="flex items-center justify-between p-4 bg-red-50 rounded-lg border border-red-200">
-                  <div>
-                    <h3 class="font-medium text-red-800">Delete Account</h3>
-                    <p class="text-sm text-red-600">Permanently delete your account and all data</p>
-                  </div>
-                  <button class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </div>
-
             <!-- Save Button -->
             <div class="flex justify-end gap-4">
-              <button class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
-                Cancel
+              <button class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors" id="reset-settings-btn">
+                Reset
               </button>
-              <button class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+              <button class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors" id="save-settings-btn">
                 Save Changes
               </button>
             </div>
@@ -313,10 +335,111 @@
         });
       });
 
+      // Use localStorage for persistence across full reloads and browser restarts
+      function getDefaultUserSettings() {
+        return {
+          name: "Rohitash Kumar",
+          email: "rohitash.kumar@vdx.tv",
+          designation: "AI Engineer",
+          photo: "public/profile.png",
+          theme: "light"
+        };
+      }
+      let userSettings = JSON.parse(localStorage.getItem('userSettings') || 'null') || getDefaultUserSettings();
+
+      // Store selected image file data temporarily
+      let tempPhotoData = null;
+
+      // Populate settings fields when opening settings
+      function populateSettingsForm() {
+        document.getElementById('user-name').value = userSettings.name;
+        document.getElementById('user-email').value = userSettings.email;
+        document.getElementById('user-designation').value = userSettings.designation;
+        document.getElementById('profile-photo-preview').src = userSettings.photo;
+        document.getElementById('theme-select').value = userSettings.theme || 'light';
+      }
+
+      // Handle photo selection (do not update preview yet)
+      const photoInput = document.getElementById('profile-photo-input');
+      document.getElementById('change-photo-btn').addEventListener('click', function() {
+        photoInput.click();
+      });
+      photoInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(evt) {
+            tempPhotoData = evt.target.result;
+            // Instantly update the preview image
+            document.getElementById('profile-photo-preview').src = tempPhotoData;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
       // Handle save button
-      document.querySelector('button:contains("Save Changes")').addEventListener('click', function() {
-        // Show success message
-        alert('Settings saved successfully!');
+      const saveBtn = document.getElementById('save-settings-btn');
+      saveBtn.addEventListener('click', function() {
+        userSettings.name = document.getElementById('user-name').value;
+        userSettings.email = document.getElementById('user-email').value;
+        userSettings.designation = document.getElementById('user-designation').value;
+        userSettings.theme = document.getElementById('theme-select').value;
+        // Only update photo if a new one was selected
+        if (tempPhotoData) {
+          userSettings.photo = tempPhotoData;
+          tempPhotoData = null;
+        }
+        // Update preview and header photo after save
+        document.getElementById('profile-photo-preview').src = userSettings.photo;
+        const headerImg = document.querySelector('header img[alt="Profile"]');
+        if (headerImg) headerImg.src = userSettings.photo;
+        // Apply theme only after save
+        if (userSettings.theme === 'dark') {
+          document.body.classList.add('dark');
+        } else {
+          document.body.classList.remove('dark');
+        }
+        localStorage.setItem('userSettings', JSON.stringify(userSettings));
+        alert('Settings saved!');
+      });
+
+      // Add Reset button logic
+      const resetBtn = document.getElementById('reset-settings-btn');
+      resetBtn.addEventListener('click', function() {
+        userSettings = getDefaultUserSettings();
+        // Save to localStorage so all pages reflect default
+        localStorage.setItem('userSettings', JSON.stringify(userSettings));
+        // Update all fields to default
+        populateSettingsForm();
+        // Update header photo
+        const headerImg = document.querySelector('header img[alt="Profile"]');
+        if (headerImg) headerImg.src = userSettings.photo;
+        // Apply theme
+        if (userSettings.theme === 'dark') {
+          document.body.classList.add('dark');
+        } else {
+          document.body.classList.remove('dark');
+        }
+        alert('Settings have been reset to default!');
+      });
+
+      // On page load, populate form and do NOT apply theme until save
+      populateSettingsForm();
+
+      // On every page load, apply user settings from localStorage if available
+      window.addEventListener('DOMContentLoaded', function() {
+        const settings = JSON.parse(localStorage.getItem('userSettings') || 'null');
+        if (settings) {
+          // Update header photo
+          const headerImg = document.querySelector('header img[alt="Profile"]');
+          if (headerImg) headerImg.src = settings.photo;
+          // Apply theme
+          if (settings.theme === 'dark') {
+            document.body.classList.add('dark');
+          } else {
+            document.body.classList.remove('dark');
+          }
+        }
       });
 
       // Highlight active header menu item
@@ -366,6 +489,17 @@
           appsDropdown.addEventListener('mouseleave', hideDropdown);
         }
       });
+    </script>
+    <script>
+    // Global dark mode JS for all pages
+    (function() {
+      const settings = JSON.parse(localStorage.getItem('userSettings') || 'null');
+      if (settings && settings.theme === 'dark') {
+        document.body.classList.add('dark');
+      } else {
+        document.body.classList.remove('dark');
+      }
+    })();
     </script>
   </body>
 </html> 
