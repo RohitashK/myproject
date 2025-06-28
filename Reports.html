@@ -17,11 +17,11 @@
       .main-content { margin-top: 96px; min-height: calc(100vh - 96px); }
     </style>
   </head>
-  <body class="bg-white font-sans">
+  <body class="bg-gray-100 font-sans">
     <div class="min-h-screen">
       <header class="fixed-header bg-white shadow p-4 flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <div class="h-16 w-16 flex items-center justify-center bg-white">
+          <div class="h-16 w-16 flex items-center justify-center bg-gray-100">
             <img src="public/logo.jpg" alt="Logo" class="h-full w-full object-contain" />
           </div>
         </div>
@@ -38,15 +38,15 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
               </svg>
             </button>
-            <div id="apps-menu-dropdown" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg opacity-0 pointer-events-none transition-opacity z-10">
-              <a href="https://expo.dev" class="block px-4 py-2 hover:bg-gray-100">Expo</a>
-              <a href="https://chat.openai.com" class="block px-4 py-2 hover:bg-gray-100">ChatGPT</a>
-              <a href="https://claude.ai" class="block px-4 py-2 hover:bg-gray-100">Claude</a>
-              <a href="https://gemini.google.com" class="block px-4 py-2 hover:bg-gray-100">Gemini</a>
-              <a href="https://copilot.microsoft.com" class="block px-4 py-2 hover:bg-gray-100">Copilot</a>
-              <a href="https://www.midjourney.com" class="block px-4 py-2 hover:bg-gray-100">Midjourney</a>
-              <a href="https://openai.com/dall-e-2" class="block px-4 py-2 hover:bg-gray-100">DALL-E</a>
-              <a href="https://stability.ai" class="block px-4 py-2 hover:bg-gray-100">Stable Diffusion</a>
+            <div id="apps-menu-dropdown" class="absolute right-0 mt-2 w-48 bg-gray-100 border border-gray-200 rounded shadow-lg opacity-0 pointer-events-none transition-opacity z-10">
+              <a href="https://expo.dev" class="block px-4 py-2 hover:bg-gray-200">Expo</a>
+              <a href="https://chat.openai.com" class="block px-4 py-2 hover:bg-gray-200">ChatGPT</a>
+              <a href="https://claude.ai" class="block px-4 py-2 hover:bg-gray-200">Claude</a>
+              <a href="https://gemini.google.com" class="block px-4 py-2 hover:bg-gray-200">Gemini</a>
+              <a href="https://copilot.microsoft.com" class="block px-4 py-2 hover:bg-gray-200">Copilot</a>
+              <a href="https://www.midjourney.com" class="block px-4 py-2 hover:bg-gray-200">Midjourney</a>
+              <a href="https://openai.com/dall-e-2" class="block px-4 py-2 hover:bg-gray-200">DALL-E</a>
+              <a href="https://stability.ai" class="block px-4 py-2 hover:bg-gray-200">Stable Diffusion</a>
             </div>
           </div>
           <div class="flex items-center gap-2 ml-4">
@@ -68,7 +68,7 @@
 
           <!-- Revenue Overview Cards -->
           <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+            <div class="bg-gray-100 rounded-xl shadow-lg border border-gray-200 p-6">
               <div class="flex items-center gap-3">
                 <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
                   <i class="ph ph-currency-dollar text-green-600 text-xl"></i>
@@ -80,7 +80,7 @@
                 </div>
               </div>
             </div>
-            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+            <div class="bg-gray-100 rounded-xl shadow-lg border border-gray-200 p-6">
               <div class="flex items-center gap-3">
                 <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
                   <i class="ph ph-chart-line text-blue-600 text-xl"></i>
@@ -92,7 +92,7 @@
                 </div>
               </div>
             </div>
-            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+            <div class="bg-gray-100 rounded-xl shadow-lg border border-gray-200 p-6">
               <div class="flex items-center gap-3">
                 <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
                   <i class="ph ph-cpu text-purple-600 text-xl"></i>
@@ -104,7 +104,7 @@
                 </div>
               </div>
             </div>
-            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+            <div class="bg-gray-100 rounded-xl shadow-lg border border-gray-200 p-6">
               <div class="flex items-center gap-3">
                 <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
                   <i class="ph ph-users text-orange-600 text-xl"></i>
@@ -121,20 +121,20 @@
           <!-- Charts Section -->
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
             <!-- Revenue Growth Chart -->
-            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+            <div class="bg-gray-100 rounded-xl shadow-lg border border-gray-200 p-6">
               <h3 class="text-xl font-bold text-gray-800 mb-4">AI Revenue Growth (2020-2025)</h3>
               <canvas id="revenueChart" width="400" height="200"></canvas>
             </div>
 
             <!-- Market Share Chart -->
-            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+            <div class="bg-gray-100 rounded-xl shadow-lg border border-gray-200 p-6">
               <h3 class="text-xl font-bold text-gray-800 mb-4">AI Market Share by Company</h3>
               <canvas id="marketShareChart" width="400" height="200"></canvas>
             </div>
           </div>
 
           <!-- Company Revenue Table -->
-          <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6 mb-8">
+          <div class="bg-gray-100 rounded-xl shadow-lg border border-gray-200 p-6 mb-8">
             <h3 class="text-xl font-bold text-gray-800 mb-6">Company Revenue Breakdown</h3>
             <div class="overflow-x-auto">
               <table class="w-full">
@@ -239,7 +239,7 @@
 
           <!-- Regional Analysis -->
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+            <div class="bg-gray-100 rounded-xl shadow-lg border border-gray-200 p-6">
               <h3 class="text-lg font-bold text-gray-800 mb-4">North America</h3>
               <div class="space-y-3">
                 <div class="flex justify-between">
@@ -256,7 +256,7 @@
                 </div>
               </div>
             </div>
-            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+            <div class="bg-gray-100 rounded-xl shadow-lg border border-gray-200 p-6">
               <h3 class="text-lg font-bold text-gray-800 mb-4">Europe</h3>
               <div class="space-y-3">
                 <div class="flex justify-between">
@@ -273,7 +273,7 @@
                 </div>
               </div>
             </div>
-            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+            <div class="bg-gray-100 rounded-xl shadow-lg border border-gray-200 p-6">
               <h3 class="text-lg font-bold text-gray-800 mb-4">Asia Pacific</h3>
               <div class="space-y-3">
                 <div class="flex justify-between">
@@ -293,7 +293,7 @@
           </div>
         </div>
       </main>
-      <footer class="bg-white text-center p-4 shadow fixed bottom-0 left-0 w-full z-30">
+      <footer class="bg-gray-100 text-center p-4 shadow fixed bottom-0 left-0 w-full z-30">
         &copy; 2024 Personal Project. All rights reserved.
       </footer>
       

@@ -47,6 +47,14 @@
         border: none !important;
         padding: 0 !important;
       }
+      .bg-gray-100 {
+        --tw-bg-opacity: 1;
+        background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
+      }
+      .bg-white {
+        --tw-bg-opacity: 1;
+        background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
+      }
     </style>
   </head>
   <body class="bg-gray-100 bg-opacity-80 font-sans">
@@ -865,6 +873,39 @@
           }
         });
       })();
+    </script>
+    <script>
+      function searchContent(query, searchableContent) {
+        const words = query.toLowerCase().split(/[\s\n]+/).filter(Boolean);
+        return searchableContent.filter(item => {
+          const content = (item.content + ' ' + item.name).toLowerCase();
+          return words.some(word => content.includes(word));
+        });
+      }
+    </script>
+    <script>
+      const menuLinks = {
+        home: 'index.html',
+        dashboard: 'Dashboard.html',
+        projects: 'Projects.html',
+        reports: 'Reports.html',
+        help: 'Help.html',
+        apps: '#',
+        'user settings': 'Settings.html'
+      };
+
+      function searchMenu(query) {
+        const key = query.trim().toLowerCase();
+        if (menuLinks[key]) {
+          return `<a href="${menuLinks[key]}">${key.charAt(0).toUpperCase() + key.slice(1)}</a>`;
+        } else {
+          return 'No matching content found.';
+        }
+      }
+
+      // Usage:
+      const userInput = 'home'; // or get from your chat input
+      const resultHtml = searchMenu(userInput);
     </script>
   </body>
 </html>

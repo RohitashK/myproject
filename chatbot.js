@@ -196,6 +196,11 @@
       // All website content and sections for full-site search
       const searchableContent = [
         {
+          name: 'Home',
+          href: 'index.html',
+          content: 'Home, main page, welcome, announcements, dashboard, quick links, news, updates, introduction, start here'
+        },
+        {
           name: 'Projects',
           href: 'Projects.html',
           content: 'Project management, collaboration, create new project, assign tasks, deadlines, milestones, copy, team, deliverables.'
@@ -251,6 +256,21 @@
           href: 'Dashboard.html#myplan',
           content: 'Plan, planning, schedule, roadmap, goals, objectives, strategy.'
         },
+        {
+          name: 'Apps',
+          href: '#',
+          content: 'Apps, Expo, ChatGPT, Claude, Gemini, Copilot, Midjourney, DALL-E, Stable Diffusion, AI, tools, models, assistants',
+          apps: [
+            { name: 'Expo', href: '#' },
+            { name: 'ChatGPT', href: '#' },
+            { name: 'Claude', href: '#' },
+            { name: 'Gemini', href: '#' },
+            { name: 'Copilot', href: '#' },
+            { name: 'Midjourney', href: '#' },
+            { name: 'DALL-E', href: '#' },
+            { name: 'Stable Diffusion', href: '#' }
+          ]
+        },
       ];
       // Fuzzy/partial word matching for keywords in all website content
       const msg = input.value.toLowerCase();
@@ -260,10 +280,27 @@
         return msgWords.some(word => content.includes(word));
       });
       if (matchedContent.length > 0) {
-        const links = matchedContent.map(item => `<a href="${item.href}" class="text-blue-600 underline chatbot-page-link">${item.name}</a>`).join(', ');
-        const reply = matchedContent.length === 1
-          ? `You can find <b>${input.value}</b> in ${links}.`
-          : `You can find <b>${input.value}</b> in these sections/pages: ${links}`;
+        let reply = '';
+        if (matchedContent.length === 1 && matchedContent[0].name === 'Apps' && matchedContent[0].apps) {
+          // Dropdown-style menu for apps
+          reply = `
+            <div style="background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08); padding:0.5em 0; border:1px solid #e5e7eb; width:220px;">
+              <ul style="list-style:none; margin:0; padding:0;">
+                ${matchedContent[0].apps.map(app => `
+                  <li style="padding:0.75em 1.25em; cursor:pointer; color:#374151; font-size:1.1em;">
+                    <a href="${app.href}" style="color:inherit; text-decoration:none; display:block;">${app.name}</a>
+                  </li>
+                `).join('')}
+              </ul>
+            </div>
+          `;
+        } else {
+          // Default reply for other matches
+          const links = matchedContent.map(item => `<a href="${item.href}" class="text-blue-600 underline chatbot-page-link">${item.name}</a>`).join(', ');
+          reply = matchedContent.length === 1
+            ? `You can find <b>${input.value}</b> in ${links}.`
+            : `You can find <b>${input.value}</b> in these sections/pages: ${links}`;
+        }
         const botMsg = createMessageBubble(reply, false, true);
         messages.appendChild(botMsg);
       } else {
