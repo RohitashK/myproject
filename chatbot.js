@@ -193,84 +193,265 @@
       // Add user message bubble
       const userMsg = createMessageBubble(input.value, true);
       messages.appendChild(userMsg);
-      // All website content and sections for full-site search
+      // Comprehensive website content arrays for high-tech chatbot search
       const searchableContent = [
+        // ===== MAIN PAGES =====
         {
-          name: 'Home',
+          name: 'Home Page',
           href: 'index.html',
-          content: 'Home, main page, welcome, announcements, dashboard, quick links, news, updates, introduction, start here'
+          content: 'Home, main page, welcome, announcements, dashboard, quick links, news, updates, introduction, start here, feed, kudos, people, revenue, tasks, plans, auto-rotating tabs, sidebar navigation, mobile menu, apps dropdown, profile picture, linkedin profile, Rohitash Kumar'
         },
         {
-          name: 'Projects',
-          href: 'Projects.html',
-          content: 'Project management, collaboration, create new project, assign tasks, deadlines, milestones, copy, team, deliverables.'
-        },
-        {
-          name: 'Reports',
-          href: 'Reports.html',
-          content: 'Data, analytics, report, summary, performance, statistics, charts, export, download, insights.'
-        },
-        {
-          name: 'Help',
-          href: 'Help.html',
-          content: 'Help, FAQ, support, guide, documentation, assistance, questions, troubleshooting, contact.'
-        },
-        {
-          name: 'Dashboard',
+          name: 'Dashboard Page',
           href: 'Dashboard.html',
-          content: 'Dashboard, overview, activity, feed, summary, main, quick access, widgets, analytics.'
+          content: 'Dashboard, overview, activity, feed, summary, main, quick access, widgets, analytics, my feed, kudos, people, revenue, my task, my plan, grid layout, bento grid, fixed header, navigation menu, apps menu, profile settings, responsive design, desktop view, mobile view'
         },
         {
-          name: 'User Settings',
+          name: 'Projects Page',
+          href: 'Projects.html',
+          content: 'Projects, project management, collaboration, create new project, assign tasks, deadlines, milestones, copy, team, deliverables, OpenAI, Google, Microsoft, Anthropic, Midjourney, GPT-5, Sora, Gemini Ultra, Copilot Studio, Claude 4.0, AI research, development, global AI projects, upcoming projects, leading companies, technology companies, project grid, project cards'
+        },
+        {
+          name: 'Reports Page',
+          href: 'Reports.html',
+          content: 'Reports, data, analytics, report, summary, performance, statistics, charts, export, download, insights, metrics, KPI, dashboard, data visualization, performance tracking, business intelligence, reporting tools'
+        },
+        {
+          name: 'Help Page',
+          href: 'Help.html',
+          content: 'Help, FAQ, support, guide, documentation, assistance, questions, troubleshooting, contact, how to, manual, instructions, help support, frequently asked questions, live chat, email support, documentation, quick actions, contact information, support team'
+        },
+        {
+          name: 'User Settings Page',
           href: 'Settings.html',
-          content: 'User, settings, preferences, profile, account, configuration, password, notifications.'
+          content: 'User settings, preferences, profile, account, configuration, password, notifications, personal, setup, options, account management, profile settings, notification preferences, security settings'
         },
-        // Dashboard sections
+        
+        // ===== DASHBOARD SECTIONS =====
         {
-          name: 'My Feed (Dashboard)',
+          name: 'My Feed Section',
           href: 'Dashboard.html#feed',
-          content: 'Feed, updates, notifications, recent activity, news, timeline.'
+          content: 'Feed, updates, notifications, recent activity, news, timeline, posts, announcements, team updates, weekly team update, design system workshop, new office location, summer team building, feed data, activity feed, social feed, team feed, June 2025, May 2025, trending up icon, book open icon, users icon, calendar icon, revenue type, meeting type, announcement type, event type, starred posts, likes, comments'
         },
         {
-          name: 'Kudos (Dashboard)',
+          name: 'Kudos Section',
           href: 'Dashboard.html#kudos',
-          content: 'Kudos, appreciation, recognition, praise, thanks, awards.'
+          content: 'Kudos, appreciation, recognition, praise, thanks, awards, Riya Mehra, Vikas Patel, Sneha Rao, Suresh Kumar, Neha Joshi, Manish Gupta, Amit Sharma, Priya Singh, Rahul Verma, Karan Singh, Pooja Nair, Deepak Chawla, kudos data, give kudos, kudos dialog, kudos form, kudos list, kudos entries, recognition system, employee recognition, team appreciation, outstanding work, amazing work, presentation skills, client meeting, problem-solving skills, attention to detail, deadline, dedication, kudos modal, kudos submission'
         },
         {
-          name: 'People (Dashboard)',
+          name: 'People Section',
           href: 'Dashboard.html#people',
-          content: 'People, team, members, users, contacts, colleagues, staff.'
+          content: 'People, team, members, users, contacts, colleagues, staff, work anniversaries, birthdays, announcements, Amit Sharma, Priya Singh, Rahul Verma, Sneha Patel, Vikram Desai, Ananya Iyer, Rohan Mehra, Meera Nair, Saurabh Gupta, people data, team members, employee directory, work anniversary, birthday celebrations, team announcements, new team member, office renovation, design team, June dates, profile pictures, avatar images, likes, comments, starred announcements, team building, office space, downtown location'
         },
         {
-          name: 'Revenue (Dashboard)',
+          name: 'Revenue Section',
           href: 'Dashboard.html#revenue',
-          content: 'Revenue, earnings, financial summary, sales, income, profit, money.'
+          content: 'Revenue, earnings, financial summary, sales, income, profit, money, design projects, development services, consulting, Arjun Desai, PixelCraft India, Meera Kapoor, Creative Minds Pvt Ltd, Rohit Sinha, TechNova Solutions, Anjali Menon, DevWorks India, Siddharth Jain, ConsultPro India, revenue data, financial data, project revenue, service revenue, crore amounts, lakh amounts, revenue categories, design projects revenue, development services revenue, consulting revenue, client companies, project amounts, revenue tracking, financial performance'
         },
         {
-          name: 'My Task (Dashboard)',
+          name: 'My Task Section',
           href: 'Dashboard.html#mywork',
-          content: 'Task, tasks, to-do, assignments, work, checklist, progress.'
+          content: 'Task, tasks, to-do, assignments, work, checklist, progress, my work, workload, assignments, deadlines, my work data, recently worked on, recently visited, favourites, UI/UX design system implementation, mobile app development sprint, client presentation deck, team training workshop, product roadmap planning, annual performance review, project dashboard, design system documentation, team calendar, client meeting notes, code review guidelines, marketing strategy document, project timeline, design resources, team guidelines, client presentations, development standards, marketing templates, work categories, design, development, marketing, HR, strategy, planning, sales, work types, today, last week, older'
         },
         {
-          name: 'My Plan (Dashboard)',
+          name: 'My Plan Section',
           href: 'Dashboard.html#myplan',
-          content: 'Plan, planning, schedule, roadmap, goals, objectives, strategy.'
+          content: 'Plan, planning, schedule, roadmap, goals, objectives, strategy, weekly plans, quarterly plans, Q1, Q2, Q3, Q4, 2025, 2026, my plan data, weekly plan data, quarterly plan data, plan dialog, plan form, plan submission, plan validation, duplicate entries, plan status, published plans, plan owners, Amit Sharma, Priya Singh, Rahul Verma, Sneha Patel, Vikram Desai, Ananya Iyer, plan descriptions, sprint planning, quarterly goals, new targets, plan management, plan creation, plan editing, plan viewing, plan deletion, plan dates, week ranges, quarter ranges, plan tracking'
         },
+        
+        // ===== APPS CATEGORIES =====
+        {
+          name: 'Expo Apps Category',
+          href: '#',
+          content: 'Expo, ChatGPT, Claude, Gemini, Copilot, Midjourney, DALL-E, Stable Diffusion, AI tools, models, assistants, artificial intelligence, expo apps, AI development tools, language models, image generation, AI assistants, machine learning tools'
+        },
+        {
+          name: 'Client Apps Category',
+          href: '#',
+          content: 'Salesforce Einstein, HubSpot AI, Zoho CRM, Pipedrive, Freshsales, Sales Navigator, customer relationship management, CRM, sales tools, client management, sales automation, lead management, customer data, sales pipeline, client apps, business development tools'
+        },
+        {
+          name: 'Finance Apps Category',
+          href: '#',
+          content: 'Plaid, Stripe, QuickBooks AI, Xero, FreshBooks, Wave, financial tools, accounting, payment processing, invoicing, finance apps, financial management, bookkeeping, payment gateways, financial automation, expense tracking, revenue management'
+        },
+        {
+          name: 'Collaboration Apps Category',
+          href: '#',
+          content: 'Notion AI, Miro AI, Figma AI, Slack AI, Microsoft Teams, Zoom AI, collaboration tools, communication, project management, design tools, team collaboration, remote work, video conferencing, design collaboration, document collaboration, team communication, collaboration apps'
+        },
+        {
+          name: 'Office Apps Category',
+          href: '#',
+          content: 'Microsoft 365 Copilot, Google Workspace AI, Grammarly, Jasper, Copy.ai, Writesonic, office productivity, writing tools, content creation, office apps, productivity tools, document creation, content writing, office automation, business productivity, writing assistance'
+        },
+        {
+          name: 'People Apps Category',
+          href: '#',
+          content: 'BambooHR, Workday, Greenhouse, Lever, SmartRecruiters, iCIMS, human resources, HR, recruitment, hiring, employee management, people apps, HR management, talent acquisition, employee onboarding, performance management, HR automation'
+        },
+        {
+          name: 'IT Apps Category',
+          href: '#',
+          content: 'Okta, 1Password, LastPass, Dashlane, NordVPN, ExpressVPN, CrowdStrike, security, password management, VPN, cybersecurity, IT apps, identity management, password security, network security, endpoint protection, IT security tools'
+        },
+        {
+          name: 'Dev Apps Category',
+          href: '#',
+          content: 'GitHub Copilot, Tabnine, CodeWhisperer, Replit, Cursor, Codeium, development tools, coding, programming, IDE, code completion, dev apps, software development, code assistance, development environment, programming tools, AI coding assistants'
+        },
+        {
+          name: 'Devices Category',
+          href: '#',
+          content: 'Laptop Windows, Laptop macOS, iPhone, Android, iPad, Surface, devices, hardware, operating systems, mobile, desktop, device management, hardware platforms, mobile devices, desktop computers, tablet devices, device categories'
+        },
+        
+        // ===== PROJECT DETAILS =====
+        {
+          name: 'OpenAI Projects',
+          href: 'Projects.html#openai',
+          content: 'OpenAI, GPT-5 Development, Sora Video Generation, AI Research, language model, video generation, Q4 2025, Q1 2026, 500+ Team, 200+ Team, OpenAI projects, AI research development, next-generation language model, enhanced reasoning capabilities, advanced video generation, text-to-video, AI model development, research team, development timeline, project milestones, AI innovation, artificial intelligence research'
+        },
+        {
+          name: 'Google Projects',
+          href: 'Projects.html#google',
+          content: 'Google, Gemini Ultra 2.0, Quantum AI Research, AI Machine Learning, multimodal AI, quantum computing, Q2 2025, Q3 2025, 800+ Team, 150+ Team, Google projects, advanced multimodal AI, complex reasoning, quantum computing applications, AI machine learning, research initiatives, technology innovation, quantum AI, multimodal intelligence, AI development projects'
+        },
+        {
+          name: 'Microsoft Projects',
+          href: 'Projects.html#microsoft',
+          content: 'Microsoft, Copilot Studio, Azure AI Services, AI Integration, custom AI assistant, enterprise AI, Q1 2025, Q2 2025, 300+ Team, 400+ Team, Microsoft projects, custom AI assistant development, enterprise AI solutions, AI APIs, Azure cloud services, AI integration platform, business AI solutions, enterprise technology, AI development platform'
+        },
+        {
+          name: 'Anthropic Projects',
+          href: 'Projects.html#anthropic',
+          content: 'Anthropic, Claude 4.0, AI Safety Research, Constitutional AI, AI alignment, safety protocols, Q3 2025, Q4 2025, 250+ Team, 100+ Team, Anthropic projects, next-generation AI, enhanced safety features, AI alignment research, safety protocols, constitutional AI principles, AI ethics, responsible AI development, safety-first AI'
+        },
+        {
+          name: 'Midjourney Projects',
+          href: 'Projects.html#midjourney',
+          content: 'Midjourney, image generation, visual AI, creative tools, art, design, visual content, Midjourney projects, AI art generation, visual content creation, creative AI tools, digital art, image synthesis, visual design, creative technology, AI-powered design'
+        },
+        
+        // ===== FEATURES AND ACTIONS =====
+        {
+          name: 'Create New Project',
+          href: 'Projects.html#create',
+          content: 'Create new project, add project, new project, project creation, start project, project setup, project initialization, project management, project planning, project development, project workflow'
+        },
+        {
+          name: 'Task Management',
+          href: 'Projects.html#tasks',
+          content: 'Task management, assign tasks, task assignment, workload, deadlines, task tracking, task planning, task scheduling, task prioritization, task monitoring, task completion, task workflow, project tasks, team tasks'
+        },
+        {
+          name: 'Team Collaboration',
+          href: 'Projects.html#collaboration',
+          content: 'Team collaboration, team work, collaboration tools, team management, group work, team coordination, team communication, collaborative projects, team productivity, team efficiency, collaborative workflow'
+        },
+        {
+          name: 'Analytics Dashboard',
+          href: 'Reports.html#analytics',
+          content: 'Analytics dashboard, data visualization, charts, metrics, performance tracking, KPI monitoring, business analytics, data analysis, performance metrics, business intelligence, data insights, reporting dashboard'
+        },
+        {
+          name: 'Export Reports',
+          href: 'Reports.html#export',
+          content: 'Export reports, download reports, report export, data export, PDF export, Excel export, report generation, data download, report sharing, report distribution, export functionality, report formats'
+        },
+        {
+          name: 'Profile Settings',
+          href: 'Settings.html#profile',
+          content: 'Profile settings, account settings, personal information, user profile, account management, profile configuration, user preferences, account details, personal settings, profile customization, user account'
+        },
+        {
+          name: 'Notification Settings',
+          href: 'Settings.html#notifications',
+          content: 'Notification settings, alerts, email notifications, push notifications, notification preferences, alert configuration, notification management, communication preferences, alert settings, notification system'
+        },
+        {
+          name: 'Help Documentation',
+          href: 'Help.html#docs',
+          content: 'Help documentation, user manual, guides, tutorials, how-to, instructions, FAQ, documentation, user guide, help resources, support documentation, learning resources, user assistance'
+        },
+        {
+          name: 'Contact Support',
+          href: 'Help.html#contact',
+          content: 'Contact support, customer service, help desk, support ticket, contact us, get help, support contact, customer assistance, help request, support inquiry, contact information, support team'
+        },
+        
+        // ===== HELP CONTENT =====
+        {
+          name: 'Navigation Help',
+          href: 'Help.html#navigation',
+          content: 'Navigate between sections, sidebar tabs, left navigation, section switching, tab navigation, dashboard view, section view, navigation menu, menu navigation, page navigation, interface navigation, user navigation'
+        },
+        {
+          name: 'Kudos Help',
+          href: 'Help.html#kudos',
+          content: 'Add kudos entry, give kudos, kudos modal, kudos form, recipient name, kudos message, submit kudos, kudos submission, recognition entry, appreciation entry, kudos workflow, kudos process'
+        },
+        {
+          name: 'Plan Creation Help',
+          href: 'Help.html#plans',
+          content: 'Create new plan, weekly plan, quarterly plan, plan form, plan submission, duplicate validation, plan management, plan creation process, plan setup, plan configuration, planning workflow'
+        },
+        {
+          name: 'View Differences Help',
+          href: 'Help.html#views',
+          content: 'Home view, dashboard view, auto-rotating tabs, grid layout, section view, view differences, interface comparison, layout options, display modes, view modes, user interface options'
+        },
+        {
+          name: 'Chatbot Access Help',
+          href: 'Help.html#chatbot',
+          content: 'Access chatbot, chat icon, bottom-right corner, chat interface, minimize chat, close chat, chat window, chat header, chatbot access, chat functionality, chat interface, chat controls'
+        },
+        {
+          name: 'Entry Management Help',
+          href: 'Help.html#entries',
+          content: 'Edit entries, delete entries, view entries, action icons, edit icon, view icon, delete icon, confirmation dialog, entry management, data management, content management, entry operations'
+        },
+        
+        // ===== LIVE CHAT AND SUPPORT =====
+        {
+          name: 'Live Chat Support',
+          href: 'Help.html#livechat',
+          content: 'Live chat, instant help, support team, real-time support, chat support, online support, immediate assistance, chat assistance, support chat, help chat, customer chat, support communication'
+        },
+        {
+          name: 'Email Support',
+          href: 'Help.html#email',
+          content: 'Email support, send email, detailed assistance, email assistance, support email, contact email, email help, email inquiry, support inquiry, email communication, support contact'
+        },
+        {
+          name: 'Documentation Access',
+          href: 'Help.html#documentation',
+          content: 'Browse documentation, comprehensive documentation, user documentation, help docs, documentation access, documentation browse, help resources, documentation library, user resources'
+        },
+        
+        // ===== CONTACT INFORMATION =====
+        {
+          name: 'Support Contact',
+          href: 'Help.html#contact',
+          content: 'support.india@example.com, contact information, support email, customer service email, help email, support contact, contact details, support team contact, customer support, technical support'
+        },
+        
+        // ===== APPS SECTION (Special handling for dropdown-style links) =====
         {
           name: 'Apps',
           href: '#',
-          content: 'Apps, Expo, ChatGPT, Claude, Gemini, Copilot, Midjourney, DALL-E, Stable Diffusion, AI, tools, models, assistants',
+          content: 'Apps, Expo, ChatGPT, Claude, Gemini, Copilot, Midjourney, DALL-E, Stable Diffusion, AI, tools, models, assistants, apps menu, applications, software tools, digital tools, productivity apps, business apps, technology apps',
           apps: [
-            { name: 'Expo', href: '#' },
-            { name: 'ChatGPT', href: '#' },
-            { name: 'Claude', href: '#' },
-            { name: 'Gemini', href: '#' },
-            { name: 'Copilot', href: '#' },
-            { name: 'Midjourney', href: '#' },
-            { name: 'DALL-E', href: '#' },
-            { name: 'Stable Diffusion', href: '#' }
+            { name: 'Expo', href: 'https://expo.dev' },
+            { name: 'ChatGPT', href: 'https://chat.openai.com' },
+            { name: 'Claude', href: 'https://claude.ai' },
+            { name: 'Gemini', href: 'https://gemini.google.com' },
+            { name: 'Copilot', href: 'https://copilot.microsoft.com' },
+            { name: 'Midjourney', href: 'https://www.midjourney.com' },
+            { name: 'DALL-E', href: 'https://openai.com/dall-e-2' },
+            { name: 'Stable Diffusion', href: 'https://stability.ai' }
           ]
-        },
+        }
       ];
       // Fuzzy/partial word matching for keywords in all website content
       const msg = input.value.toLowerCase();
@@ -282,21 +463,12 @@
       if (matchedContent.length > 0) {
         let reply = '';
         if (matchedContent.length === 1 && matchedContent[0].name === 'Apps' && matchedContent[0].apps) {
-          // Dropdown-style menu for apps
-          reply = `
-            <div style="background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08); padding:0.5em 0; border:1px solid #e5e7eb; width:220px;">
-              <ul style="list-style:none; margin:0; padding:0;">
-                ${matchedContent[0].apps.map(app => `
-                  <li style="padding:0.75em 1.25em; cursor:pointer; color:#374151; font-size:1.1em;">
-                    <a href="${app.href}" style="color:inherit; text-decoration:none; display:block;">${app.name}</a>
-                  </li>
-                `).join('')}
-              </ul>
-            </div>
-          `;
+          // Inline text hyperlinks for apps
+          const appLinks = matchedContent[0].apps.map(app => `<a href="${app.href}" class="text-blue-600 underline chatbot-page-link" target="_blank" rel="noopener noreferrer">${app.name}</a>`).join(', ');
+          reply = `You can find these apps: ${appLinks}.`;
         } else {
           // Default reply for other matches
-          const links = matchedContent.map(item => `<a href="${item.href}" class="text-blue-600 underline chatbot-page-link">${item.name}</a>`).join(', ');
+          const links = matchedContent.map(item => `<a href="${item.href}" class="text-blue-600 underline chatbot-page-link" target="_blank" rel="noopener noreferrer">${item.name}</a>`).join(', ');
           reply = matchedContent.length === 1
             ? `You can find <b>${input.value}</b> in ${links}.`
             : `You can find <b>${input.value}</b> in these sections/pages: ${links}`;
