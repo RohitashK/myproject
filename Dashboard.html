@@ -20,14 +20,56 @@
         background: #2563eb;
         color: #fff;
       }
-      .dashboard-bento-scroll {
-        /* Remove or comment out overflow-y: hidden and height if present */
-      }
       .bento-scroll-content {
         flex: 1 1 0%;
         min-height: 0;
         overflow-y: auto;
         max-height: 100%;
+      }
+      
+      /* Custom scrollbar styling for lighter colors */
+      .bento-scroll-content::-webkit-scrollbar,
+      .bento-people::-webkit-scrollbar,
+      .bento-revenue::-webkit-scrollbar,
+      .bento-myplan::-webkit-scrollbar,
+      .bento-mywork::-webkit-scrollbar {
+        width: 8px;
+      }
+      
+      .bento-scroll-content::-webkit-scrollbar-track,
+      .bento-people::-webkit-scrollbar-track,
+      .bento-revenue::-webkit-scrollbar-track,
+      .bento-myplan::-webkit-scrollbar-track,
+      .bento-mywork::-webkit-scrollbar-track {
+        background: #f8fafc;
+        border-radius: 4px;
+      }
+      
+      .bento-scroll-content::-webkit-scrollbar-thumb,
+      .bento-people::-webkit-scrollbar-thumb,
+      .bento-revenue::-webkit-scrollbar-thumb,
+      .bento-myplan::-webkit-scrollbar-thumb,
+      .bento-mywork::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+      }
+      
+      .bento-scroll-content::-webkit-scrollbar-thumb:hover,
+      .bento-people::-webkit-scrollbar-thumb:hover,
+      .bento-revenue::-webkit-scrollbar-thumb:hover,
+      .bento-myplan::-webkit-scrollbar-thumb:hover,
+      .bento-mywork::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+      
+      /* Firefox scrollbar styling */
+      .bento-scroll-content,
+      .bento-people,
+      .bento-revenue,
+      .bento-myplan,
+      .bento-mywork {
+        scrollbar-width: thin;
+        scrollbar-color: #cbd5e1 #f8fafc;
       }
       @media (min-width: 1024px) {
         #dashboard-grid {

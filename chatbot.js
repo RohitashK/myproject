@@ -16,13 +16,28 @@
   `;
   document.head.appendChild(style);
 
+  // Helper SVGs
+  const chatBubbleSVG = `
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="18" fill="none"/>
+      <path d="M9 13a6 6 0 0 1 6-6h6a6 6 0 0 1 6 6v6a6 6 0 0 1-6 6h-2.2c-.3 0-.6.1-.8.3l-2.2 2.2c-.3.3-.8.1-.8-.3v-1.7A6 6 0 0 1 9 19v-6z" fill="white"/>
+      <path d="M13 19c1 1.5 3 2.5 5 2.5s4-1 5-2.5" stroke="#007aff" stroke-width="2" stroke-linecap="round" fill="none"/>
+    </svg>
+  `;
+  const downArrowSVG = `
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="18" fill="none"/>
+      <polyline points="12,16 18,22 24,16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  `;
+
   // Create floating button
   const btn = document.createElement('div');
-  btn.className = 'fixed bottom-6 right-6 z-50 cursor-pointer bg-white rounded-full shadow-lg p-3 border-2 border-blue-500 flex items-center justify-center animate-zoom';
-  btn.style.width = '48px';
-  btn.style.height = '48px';
-  // Use a chat bubble icon (Phosphor Icons)
-  btn.innerHTML = '<i class="ph ph-chat-centered-dots text-blue-600 text-2xl"></i>';
+  btn.className = 'fixed bottom-6 right-6 z-50 cursor-pointer rounded-full shadow-lg flex items-center justify-center animate-zoom';
+  btn.style.width = '56px';
+  btn.style.height = '56px';
+  btn.style.background = '#007aff';
+  btn.innerHTML = `<span id="chatbot-icon-span" style="display:inline-block;transition:opacity 0.25s;opacity:1;">${chatBubbleSVG}</span>`;
   root.appendChild(btn);
 
   // Create chat dialog
@@ -119,6 +134,16 @@
     return messageDiv;
   }
 
+  function swapIconWithTransition(newSVG) {
+    const iconSpan = btn.querySelector('#chatbot-icon-span');
+    if (!iconSpan) return;
+    iconSpan.style.opacity = '0';
+    setTimeout(() => {
+      iconSpan.innerHTML = newSVG;
+      iconSpan.style.opacity = '1';
+    }, 250);
+  }
+
   function resetChatbot() {
     isFirstMessage = true;
     isMinimized = false;
@@ -127,6 +152,7 @@
     welcomeContent.style.display = 'block';
     messages.innerHTML = '';
     btn.style.display = 'flex';
+    swapIconWithTransition(chatBubbleSVG);
     dialog.classList.add('hidden');
     // Stop animation when closed
     btn.classList.remove('animate-zoom');
@@ -134,7 +160,8 @@
 
   btn.addEventListener('click', () => {
     dialog.classList.remove('hidden');
-    btn.style.display = 'none';
+    btn.style.display = 'flex';
+    swapIconWithTransition(downArrowSVG);
     document.getElementById('chatbot-input').focus();
     // Stop animation when opened
     btn.classList.remove('animate-zoom');
@@ -143,6 +170,7 @@
   dialog.querySelector('#chatbot-minimize').addEventListener('click', () => {
     dialog.classList.add('hidden');
     btn.style.display = 'flex';
+    swapIconWithTransition(chatBubbleSVG);
     // Stop animation when minimized
     btn.classList.remove('animate-zoom');
   });
