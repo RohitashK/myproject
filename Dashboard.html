@@ -21,10 +21,7 @@
         color: #fff;
       }
       .dashboard-bento-scroll {
-        height: calc(100vh - 112px);
-        overflow-y: hidden;
-        padding-bottom: 0;
-        margin-bottom: 0;
+        /* Remove or comment out overflow-y: hidden and height if present */
       }
       .bento-scroll-content {
         flex: 1 1 0%;
@@ -35,14 +32,18 @@
       @media (min-width: 1024px) {
         #dashboard-grid {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          grid-template-rows: repeat(3, minmax(0, 1fr));
+          grid-template-columns: 1fr 1fr 1fr;
+          grid-template-rows: 600px 400px;
           grid-template-areas:
-            "feed feed kudos people"
-            "mywork myplan myplan people"
-            "revenue myplan myplan people";
-          gap: 2rem;
-          height: 100%;
+            "feed kudos people"
+            "myplan revenue mywork";
+          gap: 1rem;
+        }
+        .bento-feed,
+        .bento-kudos,
+        .bento-people {
+          min-height: unset;
+          max-height: unset;
         }
         .bento-feed { grid-area: feed; }
         .bento-kudos { grid-area: kudos; }
@@ -51,11 +52,31 @@
         .bento-mywork { grid-area: mywork; }
         .bento-myplan { grid-area: myplan; }
         .bento-feed, .bento-kudos, .bento-people, .bento-revenue, .bento-mywork, .bento-myplan {
-          height: 100%;
-          min-height: 0;
           display: flex;
           flex-direction: column;
           border-radius: 1.25rem;
+        }
+        .bento-mywork,
+        .bento-myplan,
+        .bento-people {
+          min-height: 500px;
+        }
+        .bento-people,
+        .bento-myplan,
+        .bento-revenue {
+          max-height: 320px;
+        }
+        .bento-revenue {
+          max-height: 220px;
+          overflow: auto;
+        }
+        .bento-myplan,
+        .bento-revenue,
+        .bento-mywork {
+          height: 100%;
+          min-height: unset;
+          max-height: unset;
+          overflow: auto;
         }
       }
       .bento-btn-sm {
@@ -75,6 +96,35 @@
       }
       .bento-mywork-compact .work-list li:last-child {
         border-bottom: none;
+      }
+      .bento-mywork .bento-scroll-content {
+        display: block;
+        flex-direction: unset;
+        gap: unset;
+        overflow-x: unset;
+      }
+      .bento-mywork .bento-scroll-content > div {
+        flex: unset;
+        max-width: unset;
+      }
+      .max-w-7xl {
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .bento-people {
+        height: 100%;
+        overflow: auto;
+        min-height: unset;
+        max-height: unset;
+      }
+      .dashboard-row {
+        display: flex;
+        gap: 1rem;
+      }
+      .dashboard-row > div {
+        flex: 1 1 0;
+        min-width: 0;
       }
     </style>
   </head>
@@ -259,7 +309,7 @@
           <div class='flex items-start justify-between'>
             <div class='flex-1'>
               <div class="flex items-center gap-4">
-                <div class="bg-white rounded-full w-14 h-14 flex items-center justify-center text-2xl text-gray-400 border"><i class="ph ph-user"></i></div>
+                <div class='bg-white rounded-full w-14 h-14 flex items-center justify-center text-2xl text-gray-400 border flex-shrink-0'><i class='ph ph-user'></i></div>
                 <div class="flex flex-col justify-center">
                   <div class="font-bold text-lg text-purple-700">${kudo.author}</div>
                   <div class="text-gray-600">${kudo.content}</div>
@@ -650,9 +700,9 @@
           }
         }
         renderDashboardPlans();
-        modal.classList.add('hidden');
-      };
-    }
+            modal.classList.add('hidden');
+          };
+        }
     // --- FEED DATA (MATCHED TO INDEX) ---
     let dashboardFeed = [
       { title: 'Weekly Team Update - June 2025', desc: 'Latest updates from our team members and project progress', date: '2025-06-03', likes: 42, comments: 5, starred: true },
@@ -824,7 +874,7 @@
         <h3 class='text-lg font-semibold flex items-center gap-2 mb-3'><i class='ph ph-calendar'></i> Work Anniversaries</h3>
         ${dashboardPeople.anniversaries.map(item => `
           <div class='p-4 bg-purple-50 rounded-lg border border-purple-100 mb-4 flex items-center gap-4'>
-            <div class='bg-white rounded-full w-12 h-12 flex items-center justify-center text-2xl text-gray-400 border'><i class='ph ph-user'></i></div>
+            <div class='bg-white rounded-full w-14 h-14 flex items-center justify-center text-2xl text-gray-400 border'><i class='ph ph-user'></i></div>
             <div>
               <div class="flex items-center gap-2">
                 <span class="font-semibold text-purple-800">${item.name}</span>
@@ -842,7 +892,7 @@
         <h3 class='text-lg font-semibold flex items-center gap-2 mb-3'><i class='ph ph-cake'></i> Birthdays</h3>
         ${dashboardPeople.birthdays.map(item => `
           <div class='p-4 bg-purple-50 rounded-lg border border-purple-100 mb-4 flex items-center gap-4'>
-            <div class='bg-white rounded-full w-12 h-12 flex items-center justify-center text-2xl text-gray-400 border'><i class='ph ph-user'></i></div>
+            <div class='bg-white rounded-full w-14 h-14 flex items-center justify-center text-2xl text-gray-400 border'><i class='ph ph-user'></i></div>
             <div>
               <div class="flex items-center gap-2">
                 <span class="font-semibold text-purple-800">${item.name}</span>
