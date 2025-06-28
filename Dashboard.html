@@ -451,7 +451,13 @@
 
     // Duplicate validation functions
     function isWeeklyPlanDuplicate(week) {
-      return dashboardWeeklyPlans.some(plan => plan.week === week);
+      // Extract the start date (YYYY-MM-DD) from the week string
+      function getStartDate(str) {
+        const match = str.match(/\d{4}-\d{2}-\d{2}/);
+        return match ? match[0] : '';
+      }
+      const newStart = getStartDate(week);
+      return dashboardWeeklyPlans.some(plan => getStartDate(plan.week) === newStart);
     }
 
     function isQuarterlyPlanDuplicate(quarter) {
