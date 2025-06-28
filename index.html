@@ -61,9 +61,11 @@
     <div class="min-h-screen">
       <header class="fixed-header bg-white shadow p-4 flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <div class="h-16 w-16 flex items-center justify-center bg-white">
-            <img src="public/logo.jpg" alt="Logo" class="h-full w-full object-contain" />
-          </div>
+          <a href="https://rohitashk.github.io/myproject/index.html">
+            <div class="h-16 w-16 flex items-center justify-center bg-white">
+              <img src="public/logo.jpg" alt="Logo" class="h-full w-full object-contain" />
+            </div>
+          </a>
         </div>
         <nav class="flex items-center gap-8">
           <a href="index.html" class="flex items-center gap-1 text-gray-700 hover:text-blue-600"><i class="ph ph-house"></i> Home</a>
@@ -374,38 +376,41 @@
               `;
             }).join('') + `</div>`;
         } else if (tab === 'work') {
-          html = `<div class='grid grid-cols-1 md:grid-cols-3 gap-6'>
-            <div>
-              <h3 class='text-lg font-semibold mb-3'>Recently worked on</h3>
-              <div class='space-y-4'>
-                ${tabData.work.map(item => `
-                  <div class='p-4 bg-blue-50 rounded-lg border border-blue-100'>
-                    <div class='font-semibold text-gray-800'>${item.title}</div>
-                    <div class='text-sm text-gray-600'>${item.type}</div>
-                  </div>
-                `).join('')}
+          html = `<div class='bg-white rounded-xl shadow-lg border border-gray-200 p-6'>
+            <h2 class='text-2xl font-bold mb-6 flex items-center gap-2'><i class='ph ph-calendar'></i> My Task</h2>
+            <div class='grid grid-cols-1 md:grid-cols-3 gap-6'>
+              <div>
+                <h3 class='text-lg font-semibold mb-3'>Recently worked on</h3>
+                <div class='space-y-4'>
+                  ${tabData.work.map(item => `
+                    <div class='p-4 bg-blue-50 rounded-lg border border-blue-100'>
+                      <div class='font-semibold text-gray-800'>${item.title}</div>
+                      <div class='text-sm text-gray-600'>${item.type}</div>
+                    </div>
+                  `).join('')}
+                </div>
               </div>
-            </div>
-            <div>
-              <h3 class='text-lg font-semibold mb-3'>Recently visited</h3>
-              <div class='space-y-4'>
-                ${tabData.work.map(item => `
-                  <div class='p-4 bg-blue-50 rounded-lg border border-blue-100'>
-                    <div class='font-semibold text-gray-800'>${item.title}</div>
-                    <div class='text-sm text-gray-600'>${item.category}</div>
-                  </div>
-                `).join('')}
+              <div>
+                <h3 class='text-lg font-semibold mb-3'>Recently visited</h3>
+                <div class='space-y-4'>
+                  ${tabData.work.map(item => `
+                    <div class='p-4 bg-blue-50 rounded-lg border border-blue-100'>
+                      <div class='font-semibold text-gray-800'>${item.title}</div>
+                      <div class='text-sm text-gray-600'>${item.category}</div>
+                    </div>
+                  `).join('')}
+                </div>
               </div>
-            </div>
-            <div>
-              <h3 class='text-lg font-semibold mb-3'>Favourites</h3>
-              <div class='space-y-4'>
-                ${tabData.work.map(item => `
-                  <div class='p-4 bg-blue-50 rounded-lg border border-blue-100'>
-                    <div class='font-semibold text-gray-800'>${item.title}</div>
-                    <div class='text-sm text-gray-600'>${item.category}</div>
-                  </div>
-                `).join('')}
+              <div>
+                <h3 class='text-lg font-semibold mb-3'>Favourites</h3>
+                <div class='space-y-4'>
+                  ${tabData.work.map(item => `
+                    <div class='p-4 bg-blue-50 rounded-lg border border-blue-100'>
+                      <div class='font-semibold text-gray-800'>${item.title}</div>
+                      <div class='text-sm text-gray-600'>${item.category}</div>
+                    </div>
+                  `).join('')}
+                </div>
               </div>
             </div>
           </div>`;
