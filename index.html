@@ -256,30 +256,32 @@
               <button id='give-kudos-btn' class='bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition flex items-center gap-2'><i class='ph ph-thumbs-up'></i> Give Kudos</button>
             </div>
             <div id='kudos-list'>` +
-            tabData.kudos.map((item, idx) => `
-              <div class='p-4 bg-purple-50 rounded-lg border border-purple-100 mb-4'>
-                <div class='flex items-start justify-between'>
-                  <div class='flex-1'>
-                    <div class="flex items-center gap-4">
-                      <div class="bg-white rounded-full w-14 h-14 flex items-center justify-center text-2xl text-gray-400 border"><i class="ph ph-user"></i></div>
-                      <div class="flex flex-col justify-center">
-                        <div class="font-bold text-lg text-purple-700">${item.author}</div>
-                        <div class="text-gray-600">${item.content}</div>
-                        <div class="flex items-center gap-4 mt-1">
-                          <span class="flex items-center gap-1 text-yellow-600 font-semibold"><i class="ph ph-thumbs-up"></i>${item.likes}</span>
-                          <span class="flex items-center gap-1 text-gray-700 font-semibold"><i class="ph ph-chat-centered"></i>${item.comments}</span>
+            (tabData.kudos.length === 0
+              ? `<div class='text-gray-500 text-center py-8'>No kudos yet. Be the first to give kudos!</div>`
+              : tabData.kudos.map((item, idx) => `
+                <div class='p-4 bg-purple-50 rounded-lg border border-purple-100 mb-4'>
+                  <div class='flex items-start justify-between'>
+                    <div class='flex-1'>
+                      <div class="flex items-center gap-4">
+                        <div class="bg-white rounded-full w-14 h-14 flex items-center justify-center text-2xl text-gray-400 border"><i class="ph ph-user"></i></div>
+                        <div class="flex flex-col justify-center">
+                          <div class="font-bold text-lg text-purple-700">${item.author}</div>
+                          <div class="text-gray-600">${item.content}</div>
+                          <div class="flex items-center gap-4 mt-1">
+                            <span class="flex items-center gap-1 text-yellow-600 font-semibold"><i class="ph ph-thumbs-up"></i>${item.likes}</span>
+                            <span class="flex items-center gap-1 text-gray-700 font-semibold"><i class="ph ph-chat-centered"></i>${item.comments}</span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div class='flex gap-2'>
-                    <button class='kudos-edit-btn' data-idx='${idx}' title='Edit'><i class='ph ph-pencil'></i></button>
-                    <button class='kudos-view-btn' data-idx='${idx}' title='View'><i class='ph ph-eye'></i></button>
-                    <button class='kudos-delete-btn' data-idx='${idx}' title='Delete'><i class='ph ph-trash'></i></button>
+                    <div class='flex gap-2'>
+                      <button class='kudos-edit-btn' data-idx='${idx}' title='Edit'><i class='ph ph-pencil'></i></button>
+                      <button class='kudos-view-btn' data-idx='${idx}' title='View'><i class='ph ph-eye'></i></button>
+                      <button class='kudos-delete-btn' data-idx='${idx}' title='Delete'><i class='ph ph-trash'></i></button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            `).join('') + `</div></div>`;
+              `).join('')) + `</div></div>`;
         } else if (tab === 'people') {
           html = `<div class='bg-white rounded-xl shadow-lg border border-gray-200 p-6'>
             <h2 class='text-2xl font-bold mb-6 flex items-center gap-2'><i class='ph ph-users'></i> People</h2>
@@ -427,47 +429,51 @@
               <div class='weekly-plans-section'>
                 <h3 class='text-lg font-semibold text-gray-800 mb-3'>Weekly Plans</h3>
                 <div class='space-y-3' id='weekly-list'>
-                  ${tabData.plan.map((item, idx) => `
-                    <div class='p-3 bg-blue-50 rounded-lg border border-blue-100'>
-                      <div class='flex items-center justify-between'>
-                        <div>
-                          <h4 class='font-medium text-blue-800'>${item.week}</h4>
-                          <p class='text-sm text-gray-600'>Owner: ${item.owner}</p>
-                        </div>
-                        <div class='flex items-center gap-2'>
-                          <span class='px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full'>${item.status}</span>
-                          <div class='flex gap-2'>
-                            <button class='plan-edit-btn' data-type='weekly' data-idx='${idx}' title='Edit'><i class='ph ph-pencil'></i></button>
-                            <button class='plan-view-btn' data-type='weekly' data-idx='${idx}' title='View'><i class='ph ph-eye'></i></button>
-                            <button class='plan-delete-btn' data-type='weekly' data-idx='${idx}' title='Delete'><i class='ph ph-trash'></i></button>
+                  ${(tabData.plan.length === 0)
+                    ? `<div class='text-gray-500 text-center py-8'>No weekly plans yet. Add your first weekly plan!</div>`
+                    : tabData.plan.map((item, idx) => `
+                      <div class='p-3 bg-blue-50 rounded-lg border border-blue-100'>
+                        <div class='flex items-center justify-between'>
+                          <div>
+                            <h4 class='font-medium text-blue-800'>${item.week}</h4>
+                            <p class='text-sm text-gray-600'>Owner: ${item.owner}</p>
+                          </div>
+                          <div class='flex items-center gap-2'>
+                            <span class='px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full'>${item.status}</span>
+                            <div class='flex gap-2'>
+                              <button class='plan-edit-btn' data-type='weekly' data-idx='${idx}' title='Edit'><i class='ph ph-pencil'></i></button>
+                              <button class='plan-view-btn' data-type='weekly' data-idx='${idx}' title='View'><i class='ph ph-eye'></i></button>
+                              <button class='plan-delete-btn' data-type='weekly' data-idx='${idx}' title='Delete'><i class='ph ph-trash'></i></button>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  `).join('')}
+                    `).join('')}
                 </div>
               </div>
               <div class='quarterly-plans-section'>
                 <h3 class='text-lg font-semibold text-gray-800 mb-3'>Quarterly Plans</h3>
                 <div class='space-y-3' id='quarterly-list'>
-                  ${(tabData.quarterlyPlanArr || []).map((item, idx) => `
-                    <div class='p-3 bg-purple-50 rounded-lg border border-purple-100'>
-                      <div class='flex items-center justify-between'>
-                        <div>
-                          <h4 class='font-medium text-purple-800'>${item.quarter}</h4>
-                          <p class='text-sm text-gray-600'>Owner: ${item.owner}</p>
-                        </div>
-                        <div class='flex items-center gap-2'>
-                          <span class='px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full'>${item.status}</span>
-                          <div class='flex gap-2'>
-                            <button class='plan-edit-btn' data-type='quarterly' data-idx='${idx}' title='Edit'><i class='ph ph-pencil'></i></button>
-                            <button class='plan-view-btn' data-type='quarterly' data-idx='${idx}' title='View'><i class='ph ph-eye'></i></button>
-                            <button class='plan-delete-btn' data-type='quarterly' data-idx='${idx}' title='Delete'><i class='ph ph-trash'></i></button>
+                  ${((tabData.quarterlyPlanArr || []).length === 0)
+                    ? `<div class='text-gray-500 text-center py-8'>No quarterly plans yet. Add your first quarterly plan!</div>`
+                    : (tabData.quarterlyPlanArr || []).map((item, idx) => `
+                      <div class='p-3 bg-purple-50 rounded-lg border border-purple-100'>
+                        <div class='flex items-center justify-between'>
+                          <div>
+                            <h4 class='font-medium text-purple-800'>${item.quarter}</h4>
+                            <p class='text-sm text-gray-600'>Owner: ${item.owner}</p>
+                          </div>
+                          <div class='flex items-center gap-2'>
+                            <span class='px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full'>${item.status}</span>
+                            <div class='flex gap-2'>
+                              <button class='plan-edit-btn' data-type='quarterly' data-idx='${idx}' title='Edit'><i class='ph ph-pencil'></i></button>
+                              <button class='plan-view-btn' data-type='quarterly' data-idx='${idx}' title='View'><i class='ph ph-eye'></i></button>
+                              <button class='plan-delete-btn' data-type='quarterly' data-idx='${idx}' title='Delete'><i class='ph ph-trash'></i></button>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  `).join('')}
+                    `).join('')}
                 </div>
               </div>
             </div>
@@ -642,19 +648,36 @@
         let ownerValue = '';
         let descValue = '';
         let quarterValue = '';
-        if (mode === 'edit' && idx !== null && type === 'weekly') {
-          weekValue = tabData.plan[idx].week;
-          createdDate = tabData.plan[idx].createdDate || createdDate;
-          statusValue = tabData.plan[idx].status;
-          ownerValue = tabData.plan[idx].owner;
-          descValue = tabData.plan[idx].description || '';
+        // Always pull all fields from the plan object for both view and edit, fallback to empty string/default if missing
+        if ((mode === 'edit' || mode === 'view') && idx !== null && type === 'weekly') {
+          const plan = tabData.plan[idx] || {};
+          weekValue = plan.week || '';
+          createdDate = plan.createdDate || createdDate;
+          statusValue = plan.status || 'Published';
+          ownerValue = plan.owner || '';
+          descValue = plan.description || '';
+        } else if (mode === 'add' && type === 'weekly') {
+          // Reset all fields to sensible defaults for add mode
+          weekValue = '';
+          createdDate = format(today);
+          statusValue = 'Published';
+          ownerValue = '';
+          descValue = '';
         }
-        if (mode === 'edit' && idx !== null && type === 'quarterly') {
-          quarterValue = (tabData.quarterlyPlanArr || [])[idx].quarter;
-          createdDate = (tabData.quarterlyPlanArr || [])[idx].createdDate || createdDate;
-          statusValue = (tabData.quarterlyPlanArr || [])[idx].status;
-          ownerValue = (tabData.quarterlyPlanArr || [])[idx].owner;
-          descValue = (tabData.quarterlyPlanArr || [])[idx].description || '';
+        if ((mode === 'edit' || mode === 'view') && idx !== null && type === 'quarterly') {
+          const plan = (tabData.quarterlyPlanArr || [])[idx] || {};
+          quarterValue = plan.quarter || '';
+          createdDate = plan.createdDate || createdDate;
+          statusValue = plan.status || 'Published';
+          ownerValue = plan.owner || '';
+          descValue = plan.description || '';
+        } else if (mode === 'add' && type === 'quarterly') {
+          // Reset all fields to sensible defaults for add mode
+          quarterValue = '';
+          createdDate = format(today);
+          statusValue = 'Published';
+          ownerValue = '';
+          descValue = '';
         }
         // Generate quarter options
         const year = today.getFullYear();
@@ -669,12 +692,12 @@
           modal.innerHTML = `
             <div class='bg-white rounded-xl shadow-lg p-6 max-w-lg w-full mx-4 relative'>
               <button id='close-plan-modal' class='absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl'>&times;</button>
-              <h3 class='text-2xl font-bold mb-4 text-gray-800'>Add Quarterly Plan</h3>
+              <h3 class='text-2xl font-bold mb-4 text-gray-800'>${mode==='edit'?'Edit':mode==='view'?'View':'Add'} Quarterly Plan</h3>
               <form id='plan-form' class='space-y-3 bg-blue-50 rounded p-3 mb-4'>
                 <div class='font-semibold mb-1 text-sm'>Current Quarter</div>
                 <div>
                   <label class='block text-xs font-medium mb-1'>Quarter:</label>
-                  <select id='plan-quarter' class='w-full rounded border px-2 py-1 text-xs'>
+                  <select id='plan-quarter' class='w-full rounded border px-2 py-1 text-xs' ${mode==='view'?'disabled':''} required>
                     <option value=''>Select Quarter</option>
                     ${quarterOptions}
                   </select>
@@ -685,7 +708,7 @@
                 </div>
                 <div>
                   <label class='block text-xs font-medium mb-1'>Status:</label>
-                  <select id='plan-status' class='w-full rounded border px-2 py-1 text-xs'>
+                  <select id='plan-status' class='w-full rounded border px-2 py-1 text-xs' ${mode==='view'?'disabled':''}>
                     <option value='Published' ${statusValue === 'Published' ? 'selected' : ''}>Published</option>
                     <option value='Draft' ${statusValue === 'Draft' ? 'selected' : ''}>Draft</option>
                     <option value='Forecast' ${statusValue === 'Forecast' ? 'selected' : ''}>Forecast</option>
@@ -693,14 +716,14 @@
                 </div>
                 <div>
                   <label class='block text-xs font-medium mb-1'>Owner:</label>
-                  <input type='text' id='plan-owner' class='w-full rounded border px-2 py-1 text-xs' placeholder='Owner name' value='${ownerValue}' required />
+                  <input type='text' id='plan-owner' class='w-full rounded border px-2 py-1 text-xs' placeholder='Owner name' value='${ownerValue}' ${mode==='view'?'readonly':''} required />
                 </div>
                 <div>
                   <label class='block text-xs font-medium mb-1'>Description:</label>
-                  <textarea id='plan-desc' class='w-full rounded border px-2 py-1 text-xs' placeholder='Description' rows='2'>${descValue}</textarea>
+                  <textarea id='plan-desc' class='w-full rounded border px-2 py-1 text-xs' placeholder='Description' rows='2' ${mode==='view'?'readonly':''}>${descValue}</textarea>
                 </div>
                 <div class='flex justify-end'>
-                  <button type='submit' class='px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded'>Add</button>
+                  ${mode==='view' ? '<button type="button" id="close-plan-modal" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded">Close</button>' : `<button type='submit' class='px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded'>${mode==='edit'?'Save':'Add'}</button>`}
                 </div>
               </form>
             </div>
@@ -709,7 +732,7 @@
           modal.innerHTML = `
             <div class='bg-white rounded-xl shadow-lg p-6 max-w-lg w-full mx-4 relative'>
               <button id='close-plan-modal' class='absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl'>&times;</button>
-              <h3 class='text-2xl font-bold mb-4 text-gray-800'>Add Weekly Plan</h3>
+              <h3 class='text-2xl font-bold mb-4 text-gray-800'>${mode==='edit'?'Edit':mode==='view'?'View':'Add'} Weekly Plan</h3>
               <div class='bg-gray-100 rounded p-3 mb-4'>
                 <div class='font-semibold mb-1 text-sm'>Previous Week</div>
                 <div class='text-xs text-gray-700'>${prevWeek}</div>
@@ -719,7 +742,7 @@
                 <div class='font-semibold mb-1 text-sm'>Current Week</div>
                 <div>
                   <label class='block text-xs font-medium mb-1'>Week Start (Monday):</label>
-                  <input type='date' id='plan-weekstart' class='w-full rounded border px-2 py-1 text-xs' min='2020-01-01' max='2100-12-31' required />
+                  <input type='date' id='plan-weekstart' class='w-full rounded border px-2 py-1 text-xs' min='2020-01-01' max='2100-12-31' ${mode==='view'?'readonly':''} required />
                   <div id='plan-week-label' class='text-xs text-gray-600 mt-1'></div>
                 </div>
                 <div>
@@ -728,7 +751,7 @@
                 </div>
                 <div>
                   <label class='block text-xs font-medium mb-1'>Status:</label>
-                  <select id='plan-status' class='w-full rounded border px-2 py-1 text-xs'>
+                  <select id='plan-status' class='w-full rounded border px-2 py-1 text-xs' ${mode==='view'?'disabled':''}>
                     <option value='Published' ${statusValue === 'Published' ? 'selected' : ''}>Published</option>
                     <option value='Draft' ${statusValue === 'Draft' ? 'selected' : ''}>Draft</option>
                     <option value='Forecast' ${statusValue === 'Forecast' ? 'selected' : ''}>Forecast</option>
@@ -736,14 +759,14 @@
                 </div>
                 <div>
                   <label class='block text-xs font-medium mb-1'>Owner:</label>
-                  <input type='text' id='plan-owner' class='w-full rounded border px-2 py-1 text-xs' placeholder='Owner name' value='${ownerValue}' required />
+                  <input type='text' id='plan-owner' class='w-full rounded border px-2 py-1 text-xs' placeholder='Owner name' value='${ownerValue}' ${mode==='view'?'readonly':''} required />
                 </div>
                 <div>
                   <label class='block text-xs font-medium mb-1'>Description:</label>
-                  <textarea id='plan-desc' class='w-full rounded border px-2 py-1 text-xs' placeholder='Description' rows='2'>${descValue}</textarea>
+                  <textarea id='plan-desc' class='w-full rounded border px-2 py-1 text-xs' placeholder='Description' rows='2' ${mode==='view'?'readonly':''}>${descValue}</textarea>
                 </div>
                 <div class='flex justify-end'>
-                  <button type='submit' class='px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded'>Add</button>
+                  ${mode==='view' ? '<button type="button" id="close-plan-modal" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded">Close</button>' : `<button type='submit' class='px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded'>${mode==='edit'?'Save':'Add'}</button>`}
                 </div>
               </form>
               <div class='bg-gray-100 rounded p-3'>
@@ -760,8 +783,19 @@
           const weekStartInput = document.getElementById('plan-weekstart');
           const weekLabel = document.getElementById('plan-week-label');
           if (weekValue) {
-            // If editing, set week start to the first date
-            weekStartInput.value = weekValue.split(' to ')[0];
+            // Robustly parse week string for both old and new data
+            let weekStart = '';
+            const match = weekValue.match(/(\d{4}-\d{2}-\d{2})/); // match first full date
+            if (match) {
+              weekStart = match[1];
+            } else if (weekValue.includes(' to ')) {
+              weekStart = weekValue.split(' to ')[0];
+            }
+            if (weekStart && /^\d{4}-\d{2}-\d{2}$/.test(weekStart)) {
+              weekStartInput.value = weekStart;
+            } else {
+              weekStartInput.value = format(currMonday);
+            }
             weekLabel.textContent = 'Week: ' + weekValue;
           } else {
             weekStartInput.value = format(currMonday);
