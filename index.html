@@ -12,7 +12,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
-      body { background: #f3f4f6; }
+      body { 
+        background: #f3f4f6; 
+        overflow-x: hidden;
+      }
       .fixed-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 40; }
       .fixed-sidebar { position: fixed; top: 80px; left: 0; height: calc(100vh - 80px); z-index: 30; }
       .main-content-scroll {
@@ -28,6 +31,7 @@
         width: calc(100vw - 340px);
         box-sizing: border-box;
         margin-left: 340px;
+        overflow-x: hidden;
       }
       @media (max-width: 1024px) {
         .fixed-sidebar { position: static; height: auto; width: 100%; margin-bottom: 1rem; }
@@ -38,6 +42,36 @@
           height: auto;
           padding: 1rem;
           align-items: stretch;
+        }
+      }
+      @media (max-width: 1280px) {
+        .main-content-scroll {
+          padding: 1rem;
+        }
+      }
+      @media (max-width: 768px) {
+        .main-content-scroll {
+          padding: 0.5rem;
+        }
+        header nav {
+          gap: 1rem;
+        }
+        header nav a {
+          font-size: 0.875rem;
+        }
+      }
+      @media (max-width: 640px) {
+        .main-content-scroll {
+          padding: 0.25rem;
+        }
+        header nav {
+          gap: 0.5rem;
+        }
+        header nav a {
+          font-size: 0.75rem;
+        }
+        header nav a i {
+          font-size: 1.25rem;
         }
       }
       /* Ensure only one white background for the right panel */
@@ -211,7 +245,7 @@
 
       <!-- Main Content (Right Panel) -->
       <main class="main-content-scroll">
-        <div class="single-bg-panel bg-white rounded-xl shadow-lg border border-gray-200 p-6 mx-auto" style="width: 1200px; min-height: 600px;">
+        <div class="single-bg-panel bg-white rounded-xl shadow-lg border border-gray-200 p-6 mx-auto" style="max-width: 1200px; width: 100%; min-height: 600px;">
           <h2 id="tab-title" class="text-3xl font-bold mb-6 flex items-center gap-2"><i class="ph ph-book-open"></i> My Task</h2>
           <div id="tab-content" class="tab-content-single-bg">
             <!-- Tab content will be rendered here by JS -->
