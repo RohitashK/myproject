@@ -112,6 +112,13 @@
       body.dark .border-gray-300 {
         border-color: #333 !important;
       }
+      /* Keep logo background white in all modes */
+      .logo-container {
+        background-color: white !important;
+      }
+      body.dark .logo-container {
+        background-color: white !important;
+      }
       /* --- DARK MODE CSS END --- */
     </style>
   </head>
@@ -120,7 +127,7 @@
       <header class="fixed-header bg-white shadow p-4 flex items-center justify-between">
         <div class="flex items-center gap-2">
           <a href="https://rohitashk.github.io/myproject/index.html">
-            <div class="h-16 w-16 flex items-center justify-center bg-gray-100">
+            <div class="h-16 w-16 flex items-center justify-center bg-white logo-container">
               <img src="public/logo.jpg" alt="Logo" class="h-full w-full object-contain" />
             </div>
           </a>
