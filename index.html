@@ -24,7 +24,7 @@
         overflow-x: hidden;
       }
       .fixed-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 40; }
-      .fixed-sidebar { position: fixed; top: 0; left: 0; height: 100vh; z-index: 30; }
+      .fixed-sidebar { position: fixed; top: 3rem; left: 0; height: calc(100vh - 3rem); z-index: 30; }
       .main-content-scroll {
         margin-top: 55px;
         padding: 1.5rem;
@@ -203,6 +203,12 @@
       body.dark .logo-container {
         background-color: white !important;
       }
+      .w-16 {
+        /* width: 4rem; */
+      }
+      .h-16 {
+        height: 3rem;
+      }
     </style>
   </head>
   <body class="bg-gray-100 bg-opacity-80 font-sans">
@@ -210,8 +216,8 @@
       <header class="fixed-header bg-white shadow p-2 flex items-center justify-between">
         <div class="flex items-center gap-2 ml-4">
           <a href="https://rohitashk.github.io/myproject/index.html">
-            <div class="h-12 w-12 flex items-center justify-center bg-white logo-container">
-              <img src="public/logo.jpg" alt="Logo" class="h-full w-full object-contain" />
+            <div class="h-16 flex items-center justify-center bg-white logo-container">
+              <img src="public/logo.png" alt="Logo" class="object-contain" style="width:12rem;max-height:3rem;" />
             </div>
           </a>
         </div>
@@ -738,8 +744,8 @@
                   <textarea id='kudos-comment' rows='4' class='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500' required></textarea>
                 </div>
                 <div class='flex gap-3'>
-                  <button type='submit' class='flex-1 bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition dark:bg-blue-600 dark:hover:bg-blue-700 dark:text-white'>Submit</button>
                   <button type='button' id='close-kudos-modal' class='flex-1 bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-400 transition'>Cancel</button>
+                  <button type='submit' class='flex-1 bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition dark:bg-blue-600 dark:hover:bg-blue-700 dark:text-white'>Submit</button>
                 </div>
               </form>
             </div>

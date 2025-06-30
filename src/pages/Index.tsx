@@ -689,9 +689,9 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
           <div className="flex items-center justify-between min-h-12">
             {/* Logo on the left */}
-            <div className="flex items-center space-x-2 shrink-0 min-w-8 max-w-16">
+            <div className="flex items-center space-x-2 shrink-0 min-w-16 max-w-24">
               <a href="https://www.linkedin.com/in/rohitash-kumar-78508520/" target="_blank" rel="noopener noreferrer">
-                <img src="/logo.jpg" alt="Techbook Logo" className="object-contain min-w-8 max-w-16" style={{ width: '100%', height: 'auto' }} />
+                <img src="/logo.png" alt="Techbook Logo" className="object-contain min-w-16 max-w-24" style={{ width: '100%', height: 'auto' }} />
               </a>
             </div>
             {/* Mobile/Tablet: Hamburger and Profile Pic on right */}
