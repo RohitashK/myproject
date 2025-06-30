@@ -433,11 +433,13 @@
             (tabData.kudos.length === 0
               ? `<div class='text-gray-500 text-center py-8'>No kudos yet. Be the first to give kudos!</div>`
               : tabData.kudos.map((item, idx) => `
-                <div class='p-4 bg-purple-50 rounded-lg border border-purple-100 mb-4'>
+                <div class='p-4 bg-blue-50 rounded-lg border border-blue-100 mb-4'>
                   <div class='flex items-start justify-between'>
                     <div class='flex-1'>
                       <div class="flex items-center gap-4">
-                        <div class="bg-white rounded-full w-14 h-14 flex items-center justify-center text-2xl text-gray-400 border"><i class="ph ph-user"></i></div>
+                        <div class="bg-white rounded-full w-12 h-12 flex items-center justify-center text-2xl text-gray-400 border">
+                          <i class="ph ph-user"></i>
+                        </div>
                         <div class="flex flex-col justify-center">
                           <div class="font-bold text-lg text-purple-700">${item.author}</div>
                           <div class="text-gray-600">${item.content}</div>
@@ -463,7 +465,7 @@
               <div>
                 <h3 class='text-lg font-semibold flex items-center gap-2 mb-3'><i class='ph ph-calendar'></i> Work Anniversaries</h3>
                 ${tabData.people.anniversaries.map(item => `
-                  <div class='p-4 bg-purple-50 rounded-lg border border-purple-100 mb-4 flex items-center gap-4'>
+                  <div class='p-4 bg-blue-50 rounded-lg border border-blue-100 mb-4 flex items-center gap-4'>
                     <div class='bg-white rounded-full w-12 h-12 flex items-center justify-center text-2xl text-gray-400 border'><i class='ph ph-user'></i></div>
                     <div>
                       <div class="flex items-center gap-2">
@@ -481,7 +483,7 @@
               <div>
                 <h3 class='text-lg font-semibold flex items-center gap-2 mb-3'><i class='ph ph-cake'></i> Birthdays</h3>
                 ${tabData.people.birthdays.map(item => `
-                  <div class='p-4 bg-purple-50 rounded-lg border border-purple-100 mb-4 flex items-center gap-4'>
+                  <div class='p-4 bg-blue-50 rounded-lg border border-blue-100 mb-4 flex items-center gap-4'>
                     <div class='bg-white rounded-full w-12 h-12 flex items-center justify-center text-2xl text-gray-400 border'><i class='ph ph-user'></i></div>
                     <div>
                       <div class="flex items-center gap-2">
@@ -499,7 +501,7 @@
               <div>
                 <h3 class='text-lg font-semibold flex items-center gap-2 mb-3'><i class='ph ph-megaphone'></i> Personal Announcements</h3>
                 ${tabData.people.announcements.map(item => `
-                  <div class='p-4 bg-pink-50 rounded-lg border border-pink-100 mb-4'>
+                  <div class='p-4 bg-blue-50 rounded-lg border border-blue-100 mb-4'>
                     <div class='flex items-center gap-2 mb-1'>
                       <h4 class='font-semibold text-pink-800'>${item.title}</h4>
                       ${item.starred ? "<span class='text-yellow-500'><i class='ph ph-star-fill'></i></span>" : ''}
@@ -536,7 +538,7 @@
                     <div class='space-y-2'>
                       ${item.people.map(p => `
                         <div class='flex items-center gap-3 p-2 rounded-lg hover:bg-blue-100 transition'>
-                          <div class="bg-white rounded-full w-10 h-10 flex items-center justify-center text-xl text-gray-700 border">
+                          <div class="bg-white rounded-full w-12 h-12 flex items-center justify-center text-2xl text-gray-400 border">
                             <i class="ph ph-user"></i>
                           </div>
                           <div class="flex-1">
@@ -613,8 +615,8 @@
             <div class='flex items-center justify-between mb-6'>
               <h2 class='text-2xl font-bold flex items-center gap-2'><i class='ph ph-gear'></i> My Plan</h2>
               <div class='flex gap-3'>
-                <button id='add-weekly-btn' class='bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition flex items-center gap-2'><i class='ph ph-plus'></i> Add Weekly</button>
-                <button id='add-quarterly-btn' class='bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition flex items-center gap-2'><i class='ph ph-plus'></i> Add Quarterly</button>
+                <button id='add-weekly-btn' class='bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition flex items-center gap-2'><i class='ph ph-calendar'></i> Add Weekly</button>
+                <button id='add-quarterly-btn' class='bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition flex items-center gap-2'><i class='ph ph-gear'></i> Add Quarterly</button>
               </div>
             </div>` +
             `<div class='weekly-plans-section mb-8'>
@@ -648,10 +650,10 @@
                 ((tabData.quarterlyPlanArr || []).length === 0
                   ? `<div class='text-gray-500 text-center py-8'>No quarterly plans yet. Add your first quarterly plan!</div>`
                   : (tabData.quarterlyPlanArr || []).map((item, idx) => `
-                    <div class='p-3 bg-purple-50 rounded-lg border border-purple-100'>
+                    <div class='p-3 bg-blue-50 rounded-lg border border-blue-100'>
                       <div class='flex items-center justify-between'>
                         <div>
-                          <h4 class='font-medium text-purple-800'>${item.quarter}</h4>
+                          <h4 class='font-medium text-blue-800'>${item.quarter}</h4>
                           <p class='text-sm text-gray-600'>Owner: ${item.owner}</p>
                         </div>
                         <div class='flex items-center gap-2'>

@@ -362,7 +362,7 @@
               </div>
             </div>
             <div class="bento-mywork bg-white rounded-xl shadow-lg border border-gray-200 p-6 h-full flex flex-col">
-              <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2"><i class="ph ph-calendar"></i> My Work</h2>
+              <h2 class="text-base font-bold flex items-center gap-2 m-0"><i class="ph ph-calendar"></i> My Work</h2>
               <div class="bento-scroll-content" id="work-list">
                 <!-- My Work content will be rendered here -->
               </div>
@@ -371,8 +371,8 @@
               <div class="flex items-center justify-between mb-4">
                 <h2 class="text-base font-bold flex items-center gap-2 m-0"><i class="ph ph-gear"></i> My Plan</h2>
                 <div class="flex gap-2">
-                  <button id="add-weekly-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold flex items-center gap-2 px-3.5 py-2.5 rounded-lg shadow-none text-xs"><i class="ph ph-calendar"></i> Add Weekly</button>
-                  <button id="add-quarterly-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold flex items-center gap-2 px-3.5 py-2.5 rounded-lg shadow-none text-xs"><i class="ph ph-gear"></i> Add Quarterly</button>
+                  <button id="add-weekly-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold flex items-center gap-2 px-2 py-1 rounded-lg shadow-none text-xs"><i class="ph ph-calendar text-xs"></i> Add Weekly</button>
+                  <button id="add-quarterly-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold flex items-center gap-2 px-2 py-1 rounded-lg shadow-none text-xs"><i class="ph ph-gear text-xs"></i> Add Quarterly</button>
                 </div>
               </div>
               <div class="bento-scroll-content">
@@ -464,27 +464,27 @@
       }
       dashboardKudos.forEach((kudo, idx) => {
         const card = document.createElement('div');
-        card.className = 'p-4 bg-purple-50 rounded-lg border border-purple-100 mb-4';
+        card.className = 'p-4 bg-blue-50 rounded-lg border border-blue-100 mb-4';
         card.innerHTML = `
           <div class='flex items-start justify-between'>
             <div class='flex-1'>
               <div class="flex items-center gap-4">
-                <div class='bg-white rounded-full w-14 h-14 flex items-center justify-center text-2xl text-gray-400 border flex-shrink-0'><i class='ph ph-user'></i></div>
+                <div class='bg-white rounded-full w-10 h-10 flex items-center justify-center text-xl text-gray-400 border flex-shrink-0'><i class='ph ph-user'></i></div>
                 <div class="flex flex-col justify-center">
-                  <div class="font-bold text-lg text-purple-700">${kudo.author}</div>
-                  <div class="text-gray-600">${kudo.content}</div>
-                  <div class="flex items-center gap-4 mt-1">
+                  <div class="font-bold text-sm text-purple-700">${kudo.author}</div>
+                  <div class="text-gray-600 text-xs">${kudo.content}</div>
+                  <div class="flex items-center gap-4 mt-1 text-xs">
                     <span class="flex items-center gap-1 text-yellow-600 font-semibold"><i class="ph ph-thumbs-up"></i>${kudo.likes}</span>
                     <span class="flex items-center gap-1 text-gray-700 font-semibold"><i class="ph ph-chat-centered"></i>${kudo.comments}</span>
-                    </div>
-                  </div>
                   </div>
                 </div>
+              </div>
+            </div>
             <div class='flex gap-2'>
               <button class='kudos-edit-btn' title='Edit'><i class='ph ph-pencil'></i></button>
               <button class='kudos-view-btn' title='View'><i class='ph ph-eye'></i></button>
               <button class='kudos-delete-btn' title='Delete'><i class='ph ph-trash'></i></button>
-              </div>
+            </div>
           </div>
         `;
         kudosContainer.appendChild(card);
@@ -598,8 +598,8 @@
             card.innerHTML = `
               <div class='flex items-center justify-between'>
                   <div>
-                  <h4 class='font-medium text-blue-800'>${plan.week}</h4>
-                  <p class='text-sm text-gray-600'>Owner: ${plan.owner}</p>
+                  <h4 class='font-medium text-blue-800 text-sm'>${plan.week}</h4>
+                  <p class='text-xs text-gray-600'>Owner: ${plan.owner}</p>
                   </div>
                 <div class='flex items-center gap-2'>
                   <span class='px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full'>${plan.status}</span>
@@ -628,9 +628,9 @@
             card.innerHTML = `
               <div class='flex items-center justify-between'>
                 <div>
-                  <h4 class='font-medium text-purple-800'>${plan.quarter}</h4>
-                  <p class='text-sm text-gray-600'>Owner: ${plan.owner}</p>
-                  </div>
+                  <h4 class='font-medium text-purple-800 text-sm'>${plan.quarter}</h4>
+                  <p class='text-xs text-gray-600'>Owner: ${plan.owner}</p>
+                </div>
                 <div class='flex items-center gap-2'>
                   <span class='px-2 py-1 ${plan.status === 'Published' ? 'bg-green-100 text-green-800' : plan.status === 'Draft' ? 'bg-blue-100 text-blue-800' : 'bg-yellow-100 text-yellow-800'} text-xs rounded-full'>${plan.status}</span>
                   <div class='flex gap-2'>
@@ -924,8 +924,8 @@
         card.innerHTML = `
           <div class='flex items-start justify-between'>
             <div class='flex-1'>
-              <h3 class='font-semibold text-blue-800 mb-2'>${item.title}</h3>
-              <p class='text-sm text-gray-700 mb-2'>${item.desc}</p>
+              <h3 class='font-semibold text-blue-800 mb-2 text-sm'>${item.title}</h3>
+              <p class='text-xs text-gray-700 mb-2'>${item.desc}</p>
               <div class='flex items-center gap-4 text-xs text-gray-500'>
                 <span>${item.date}</span>
                 <span class="flex items-center gap-1 text-yellow-600 font-semibold"><i class="ph ph-thumbs-up"></i>${item.likes}</span>
@@ -956,7 +956,7 @@
         workContainer.innerHTML = '<div class="text-gray-500 text-center py-8">No work items yet.</div>';
         return;
       }
-      // Unique content for each column
+      // Unique content for each column (COMPACT VERSION)
       const recentlyWorkedOn = [
         { title: 'UI/UX Design System Implementation', category: 'Design', type: 'Today' },
         { title: 'Mobile App Development Sprint', category: 'Development', type: 'Last week' },
@@ -978,38 +978,38 @@
         { title: 'Client Presentations', category: 'Marketing' },
         { title: 'Development Standards', category: 'Development' }
       ];
-      // Render three columns with unique content
+      // Render three columns with unique content (COMPACT)
       workContainer.innerHTML = `
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="flex flex-col gap-4 mt-4">
           <div>
-            <h3 class="text-blue-300 font-semibold mb-4">Recently worked on</h3>
-            <div class="space-y-4">
+            <h3 class="font-semibold text-lg text-blue-700 mb-2">Recently worked on</h3>
+            <div class="space-y-2">
               ${recentlyWorkedOn.map(item => `
-                <div class='p-4 bg-blue-50 rounded-lg border border-blue-100 w-full break-words whitespace-normal'>
+                <div class='p-2 bg-blue-50 rounded border border-blue-100 w-full break-words whitespace-normal text-xs'>
                   <div class='font-semibold text-gray-800'>${item.title}</div>
-                  <div class='text-sm text-gray-600'>${item.type}</div>
+                  <div class='text-gray-600'>${item.type}</div>
                 </div>
               `).join('')}
             </div>
           </div>
           <div>
-            <h3 class="text-blue-300 font-semibold mb-4">Recently visited</h3>
-            <div class="space-y-4">
+            <h3 class="font-semibold text-lg text-blue-700 mb-2">Recently visited</h3>
+            <div class="space-y-2">
               ${recentlyVisited.map(item => `
-                <div class='p-4 bg-blue-50 rounded-lg border border-blue-100 w-full break-words whitespace-normal'>
+                <div class='p-2 bg-blue-50 rounded border border-blue-100 w-full break-words whitespace-normal text-xs'>
                   <div class='font-semibold text-gray-800'>${item.title}</div>
-                  <div class='text-sm text-gray-600'>${item.category}</div>
+                  <div class='text-gray-600'>${item.category}</div>
                 </div>
               `).join('')}
             </div>
           </div>
           <div>
-            <h3 class="text-blue-300 font-semibold mb-4">Favourites</h3>
-            <div class="space-y-4">
+            <h3 class="font-semibold text-lg text-purple-700 mb-2">Favourites</h3>
+            <div class="space-y-2">
               ${favourites.map(item => `
-                <div class='p-4 bg-blue-50 rounded-lg border border-blue-100 w-full break-words whitespace-normal'>
+                <div class='p-2 bg-blue-50 rounded border border-blue-100 w-full break-words whitespace-normal text-xs'>
                   <div class='font-semibold text-gray-800'>${item.title}</div>
-                  <div class='text-sm text-gray-600'>${item.category}</div>
+                  <div class='text-gray-600'>${item.category}</div>
                 </div>
               `).join('')}
             </div>
@@ -1068,14 +1068,14 @@
         card.className = 'mb-6';
         card.innerHTML = `
           <div class='p-4 bg-blue-50 rounded-lg border border-blue-100 mb-2'>
-            <div class="mb-3 font-semibold text-gray-800">${item.category} - ${item.amount}</div>
+            <div class="mb-3 font-semibold text-gray-800 text-sm">${item.category} - ${item.amount}</div>
             <div class="space-y-2">
               ${item.people.map(person => `
-                <div class="flex items-center justify-between text-sm">
+                <div class="flex items-center justify-between text-xs">
                   <div>
                     <span class="font-semibold text-blue-800">${person.name}</span>
                     <span class="text-gray-500 ml-2">(${person.company})</span>
-    </div>
+                  </div>
                   <div class="font-semibold text-gray-700">${person.amount}</div>
                   <div class="text-xs text-gray-400">${person.date}</div>
                 </div>
@@ -1127,11 +1127,11 @@
       let html = `<div class='mb-8'>
         <h3 class='text-lg font-semibold flex items-center gap-2 mb-3'><i class='ph ph-calendar'></i> Work Anniversaries</h3>
         ${dashboardPeople.anniversaries.map(item => `
-          <div class='p-4 bg-purple-50 rounded-lg border border-purple-100 mb-4 flex items-center gap-4'>
-            <div class='bg-white rounded-full w-14 h-14 flex items-center justify-center text-2xl text-gray-400 border'><i class='ph ph-user'></i></div>
+          <div class='p-4 bg-blue-50 rounded-lg border border-blue-100 mb-4 flex items-center gap-4'>
+            <div class='bg-white rounded-full w-10 h-10 flex items-center justify-center text-xl text-gray-400 border'><i class='ph ph-user'></i></div>
             <div>
               <div class="flex items-center gap-2">
-                <span class="font-semibold text-purple-800">${item.name}</span>
+                <span class="font-semibold text-blue-800">${item.name}</span>
               </div>
               <p class='text-sm text-gray-600'>${item.years} years, ${item.date}</p>
               <div class='flex items-center gap-4 text-xs text-gray-500 mt-1'>
@@ -1145,11 +1145,11 @@
       html += `<div class='mb-8'>
         <h3 class='text-lg font-semibold flex items-center gap-2 mb-3'><i class='ph ph-cake'></i> Birthdays</h3>
         ${dashboardPeople.birthdays.map(item => `
-          <div class='p-4 bg-purple-50 rounded-lg border border-purple-100 mb-4 flex items-center gap-4'>
-            <div class='bg-white rounded-full w-14 h-14 flex items-center justify-center text-2xl text-gray-400 border'><i class='ph ph-user'></i></div>
+          <div class='p-4 bg-blue-50 rounded-lg border border-blue-100 mb-4 flex items-center gap-4'>
+            <div class='bg-white rounded-full w-10 h-10 flex items-center justify-center text-xl text-gray-400 border'><i class='ph ph-user'></i></div>
             <div>
               <div class="flex items-center gap-2">
-                <span class="font-semibold text-purple-800">${item.name}</span>
+                <span class="font-semibold text-blue-800">${item.name}</span>
               </div>
               <p class='text-sm text-gray-600'>${item.date}</p>
               <div class='flex items-center gap-4 text-xs text-gray-500 mt-1'>
@@ -1163,9 +1163,9 @@
       html += `<div>
         <h3 class='text-lg font-semibold flex items-center gap-2 mb-3'><i class='ph ph-megaphone'></i> Personal Announcements</h3>
         ${dashboardPeople.announcements.map(item => `
-          <div class='p-4 bg-pink-50 rounded-lg border border-pink-100 mb-4'>
+          <div class='p-4 bg-blue-50 rounded-lg border border-blue-100 mb-4'>
             <div class='flex items-center gap-2 mb-1'>
-              <h4 class='font-semibold text-pink-800'>${item.title}</h4>
+              <h4 class='font-semibold text-blue-800'>${item.title}</h4>
               ${item.starred ? "<span class='text-yellow-500'><i class='ph ph-star-fill'></i></span>" : ''}
             </div>
             <p class='text-sm text-gray-600 mb-2'>${item.desc}</p>
