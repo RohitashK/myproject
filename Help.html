@@ -17,8 +17,8 @@
       .faq-item { border-bottom: 1px solid #e5e7eb; }
       .faq-item:last-child { border-bottom: none; }
       .faq-question { cursor: pointer; }
-      .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-      .faq-answer.active { max-height: 200px; }
+      .faq-answer { /* max-height: 0; overflow: hidden; transition: max-height 0.3s ease; */ }
+      .faq-answer.active { /* max-height: 200px; */ }
       /* --- DARK MODE CSS START --- */
       body.dark, body.dark * {
         background-color: #18191a !important;
@@ -191,7 +191,7 @@
 
     <div class="min-h-screen">
       <main class="main-content p-8">
-        <div class="max-w-4xl mx-auto">
+        <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 py-4 sm:py-6">
           <!-- Page Header -->
           <div class="mb-8">
             <h1 class="text-4xl font-bold text-gray-800 mb-2 flex items-center gap-3">
@@ -281,70 +281,6 @@
                 </div>
                 <div class="faq-answer p-4">
                   <p class="text-gray-600">Each entry has action icons (edit, view, delete) on the right side. Click the edit icon to modify an entry, the view icon to see details, or the delete icon to remove an entry. A confirmation dialog will appear for deletions.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Contact Information -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
-              <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <i class="ph ph-phone text-blue-600"></i>
-                Contact Information
-              </h2>
-              <div class="space-y-3">
-                <div class="flex items-center gap-3">
-                  <i class="ph ph-envelope text-gray-500"></i>
-                  <span class="text-gray-700">support.india@example.com</span>
-                </div>
-                <div class="flex items-center gap-3">
-                  <i class="ph ph-phone text-gray-500"></i>
-                  <span class="text-gray-700">+91-9876543210</span>
-                </div>
-                <div class="flex items-center gap-3">
-                  <i class="ph ph-clock text-gray-500"></i>
-                  <span class="text-gray-700">Mon-Fri 9AM-6PM EST</span>
-                </div>
-                <div class="flex items-center gap-3">
-                  <i class="ph ph-map-pin text-gray-500"></i>
-                  <span class="text-gray-700">Mumbai, India</span>
-                </div>
-              </div>
-            </div>
-            
-            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
-              <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <i class="ph ph-users text-blue-600"></i>
-                Support Team
-              </h2>
-              <div class="space-y-4">
-                <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                  <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                    <i class="ph ph-user text-blue-600"></i>
-                  </div>
-                  <div>
-                    <h3 class="font-medium text-gray-800">Amit Sharma</h3>
-                    <p class="text-sm text-gray-600">Technical Support Lead</p>
-                  </div>
-                </div>
-                <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                  <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                    <i class="ph ph-user text-green-600"></i>
-                  </div>
-                  <div>
-                    <h3 class="font-medium text-gray-800">Priya Singh</h3>
-                    <p class="text-sm text-gray-600">Customer Success Manager</p>
-                  </div>
-                </div>
-                <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                  <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
-                    <i class="ph ph-user text-purple-600"></i>
-                  </div>
-                  <div>
-                    <h3 class="font-medium text-gray-800">Vikas Patel</h3>
-                    <p class="text-sm text-gray-600">Product Specialist</p>
-                  </div>
                 </div>
               </div>
             </div>

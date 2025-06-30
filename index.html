@@ -26,11 +26,14 @@
       .fixed-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 40; }
       .fixed-sidebar { position: fixed; top: 3rem; left: 0; height: calc(100vh - 3rem); z-index: 30; }
       .main-content-scroll {
-        margin-top: 55px;
-        padding: 1.5rem;
+        padding-top: 90px;
+        padding-right: 1.5rem;
+        padding-bottom: 1.5rem;
+        padding-left: 1.5rem;
         background: transparent;
         min-width: 0;
-        height: calc(100vh - 55px - 56px);
+        min-height: calc(100vh - 90px);
+        height: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
