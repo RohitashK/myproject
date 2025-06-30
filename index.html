@@ -256,11 +256,11 @@
       <aside class="fixed-sidebar bg-white shadow-lg w-80 p-6 rounded-r-2xl border-r border-gray-200 hidden lg:block" style="padding-top: 80px;">
         <div>
           <ul id="tab-menu">
-            <li class="mb-2"><button class="w-full flex items-center gap-2 text-left py-2 px-4 rounded hover:bg-blue-50" data-tab="feed"><i class="ph ph-book-open"></i> My Feed</button></li>
-            <li class="mb-2"><button class="w-full flex items-center gap-2 text-left py-2 px-4 rounded hover:bg-blue-50" data-tab="kudos"><i class="ph ph-thumbs-up"></i> Kudos</button></li>
-            <li class="mb-2"><button class="w-full flex items-center gap-2 text-left py-2 px-4 rounded hover:bg-blue-50" data-tab="people"><i class="ph ph-users"></i> People</button></li>
-            <li class="mb-2"><button class="w-full flex items-center gap-2 text-left py-2 px-4 rounded hover:bg-blue-50" data-tab="revenue"><i class="ph ph-trend-up"></i> Revenue</button></li>
-            <li class="mb-2"><button class="w-full flex items-center gap-2 text-left py-2 px-4 rounded hover:bg-blue-50" data-tab="work"><i class="ph ph-calendar"></i> My Task</button></li>
+            <li class="mb-2 border-b border-gray-200 last:border-b-0"><button class="w-full flex items-center gap-2 text-left py-2 px-4 rounded hover:bg-blue-50" data-tab="feed"><i class="ph ph-book-open"></i> My Feed</button></li>
+            <li class="mb-2 border-b border-gray-200 last:border-b-0"><button class="w-full flex items-center gap-2 text-left py-2 px-4 rounded hover:bg-blue-50" data-tab="kudos"><i class="ph ph-thumbs-up"></i> Kudos</button></li>
+            <li class="mb-2 border-b border-gray-200 last:border-b-0"><button class="w-full flex items-center gap-2 text-left py-2 px-4 rounded hover:bg-blue-50" data-tab="people"><i class="ph ph-users"></i> People</button></li>
+            <li class="mb-2 border-b border-gray-200 last:border-b-0"><button class="w-full flex items-center gap-2 text-left py-2 px-4 rounded hover:bg-blue-50" data-tab="revenue"><i class="ph ph-trend-up"></i> Revenue</button></li>
+            <li class="mb-2 border-b border-gray-200 last:border-b-0"><button class="w-full flex items-center gap-2 text-left py-2 px-4 rounded hover:bg-blue-50" data-tab="work"><i class="ph ph-calendar"></i> My Task</button></li>
             <li class="mb-2"><button class="w-full flex items-center gap-2 text-left py-2 px-4 rounded hover:bg-blue-50" data-tab="plan"><i class="ph ph-gear"></i> My Plan</button></li>
           </ul>
         </div>
@@ -462,7 +462,7 @@
           html = `<div class='single-bg-panel bg-white rounded-xl shadow-lg border border-gray-200 p-6 mx-auto' style='max-width: 1200px; width: 100%; min-height: auto;'>
             <h2 class='text-2xl font-bold mb-6 flex items-center gap-2'><i class='ph ph-users'></i> People</h2>
             <div class='grid grid-cols-1 md:grid-cols-3 gap-6'>
-              <div>
+              <div class='col-span-1'>
                 <h3 class='text-lg font-semibold flex items-center gap-2 mb-3'><i class='ph ph-calendar'></i> Work Anniversaries</h3>
                 ${tabData.people.anniversaries.map(item => `
                   <div class='p-4 bg-blue-50 rounded-lg border border-blue-100 mb-4 flex items-center gap-4'>
@@ -480,7 +480,7 @@
                   </div>
                 `).join('')}
               </div>
-              <div>
+              <div class='col-span-1 md:border-l md:border-gray-200 md:pl-6'>
                 <h3 class='text-lg font-semibold flex items-center gap-2 mb-3'><i class='ph ph-cake'></i> Birthdays</h3>
                 ${tabData.people.birthdays.map(item => `
                   <div class='p-4 bg-blue-50 rounded-lg border border-blue-100 mb-4 flex items-center gap-4'>
@@ -498,7 +498,7 @@
                   </div>
                 `).join('')}
               </div>
-              <div>
+              <div class='col-span-1 md:border-l md:border-gray-200 md:pl-6'>
                 <h3 class='text-lg font-semibold flex items-center gap-2 mb-3'><i class='ph ph-megaphone'></i> Personal Announcements</h3>
                 ${tabData.people.announcements.map(item => `
                   <div class='p-4 bg-blue-50 rounded-lg border border-blue-100 mb-4'>
@@ -556,8 +556,8 @@
         } else if (tab === 'work') {
           html = `<div class='single-bg-panel bg-white rounded-xl shadow-lg border border-gray-200 p-6 mx-auto' style='max-width: 1200px; width: 100%; min-height: auto;'>
             <h2 class='text-2xl font-bold mb-6 flex items-center gap-2'><i class='ph ph-calendar'></i> My Task</h2>
-            <div class='grid grid-cols-1 md:grid-cols-3 gap-6'>` +
-            `<div>
+            <div class='grid grid-cols-1 md:grid-cols-3 gap-6'>
+              <div class='col-span-1'>
                 <h3 class='text-lg font-semibold mb-3'>Recently worked on</h3>
                 <div class='space-y-4'>` +
                   [
@@ -574,7 +574,7 @@
                   `).join('') +
                 `</div>
               </div>
-              <div>
+              <div class='col-span-1 md:border-l md:border-gray-200 md:pl-6'>
                 <h3 class='text-lg font-semibold mb-3'>Recently visited</h3>
                 <div class='space-y-4'>` +
                   [
@@ -591,7 +591,7 @@
                   `).join('') +
                 `</div>
               </div>
-              <div>
+              <div class='col-span-1 md:border-l md:border-gray-200 md:pl-6'>
                 <h3 class='text-lg font-semibold mb-3'>Favourites</h3>
                 <div class='space-y-4'>` +
                   [
@@ -644,6 +644,7 @@
                   `).join('')) +
               `</div>
             </div>
+            <div class='border-t border-gray-200 mt-6 mb-4'></div>
             <div class='quarterly-plans-section'>
               <h3 class='text-lg font-semibold text-gray-800 mb-3'>Quarterly Plans</h3>
               <div class='space-y-3' id='quarterly-list'>` +
