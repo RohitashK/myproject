@@ -11,7 +11,7 @@
     <style>
       body { background: #ffffff; }
       .fixed-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 40; }
-      .main-content-scroll { margin-top: 96px; min-height: calc(100vh - 96px); overflow-y: auto; }
+      .main-content { margin-top: 96px; min-height: calc(100vh - 96px); }
       .kudos-edit-btn i, .kudos-view-btn i, .kudos-delete-btn i {
         color: #64748b;
         background: transparent;
@@ -276,8 +276,8 @@
       .fixed-sidebar { position: fixed; top: 0; left: 0; height: 100vh; z-index: 30; }
     </style>
   </head>
-  <body class="bg-white font-sans">
-    <div class="min-h-screen bg-gray-100">
+  <body class="bg-gray-100 font-sans">
+    <div class="min-h-screen">
       <header class="fixed-header bg-white shadow p-2 flex items-center justify-between">
         <div class="flex items-center gap-2 ml-4">
           <a href="https://rohitashk.github.io/myproject/index.html">
@@ -315,64 +315,66 @@
           </div>
         </nav>
       </header>
-      <main class="main-content-scroll p-8">
+      <main class="main-content p-8">
         <div class="max-w-7xl mx-auto">
           <!-- Page Header -->
-          <!-- <div class="mb-8"> ... </div> -->
+          <div class="mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2 flex items-center gap-3">
+              <i class="ph ph-layout text-blue-600"></i>
+              Dashboard
+            </h1>
+            <p class="text-gray-600 text-lg">Your personalized overview of activities, kudos, and team updates</p>
+          </div>
 
           <!-- Dashboard Grid -->
-          <div class="single-bg-panel bg-white rounded-xl shadow-lg border border-gray-200 p-6 mx-auto" style="max-width: 1200px; width: 100%; min-height: auto;">
-            <div class="dashboard-bento-scroll">
-              <div class="grid grid-cols-1 gap-8" id="dashboard-grid">
-                <div class="bento-feed bg-white rounded-xl shadow-lg border border-gray-200 p-6 h-full flex flex-col">
-                  <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="ph ph-book-open"></i> My Feed</h2>
-                  <div class="bento-scroll-content" id="feed-list">
-                    <!-- Feed content will be rendered here -->
-                  </div>
+          <div class="grid grid-cols-1 gap-8" id="dashboard-grid">
+            <div class="bento-feed bg-white rounded-xl shadow-lg border border-gray-200 p-6 h-full flex flex-col">
+              <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="ph ph-book-open"></i> My Feed</h2>
+              <div class="bento-scroll-content" id="feed-list">
+                <!-- Feed content will be rendered here -->
+              </div>
+            </div>
+            <div class="bento-kudos bg-white rounded-xl shadow-lg border border-gray-200 p-6 h-full flex flex-col">
+              <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-bold flex items-center gap-2"><i class="ph ph-thumbs-up"></i> Kudos</h2>
+                <button id="give-kudos-btn" class="bento-btn-sm bg-blue-600 hover:bg-blue-700 text-white font-semibold transition flex items-center gap-2"><i class="ph ph-thumbs-up"></i> Give Kudos</button>
+              </div>
+              <div class="bento-scroll-content">
+                <!-- Kudos content will be rendered here by JS -->
+              </div>
+            </div>
+            <div class="bento-people bg-white rounded-xl shadow-lg border border-gray-200 p-6 h-full flex flex-col">
+              <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="ph ph-users"></i> People</h2>
+              <div class="bento-scroll-content" id="people-list">
+                <!-- People content will be rendered here -->
+              </div>
+            </div>
+            <div class="bento-revenue bg-white rounded-xl shadow-lg border border-gray-200 p-6 h-full flex flex-col">
+              <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="ph ph-trend-up"></i> Revenue</h2>
+              <div class="bento-scroll-content" id="revenue-list">
+                <!-- Revenue content will be rendered here -->
+              </div>
+            </div>
+            <div class="bento-mywork bg-white rounded-xl shadow-lg border border-gray-200 p-6 h-full flex flex-col">
+              <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="ph ph-calendar"></i> My Work</h2>
+              <div class="bento-scroll-content" id="work-list">
+                <!-- My Work content will be rendered here -->
+              </div>
+            </div>
+            <div class="bento-myplan bg-white rounded-xl shadow-lg border border-gray-200 p-6 h-full flex flex-col">
+              <div class="flex items-center gap-2 mb-4">
+                <h2 class="text-lg font-bold flex items-center gap-2 m-0"><i class="ph ph-gear"></i> My Plan</h2>
+                <button id="add-weekly-btn" class="bento-btn-sm bg-blue-600 hover:bg-blue-700 text-white font-semibold transition flex items-center gap-1 px-2 py-0.5 text-xs"><i class="ph ph-calendar"></i> Add Weekly</button>
+                <button id="add-quarterly-btn" class="bento-btn-sm bg-blue-600 hover:bg-blue-700 text-white font-semibold transition flex items-center gap-1 px-2 py-0.5 text-xs"><i class="ph ph-gear"></i> Add Quarterly</button>
+              </div>
+              <div class="bento-scroll-content">
+                <div class="mb-4">
+                  <h3 class="font-semibold text-blue-700 mb-2">Weekly Plans</h3>
+                  <div id="weekly-list"></div>
                 </div>
-                <div class="bento-kudos bg-white rounded-xl shadow-lg border border-gray-200 p-6 h-full flex flex-col">
-                  <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-lg font-bold flex items-center gap-2"><i class="ph ph-thumbs-up"></i> Kudos</h2>
-                    <button id="give-kudos-btn" class="bento-btn-sm bg-blue-600 hover:bg-blue-700 text-white font-semibold transition flex items-center gap-2"><i class="ph ph-thumbs-up"></i> Give Kudos</button>
-                  </div>
-                  <div class="bento-scroll-content">
-                    <!-- Kudos content will be rendered here by JS -->
-                  </div>
-                </div>
-                <div class="bento-people bg-white rounded-xl shadow-lg border border-gray-200 p-6 h-full flex flex-col">
-                  <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="ph ph-users"></i> People</h2>
-                  <div class="bento-scroll-content" id="people-list">
-                    <!-- People content will be rendered here -->
-                  </div>
-                </div>
-                <div class="bento-revenue bg-white rounded-xl shadow-lg border border-gray-200 p-6 h-full flex flex-col">
-                  <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="ph ph-trend-up"></i> Revenue</h2>
-                  <div class="bento-scroll-content" id="revenue-list">
-                    <!-- Revenue content will be rendered here -->
-                  </div>
-                </div>
-                <div class="bento-mywork bg-white rounded-xl shadow-lg border border-gray-200 p-6 h-full flex flex-col">
-                  <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="ph ph-calendar"></i> My Work</h2>
-                  <div class="bento-scroll-content" id="work-list">
-                    <!-- My Work content will be rendered here -->
-                  </div>
-                </div>
-                <div class="bento-myplan bg-white rounded-xl shadow-lg border border-gray-200 p-6 h-full flex flex-col">
-                  <div class="flex items-center gap-2 mb-4">
-                    <h2 class="text-lg font-bold flex items-center gap-2 m-0"><i class="ph ph-gear"></i> My Plan</h2>
-                    <button id="add-weekly-btn" class="bento-btn-sm bg-blue-600 hover:bg-blue-700 text-white font-semibold transition flex items-center gap-1 px-2 py-0.5 text-xs"><i class="ph ph-calendar"></i> Add Weekly</button>
-                    <button id="add-quarterly-btn" class="bento-btn-sm bg-blue-600 hover:bg-blue-700 text-white font-semibold transition flex items-center gap-1 px-2 py-0.5 text-xs"><i class="ph ph-gear"></i> Add Quarterly</button>
-                  </div>
-                  <div class="bento-scroll-content">
-                    <div class="mb-4">
-                      <h3 class="font-semibold text-blue-700 mb-2">Weekly Plans</h3>
-                      <div id="weekly-list"></div>
-                    </div>
-                    <div>
-                      <h3 class="font-semibold text-purple-700 mb-2">Quarterly Plans</h3>
-                      <div id="quarterly-list"></div>
-                    </div>
-                  </div>
+                <div>
+                  <h3 class="font-semibold text-purple-700 mb-2">Quarterly Plans</h3>
+                  <div id="quarterly-list"></div>
                 </div>
               </div>
             </div>
