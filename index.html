@@ -26,14 +26,14 @@
       .fixed-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 40; }
       .fixed-sidebar { position: fixed; top: 3rem; left: 0; height: calc(100vh - 3rem); z-index: 30; }
       .main-content-scroll {
+        height: 100vh;
+        overflow-y: auto;
         padding-top: 90px;
         padding-right: 1.5rem;
         padding-bottom: 1.5rem;
         padding-left: 1.5rem;
         background: transparent;
         min-width: 0;
-        min-height: calc(100vh - 90px);
-        height: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -42,7 +42,6 @@
         box-sizing: border-box;
         margin-left: 340px;
         overflow-x: hidden;
-        overflow-y: auto;
       }
       @media (max-width: 1024px) {
         .fixed-sidebar { position: static; height: auto; width: 100%; margin-bottom: 1rem; }
@@ -268,7 +267,7 @@
       </aside>
 
       <!-- Main Content (Right Panel) -->
-      <main class="main-content-scroll">
+      <main class="main-content-scroll" style="padding-bottom: 5rem;">
         <div class="single-bg-panel bg-white rounded-xl shadow-lg border border-gray-200 p-6 mx-auto" style="max-width: 1200px; width: 100%; min-height: auto;">
           <h2 id="tab-title" class="text-3xl font-bold mb-6 flex items-center gap-2"><i class="ph ph-book-open"></i> My Task</h2>
           <div id="tab-content" class="tab-content-single-bg">
@@ -277,7 +276,7 @@
         </div>
       </main>
 
-      <footer class="bg-white text-center p-4 shadow fixed bottom-0 left-0 w-full z-30">
+      <footer class="bg-white text-center p-4 shadow fixed bottom-0 left-0 w-full z-30 border-t border-gray-200">
         &copy; 2025 Personal Project. All rights reserved.
       </footer>
     </div>
@@ -559,7 +558,13 @@
             `<div>
                 <h3 class='text-lg font-semibold mb-3'>Recently worked on</h3>
                 <div class='space-y-4'>` +
-                  tabData.work.map(item => `
+                  [
+                    { title: 'UI/UX Design System Implementation', type: 'Today' },
+                    { title: 'Mobile App Development Sprint', type: 'Last week' },
+                    { title: 'Client Presentation Deck', type: 'Older' },
+                    { title: 'Team Training Workshop', type: 'Older' },
+                    { title: 'Product Roadmap Planning', type: 'Older' }
+                  ].map(item => `
                     <div class='p-4 bg-blue-50 rounded-lg border border-blue-100'>
                       <div class='font-semibold text-gray-800'>${item.title}</div>
                       <div class='text-sm text-gray-600'>${item.type}</div>
@@ -570,7 +575,13 @@
               <div>
                 <h3 class='text-lg font-semibold mb-3'>Recently visited</h3>
                 <div class='space-y-4'>` +
-                  tabData.work.map(item => `
+                  [
+                    { title: 'Project Dashboard', category: 'Development' },
+                    { title: 'Design System Documentation', category: 'Design' },
+                    { title: 'Team Calendar', category: 'Planning' },
+                    { title: 'Client Meeting Notes', category: 'Sales' },
+                    { title: 'Code Review Guidelines', category: 'Development' }
+                  ].map(item => `
                     <div class='p-4 bg-blue-50 rounded-lg border border-blue-100'>
                       <div class='font-semibold text-gray-800'>${item.title}</div>
                       <div class='text-sm text-gray-600'>${item.category}</div>
@@ -581,7 +592,13 @@
               <div>
                 <h3 class='text-lg font-semibold mb-3'>Favourites</h3>
                 <div class='space-y-4'>` +
-                  tabData.work.map(item => `
+                  [
+                    { title: 'Project Timeline', category: 'Planning' },
+                    { title: 'Design Resources', category: 'Design' },
+                    { title: 'Team Guidelines', category: 'HR' },
+                    { title: 'Client Presentations', category: 'Marketing' },
+                    { title: 'Development Standards', category: 'Development' }
+                  ].map(item => `
                     <div class='p-4 bg-blue-50 rounded-lg border border-blue-100'>
                       <div class='font-semibold text-gray-800'>${item.title}</div>
                       <div class='text-sm text-gray-600'>${item.category}</div>

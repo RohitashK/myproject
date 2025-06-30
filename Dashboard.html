@@ -321,7 +321,7 @@
           </div>
         </nav>
       </header>
-      <main class="main-content p-8">
+      <main class="main-content p-8" style="padding-bottom: 5rem;">
         <div class="max-w-7xl mx-auto">
           <!-- Page Header -->
           <div class="mb-8">
@@ -333,7 +333,7 @@
           </div>
 
           <!-- Dashboard Grid -->
-          <div class="grid grid-cols-1 gap-8" id="dashboard-grid">
+          <div class="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-8 items-start" id="dashboard-grid">
             <div class="bento-feed bg-white rounded-xl shadow-lg border border-gray-200 p-6 h-full flex flex-col">
               <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="ph ph-book-open"></i> My Feed</h2>
               <div class="bento-scroll-content" id="feed-list">
@@ -362,12 +362,12 @@
               </div>
             </div>
             <div class="bento-mywork bg-white rounded-xl shadow-lg border border-gray-200 p-6 h-full flex flex-col">
-              <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="ph ph-calendar"></i> My Work</h2>
+              <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2"><i class="ph ph-calendar"></i> My Work</h2>
               <div class="bento-scroll-content" id="work-list">
                 <!-- My Work content will be rendered here -->
               </div>
             </div>
-            <div class="bento-myplan bg-white rounded-xl shadow-lg border border-gray-200 p-6 h-full flex flex-col mt-8">
+            <div class="bento-myplan bg-white rounded-xl shadow-lg border border-gray-200 p-6 h-full flex flex-col">
               <div class="flex items-center justify-between mb-4">
                 <h2 class="text-base font-bold flex items-center gap-2 m-0"><i class="ph ph-gear"></i> My Plan</h2>
                 <div class="flex gap-2">
@@ -389,7 +389,7 @@
           </div>
         </div>
       </main>
-      <footer class="bg-gray-100 text-center p-4 shadow fixed bottom-0 left-0 w-full z-30">
+      <footer class="bg-white text-center p-4 shadow fixed bottom-0 left-0 w-full z-30 border-t border-gray-200">
         &copy; 2025 Personal Project. All rights reserved.
       </footer>
       <!-- Chat Bot Placeholder -->
@@ -956,12 +956,66 @@
         workContainer.innerHTML = '<div class="text-gray-500 text-center py-8">No work items yet.</div>';
         return;
       }
-      dashboardWork.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'p-4 bg-blue-50 rounded-lg border border-blue-100 mb-4';
-        card.innerHTML = `<h3 class='font-semibold text-blue-800 mb-1'>${item.title}</h3><div class='text-xs text-gray-500 mb-1'>${item.category} &middot; ${item.type}</div>`;
-        workContainer.appendChild(card);
-      });
+      // Unique content for each column
+      const recentlyWorkedOn = [
+        { title: 'UI/UX Design System Implementation', category: 'Design', type: 'Today' },
+        { title: 'Mobile App Development Sprint', category: 'Development', type: 'Last week' },
+        { title: 'Client Presentation Deck', category: 'Marketing', type: 'Older' },
+        { title: 'Team Training Workshop', category: 'HR', type: 'Older' },
+        { title: 'Product Roadmap Planning', category: 'Strategy', type: 'Older' }
+      ];
+      const recentlyVisited = [
+        { title: 'Project Dashboard', category: 'Development' },
+        { title: 'Design System Documentation', category: 'Design' },
+        { title: 'Team Calendar', category: 'Planning' },
+        { title: 'Client Meeting Notes', category: 'Sales' },
+        { title: 'Code Review Guidelines', category: 'Development' }
+      ];
+      const favourites = [
+        { title: 'Project Timeline', category: 'Planning' },
+        { title: 'Design Resources', category: 'Design' },
+        { title: 'Team Guidelines', category: 'HR' },
+        { title: 'Client Presentations', category: 'Marketing' },
+        { title: 'Development Standards', category: 'Development' }
+      ];
+      // Render three columns with unique content
+      workContainer.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div>
+            <h3 class="text-blue-300 font-semibold mb-4">Recently worked on</h3>
+            <div class="space-y-4">
+              ${recentlyWorkedOn.map(item => `
+                <div class='p-4 bg-blue-50 rounded-lg border border-blue-100 w-full break-words whitespace-normal'>
+                  <div class='font-semibold text-gray-800'>${item.title}</div>
+                  <div class='text-sm text-gray-600'>${item.type}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+          <div>
+            <h3 class="text-blue-300 font-semibold mb-4">Recently visited</h3>
+            <div class="space-y-4">
+              ${recentlyVisited.map(item => `
+                <div class='p-4 bg-blue-50 rounded-lg border border-blue-100 w-full break-words whitespace-normal'>
+                  <div class='font-semibold text-gray-800'>${item.title}</div>
+                  <div class='text-sm text-gray-600'>${item.category}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+          <div>
+            <h3 class="text-blue-300 font-semibold mb-4">Favourites</h3>
+            <div class="space-y-4">
+              ${favourites.map(item => `
+                <div class='p-4 bg-blue-50 rounded-lg border border-blue-100 w-full break-words whitespace-normal'>
+                  <div class='font-semibold text-gray-800'>${item.title}</div>
+                  <div class='text-sm text-gray-600'>${item.category}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
     }
     renderDashboardWork();
     // --- REVENUE DATA (MATCHED TO INDEX) ---
@@ -1171,6 +1225,31 @@
       setTimeout(forceBlueModalButtonsDarkMode, 10);
     };
     window.addEventListener('DOMContentLoaded', forceBlueModalButtonsDarkMode);
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const appsBtn = document.getElementById('apps-menu-btn');
+        const appsDropdown = document.getElementById('apps-menu-dropdown');
+        let dropdownTimeout;
+        if (appsBtn && appsDropdown) {
+          function showDropdown() {
+            clearTimeout(dropdownTimeout);
+            appsDropdown.classList.remove('opacity-0', 'pointer-events-none');
+            appsDropdown.classList.add('opacity-100');
+          }
+          function hideDropdown() {
+            clearTimeout(dropdownTimeout);
+            dropdownTimeout = setTimeout(() => {
+              appsDropdown.classList.add('opacity-0', 'pointer-events-none');
+              appsDropdown.classList.remove('opacity-100');
+            }, 250);
+          }
+          appsBtn.addEventListener('mouseenter', showDropdown);
+          appsBtn.addEventListener('mouseleave', hideDropdown);
+          appsDropdown.addEventListener('mouseenter', showDropdown);
+          appsDropdown.addEventListener('mouseleave', hideDropdown);
+        }
+      });
     </script>
   </body>
 </html> 
