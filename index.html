@@ -12,18 +12,25 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
+      html, body {
+        height: 100vh;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
       body { 
         background: #f3f4f6; 
         overflow-x: hidden;
       }
       .fixed-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 40; }
-      .fixed-sidebar { position: fixed; top: 80px; left: 0; height: calc(100vh - 80px); z-index: 30; }
+      .fixed-sidebar { position: fixed; top: 0; left: 0; height: 100vh; z-index: 30; }
       .main-content-scroll {
-        margin-top: 96px;
-        padding: 2rem;
+        margin-top: 55px;
+        padding: 1.5rem;
         background: transparent;
         min-width: 0;
-        min-height: 0;
+        height: calc(100vh - 55px - 56px);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -32,6 +39,7 @@
         box-sizing: border-box;
         margin-left: 340px;
         overflow-x: hidden;
+        overflow-y: auto;
       }
       @media (max-width: 1024px) {
         .fixed-sidebar { position: static; height: auto; width: 100%; margin-bottom: 1rem; }
@@ -199,10 +207,10 @@
   </head>
   <body class="bg-gray-100 bg-opacity-80 font-sans">
     <div class="min-h-screen">
-      <header class="fixed-header bg-white shadow p-4 flex items-center justify-between">
-        <div class="flex items-center gap-2">
+      <header class="fixed-header bg-white shadow p-2 flex items-center justify-between">
+        <div class="flex items-center gap-2 ml-4">
           <a href="https://rohitashk.github.io/myproject/index.html">
-            <div class="h-16 w-16 flex items-center justify-center bg-white logo-container">
+            <div class="h-12 w-12 flex items-center justify-center bg-white logo-container">
               <img src="public/logo.jpg" alt="Logo" class="h-full w-full object-contain" />
             </div>
           </a>
@@ -231,15 +239,14 @@
               <a href="https://stability.ai" class="block px-4 py-2 hover:bg-gray-100">Stable Diffusion</a>
             </div>
           </div>
-          <div class="flex items-center gap-2 ml-4">
-            <img src="public/profile.png" alt="Profile" class="w-10 h-10 rounded-full cursor-pointer hover:opacity-80 transition-opacity border-2 border-gray-200 ring-2 ring-blue-500" onclick="window.location.href='Settings.html'" title="Settings" />
+          <div class="flex items-center gap-2 ml-4 mr-4">
+            <img src="public/profile.png" alt="Profile" class="w-8 h-8 rounded-full cursor-pointer hover:opacity-80 transition-opacity border-2 border-gray-200 ring-2 ring-blue-500" onclick="window.location.href='Settings.html'" title="Settings" />
           </div>
         </nav>
       </header>
       <!-- Side Panel (Tabbed) -->
-      <aside class="fixed-sidebar bg-white shadow-lg w-80 p-6 rounded-r-2xl border-r border-gray-200 hidden lg:block">
+      <aside class="fixed-sidebar bg-white shadow-lg w-80 p-6 rounded-r-2xl border-r border-gray-200 hidden lg:block" style="padding-top: 80px;">
         <div>
-          <h2 class="text-xl font-bold mb-4">Menu</h2>
           <ul id="tab-menu">
             <li class="mb-2"><button class="w-full flex items-center gap-2 text-left py-2 px-4 rounded hover:bg-blue-50" data-tab="feed"><i class="ph ph-book-open"></i> My Feed</button></li>
             <li class="mb-2"><button class="w-full flex items-center gap-2 text-left py-2 px-4 rounded hover:bg-blue-50" data-tab="kudos"><i class="ph ph-thumbs-up"></i> Kudos</button></li>
@@ -253,7 +260,7 @@
 
       <!-- Main Content (Right Panel) -->
       <main class="main-content-scroll">
-        <div class="single-bg-panel bg-white rounded-xl shadow-lg border border-gray-200 p-6 mx-auto" style="max-width: 1200px; width: 100%; min-height: 600px;">
+        <div class="single-bg-panel bg-white rounded-xl shadow-lg border border-gray-200 p-6 mx-auto" style="max-width: 1200px; width: 100%; min-height: auto;">
           <h2 id="tab-title" class="text-3xl font-bold mb-6 flex items-center gap-2"><i class="ph ph-book-open"></i> My Task</h2>
           <div id="tab-content" class="tab-content-single-bg">
             <!-- Tab content will be rendered here by JS -->
@@ -390,7 +397,7 @@
         });
         let html = '';
         if (tab === 'feed') {
-          html = `<div class='bg-white rounded-xl shadow-lg border border-gray-200 p-6'>
+          html = `<div class='single-bg-panel bg-white rounded-xl shadow-lg border border-gray-200 p-6 mx-auto' style='max-width: 1200px; width: 100%; min-height: auto;'>
             <h2 class='text-2xl font-bold mb-6 flex items-center gap-2'><i class='ph ph-book-open'></i> My Feed</h2>` +
             tabData.feed.map(item => `
               <div class='p-4 bg-blue-50 rounded-lg border border-blue-100 mb-4'>
@@ -409,8 +416,8 @@
               </div>
             `).join('') + `</div>`;
         } else if (tab === 'kudos') {
-          html = `<div class='bg-white rounded-xl shadow-lg border border-gray-200 p-6'>
-            <div class='flex items-center justify-between mb-6'>
+          html = `<div class='single-bg-panel bg-white rounded-xl shadow-lg border border-gray-200 p-6 mx-auto' style='max-width: 1200px; width: 100%; min-height: auto;'>` +
+            `<div class='flex items-center justify-between mb-6'>
               <h2 class='text-2xl font-bold flex items-center gap-2'><i class='ph ph-thumbs-up'></i> Kudos</h2>
               <button id='give-kudos-btn' class='bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition flex items-center gap-2'><i class='ph ph-thumbs-up'></i> Give Kudos</button>
             </div>
@@ -442,7 +449,7 @@
                 </div>
               `).join('')) + `</div></div>`;
         } else if (tab === 'people') {
-          html = `<div class='bg-white rounded-xl shadow-lg border border-gray-200 p-6'>
+          html = `<div class='single-bg-panel bg-white rounded-xl shadow-lg border border-gray-200 p-6 mx-auto' style='max-width: 1200px; width: 100%; min-height: auto;'>
             <h2 class='text-2xl font-bold mb-6 flex items-center gap-2'><i class='ph ph-users'></i> People</h2>
             <div class='grid grid-cols-1 md:grid-cols-3 gap-6'>
               <div>
@@ -509,7 +516,7 @@
             'Pharma',
             'Retail'
           ];
-          html = `<div class='bg-white rounded-xl shadow-lg border border-gray-200 p-6'>
+          html = `<div class='single-bg-panel bg-white rounded-xl shadow-lg border border-gray-200 p-6 mx-auto' style='max-width: 1200px; width: 100%; min-height: auto;'>
             <h2 class='text-2xl font-bold mb-6 flex items-center gap-2'><i class='ph ph-trend-up'></i> Revenue</h2>` +
             categoryOrder.map(category => {
               const item = tabData.revenue.find(i => i.category === category);
@@ -537,104 +544,96 @@
               `;
             }).join('') + `</div>`;
         } else if (tab === 'work') {
-          html = `<div class='bg-white rounded-xl shadow-lg border border-gray-200 p-6'>
+          html = `<div class='single-bg-panel bg-white rounded-xl shadow-lg border border-gray-200 p-6 mx-auto' style='max-width: 1200px; width: 100%; min-height: auto;'>
             <h2 class='text-2xl font-bold mb-6 flex items-center gap-2'><i class='ph ph-calendar'></i> My Task</h2>
-            <div class='grid grid-cols-1 md:grid-cols-3 gap-6'>
-              <div>
+            <div class='grid grid-cols-1 md:grid-cols-3 gap-6'>` +
+            `<div>
                 <h3 class='text-lg font-semibold mb-3'>Recently worked on</h3>
-                <div class='space-y-4'>
-                  ${tabData.work.map(item => `
+                <div class='space-y-4'>` +
+                  tabData.work.map(item => `
                     <div class='p-4 bg-blue-50 rounded-lg border border-blue-100'>
                       <div class='font-semibold text-gray-800'>${item.title}</div>
                       <div class='text-sm text-gray-600'>${item.type}</div>
                     </div>
-                  `).join('')}
-                </div>
+                  `).join('') +
+                `</div>
               </div>
               <div>
                 <h3 class='text-lg font-semibold mb-3'>Recently visited</h3>
-                <div class='space-y-4'>
-                  ${tabData.work.map(item => `
+                <div class='space-y-4'>` +
+                  tabData.work.map(item => `
                     <div class='p-4 bg-blue-50 rounded-lg border border-blue-100'>
                       <div class='font-semibold text-gray-800'>${item.title}</div>
                       <div class='text-sm text-gray-600'>${item.category}</div>
                     </div>
-                  `).join('')}
-                </div>
+                  `).join('') +
+                `</div>
               </div>
               <div>
                 <h3 class='text-lg font-semibold mb-3'>Favourites</h3>
-                <div class='space-y-4'>
-                  ${tabData.work.map(item => `
+                <div class='space-y-4'>` +
+                  tabData.work.map(item => `
                     <div class='p-4 bg-blue-50 rounded-lg border border-blue-100'>
                       <div class='font-semibold text-gray-800'>${item.title}</div>
                       <div class='text-sm text-gray-600'>${item.category}</div>
                     </div>
-                  `).join('')}
-                </div>
+                  `).join('') +
+                `</div>
               </div>
             </div>
           </div>`;
         } else if (tab === 'plan') {
-          html = `<div class='bg-white rounded-xl shadow-lg border border-gray-200 p-6'>
-            <div class='flex items-center justify-between mb-6'>
-              <h2 class='text-2xl font-bold flex items-center gap-2'><i class='ph ph-gear'></i> My Plan</h2>
-              <div class='flex gap-3'>
-                <button id='add-weekly-btn' class='bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition flex items-center gap-2'><i class='ph ph-calendar'></i> Add Weekly Plan</button>
-                <button id='add-quarterly-btn' class='bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition flex items-center gap-2'><i class='ph ph-gear'></i> Add Quarterly Plan</button>
-              </div>
+          html = `<div class='single-bg-panel bg-white rounded-xl shadow-lg border border-gray-200 p-6 mx-auto' style='max-width: 1200px; width: 100%; min-height: auto;'>
+            <h2 class='text-2xl font-bold mb-6 flex items-center gap-2'><i class='ph ph-gear'></i> My Plan</h2>` +
+            `<div class='weekly-plans-section mb-8'>
+              <h3 class='text-lg font-semibold text-gray-800 mb-3'>Weekly Plans</h3>
+              <div class='space-y-3' id='weekly-list'>` +
+                ((tabData.plan || []).length === 0
+                  ? `<div class='text-gray-500 text-center py-8'>No weekly plans yet. Add your first weekly plan!</div>`
+                  : (tabData.plan || []).map((item, idx) => `
+                    <div class='p-3 bg-blue-50 rounded-lg border border-blue-100'>
+                      <div class='flex items-center justify-between'>
+                        <div>
+                          <h4 class='font-medium text-blue-800'>${item.week}</h4>
+                          <p class='text-sm text-gray-600'>Owner: ${item.owner}</p>
+                        </div>
+                        <div class='flex items-center gap-2'>
+                          <span class='px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full'>${item.status}</span>
+                          <div class='flex gap-2'>
+                            <button class='plan-edit-btn' data-type='weekly' data-idx='${idx}' title='Edit'><i class='ph ph-pencil'></i></button>
+                            <button class='plan-view-btn' data-type='weekly' data-idx='${idx}' title='View'><i class='ph ph-eye'></i></button>
+                            <button class='plan-delete-btn' data-type='weekly' data-idx='${idx}' title='Delete'><i class='ph ph-trash'></i></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  `).join('')) +
+              `</div>
             </div>
-            <div class='space-y-6'>
-              <div class='weekly-plans-section'>
-                <h3 class='text-lg font-semibold text-gray-800 mb-3'>Weekly Plans</h3>
-                <div class='space-y-3' id='weekly-list'>
-                  ${(tabData.plan.length === 0)
-                    ? `<div class='text-gray-500 text-center py-8'>No weekly plans yet. Add your first weekly plan!</div>`
-                    : tabData.plan.map((item, idx) => `
-                      <div class='p-3 bg-blue-50 rounded-lg border border-blue-100'>
-                        <div class='flex items-center justify-between'>
-                          <div>
-                            <h4 class='font-medium text-blue-800'>${item.week}</h4>
-                            <p class='text-sm text-gray-600'>Owner: ${item.owner}</p>
-                          </div>
-                          <div class='flex items-center gap-2'>
-                            <span class='px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full'>${item.status}</span>
-                            <div class='flex gap-2'>
-                              <button class='plan-edit-btn' data-type='weekly' data-idx='${idx}' title='Edit'><i class='ph ph-pencil'></i></button>
-                              <button class='plan-view-btn' data-type='weekly' data-idx='${idx}' title='View'><i class='ph ph-eye'></i></button>
-                              <button class='plan-delete-btn' data-type='weekly' data-idx='${idx}' title='Delete'><i class='ph ph-trash'></i></button>
-                            </div>
+            <div class='quarterly-plans-section'>
+              <h3 class='text-lg font-semibold text-gray-800 mb-3'>Quarterly Plans</h3>
+              <div class='space-y-3' id='quarterly-list'>` +
+                ((tabData.quarterlyPlanArr || []).length === 0
+                  ? `<div class='text-gray-500 text-center py-8'>No quarterly plans yet. Add your first quarterly plan!</div>`
+                  : (tabData.quarterlyPlanArr || []).map((item, idx) => `
+                    <div class='p-3 bg-purple-50 rounded-lg border border-purple-100'>
+                      <div class='flex items-center justify-between'>
+                        <div>
+                          <h4 class='font-medium text-purple-800'>${item.quarter}</h4>
+                          <p class='text-sm text-gray-600'>Owner: ${item.owner}</p>
+                        </div>
+                        <div class='flex items-center gap-2'>
+                          <span class='px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full'>${item.status}</span>
+                          <div class='flex gap-2'>
+                            <button class='plan-edit-btn' data-type='quarterly' data-idx='${idx}' title='Edit'><i class='ph ph-pencil'></i></button>
+                            <button class='plan-view-btn' data-type='quarterly' data-idx='${idx}' title='View'><i class='ph ph-eye'></i></button>
+                            <button class='plan-delete-btn' data-type='quarterly' data-idx='${idx}' title='Delete'><i class='ph ph-trash'></i></button>
                           </div>
                         </div>
                       </div>
-                    `).join('')}
-                </div>
-              </div>
-              <div class='quarterly-plans-section'>
-                <h3 class='text-lg font-semibold text-gray-800 mb-3'>Quarterly Plans</h3>
-                <div class='space-y-3' id='quarterly-list'>
-                  ${((tabData.quarterlyPlanArr || []).length === 0)
-                    ? `<div class='text-gray-500 text-center py-8'>No quarterly plans yet. Add your first quarterly plan!</div>`
-                    : (tabData.quarterlyPlanArr || []).map((item, idx) => `
-                      <div class='p-3 bg-purple-50 rounded-lg border border-purple-100'>
-                        <div class='flex items-center justify-between'>
-                          <div>
-                            <h4 class='font-medium text-purple-800'>${item.quarter}</h4>
-                            <p class='text-sm text-gray-600'>Owner: ${item.owner}</p>
-                          </div>
-                          <div class='flex items-center gap-2'>
-                            <span class='px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full'>${item.status}</span>
-                            <div class='flex gap-2'>
-                              <button class='plan-edit-btn' data-type='quarterly' data-idx='${idx}' title='Edit'><i class='ph ph-pencil'></i></button>
-                              <button class='plan-view-btn' data-type='quarterly' data-idx='${idx}' title='View'><i class='ph ph-eye'></i></button>
-                              <button class='plan-delete-btn' data-type='quarterly' data-idx='${idx}' title='Delete'><i class='ph ph-trash'></i></button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    `).join('')}
-                </div>
-              </div>
+                    </div>
+                  `).join('')) +
+              `</div>
             </div>
           </div>`;
         }

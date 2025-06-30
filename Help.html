@@ -133,14 +133,22 @@
       body.dark .logo-container {
         background-color: white !important;
       }
+      /* Keep card backgrounds white in light mode */
+      .card-white {
+        background-color: white !important;
+      }
+      .bg-gray-100.card-white {
+        background-color: white !important;
+      }
       /* --- DARK MODE CSS END --- */
+      .fixed-sidebar { position: fixed; top: 0; left: 0; height: 100vh; z-index: 30; }
     </style>
   </head>
   <body class="bg-gray-100 font-sans">
-    <header class="fixed-header bg-white shadow p-4 flex items-center justify-between">
+    <header class="fixed-header bg-white shadow p-2 flex items-center justify-between">
       <div class="flex items-center gap-2">
         <a href="https://rohitashk.github.io/myproject/index.html">
-          <div class="h-16 w-16 flex items-center justify-center bg-white logo-container">
+          <div class="h-12 w-12 flex items-center justify-center bg-white logo-container">
             <img src="public/logo.jpg" alt="Logo" class="h-full w-full object-contain" />
           </div>
         </a>
@@ -158,19 +166,19 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
           </button>
-          <div id="apps-menu-dropdown" class="absolute right-0 mt-2 w-48 bg-gray-100 border border-gray-200 rounded shadow-lg opacity-0 pointer-events-none transition-opacity z-10">
-            <a href="https://expo.dev" class="block px-4 py-2 hover:bg-gray-200">Expo</a>
-            <a href="https://chat.openai.com" class="block px-4 py-2 hover:bg-gray-200">ChatGPT</a>
-            <a href="https://claude.ai" class="block px-4 py-2 hover:bg-gray-200">Claude</a>
-            <a href="https://gemini.google.com" class="block px-4 py-2 hover:bg-gray-200">Gemini</a>
-            <a href="https://copilot.microsoft.com" class="block px-4 py-2 hover:bg-gray-200">Copilot</a>
-            <a href="https://www.midjourney.com" class="block px-4 py-2 hover:bg-gray-200">Midjourney</a>
-            <a href="https://openai.com/dall-e-2" class="block px-4 py-2 hover:bg-gray-200">DALL-E</a>
-            <a href="https://stability.ai" class="block px-4 py-2 hover:bg-gray-200">Stable Diffusion</a>
+          <div id="apps-menu-dropdown" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg opacity-0 pointer-events-none transition-opacity z-10">
+            <a href="https://expo.dev" class="block px-4 py-2 hover:bg-gray-100">Expo</a>
+            <a href="https://chat.openai.com" class="block px-4 py-2 hover:bg-gray-100">ChatGPT</a>
+            <a href="https://claude.ai" class="block px-4 py-2 hover:bg-gray-100">Claude</a>
+            <a href="https://gemini.google.com" class="block px-4 py-2 hover:bg-gray-100">Gemini</a>
+            <a href="https://copilot.microsoft.com" class="block px-4 py-2 hover:bg-gray-100">Copilot</a>
+            <a href="https://www.midjourney.com" class="block px-4 py-2 hover:bg-gray-100">Midjourney</a>
+            <a href="https://openai.com/dall-e-2" class="block px-4 py-2 hover:bg-gray-100">DALL-E</a>
+            <a href="https://stability.ai" class="block px-4 py-2 hover:bg-gray-100">Stable Diffusion</a>
           </div>
         </div>
         <div class="flex items-center gap-2 ml-4">
-          <img src="public/profile.png" alt="Profile" class="w-10 h-10 rounded-full cursor-pointer hover:opacity-80 transition-opacity border-2 border-gray-200 ring-2 ring-blue-500" onclick="window.location.href='Settings.html'" title="Settings" />
+          <img src="public/profile.png" alt="Profile" class="w-8 h-8 rounded-full cursor-pointer hover:opacity-80 transition-opacity border-2 border-gray-200 ring-2 ring-blue-500" onclick="window.location.href='Settings.html'" title="Settings" />
         </div>
       </nav>
     </header>
@@ -188,41 +196,11 @@
           </div>
 
           <!-- Quick Actions -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div class="bg-gray-100 rounded-xl shadow-lg border border-gray-200 p-6 text-center">
-              <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <i class="ph ph-book text-blue-600 text-xl"></i>
-              </div>
-              <h3 class="text-lg font-bold text-gray-800 mb-2">Documentation</h3>
-              <p class="text-gray-600 text-sm mb-4">Browse our comprehensive documentation</p>
-              <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                View Docs
-              </button>
-            </div>
-            <div class="bg-gray-100 rounded-xl shadow-lg border border-gray-200 p-6 text-center">
-              <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <i class="ph ph-chat-circle text-green-600 text-xl"></i>
-              </div>
-              <h3 class="text-lg font-bold text-gray-800 mb-2">Live Chat</h3>
-              <p class="text-gray-600 text-sm mb-4">Get instant help from our support team</p>
-              <button class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-                Start Chat
-              </button>
-            </div>
-            <div class="bg-gray-100 rounded-xl shadow-lg border border-gray-200 p-6 text-center">
-              <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <i class="ph ph-envelope text-purple-600 text-xl"></i>
-              </div>
-              <h3 class="text-lg font-bold text-gray-800 mb-2">Email Support</h3>
-              <p class="text-gray-600 text-sm mb-4">Send us an email for detailed assistance</p>
-              <button class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
-                Send Email
-              </button>
-            </div>
-          </div>
+          <!-- Removed video tutorial cards as requested -->
+          <!-- End Quick Actions -->
 
           <!-- FAQ Section -->
-          <div class="bg-gray-100 rounded-xl shadow-lg border border-gray-200 p-6 mb-8">
+          <div class="single-bg-panel bg-white rounded-xl shadow-lg border border-gray-200 p-6 mx-auto" style="max-width: 1200px; width: 100%; min-height: auto;">
             <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
               <i class="ph ph-lightbulb text-blue-600"></i>
               Frequently Asked Questions
@@ -304,7 +282,7 @@
 
           <!-- Contact Information -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-gray-100 rounded-xl shadow-lg border border-gray-200 p-6">
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
               <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
                 <i class="ph ph-phone text-blue-600"></i>
                 Contact Information
@@ -329,7 +307,7 @@
               </div>
             </div>
             
-            <div class="bg-gray-100 rounded-xl shadow-lg border border-gray-200 p-6">
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
               <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
                 <i class="ph ph-users text-blue-600"></i>
                 Support Team
@@ -367,35 +345,56 @@
           </div>
 
           <!-- Video Tutorials -->
-          <div class="bg-gray-100 rounded-xl shadow-lg border border-gray-200 p-6 mt-8">
+          <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6 mt-8 card-white">
             <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
               <i class="ph ph-play-circle text-blue-600"></i>
               Video Tutorials
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div class="bg-gray-50 rounded-lg p-4">
-                <div class="w-full h-32 bg-gray-200 rounded-lg mb-3 flex items-center justify-center">
-                  <i class="ph ph-play text-gray-400 text-2xl"></i>
+              <div class="bg-white rounded-lg p-4 border border-gray-200">
+                <div class="relative mb-3">
+                  <a href="https://www.youtube.com/watch?v=8xUher8-5_Q" target="_blank">
+                    <img src="https://img.youtube.com/vi/8xUher8-5_Q/maxresdefault.jpg" alt="Getting Started Tutorial" class="w-full h-32 object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                      <div class="bg-black bg-opacity-50 rounded-full p-2">
+                        <i class="ph ph-play text-white text-xl"></i>
+                      </div>
+                    </div>
+                  </a>
                 </div>
                 <h3 class="font-semibold text-gray-800 mb-2">Getting Started</h3>
                 <p class="text-sm text-gray-600 mb-3">Learn the basics of navigating the application</p>
-                <button class="text-blue-600 hover:text-blue-700 text-sm font-medium">Watch Video</button>
+                <a href="https://www.youtube.com/watch?v=8xUher8-5_Q" target="_blank" class="text-blue-600 hover:text-blue-700 text-sm font-medium">Watch Now</a>
               </div>
-              <div class="bg-gray-50 rounded-lg p-4">
-                <div class="w-full h-32 bg-gray-200 rounded-lg mb-3 flex items-center justify-center">
-                  <i class="ph ph-play text-gray-400 text-2xl"></i>
+              <div class="bg-white rounded-lg p-4 border border-gray-200">
+                <div class="relative mb-3">
+                  <a href="https://www.youtube.com/watch?v=0oBqJ-0S8Xc" target="_blank">
+                    <img src="https://img.youtube.com/vi/0oBqJ-0S8Xc/maxresdefault.jpg" alt="Managing Kudos Tutorial" class="w-full h-32 object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                      <div class="bg-black bg-opacity-50 rounded-full p-2">
+                        <i class="ph ph-play text-white text-xl"></i>
+                      </div>
+                    </div>
+                  </a>
                 </div>
                 <h3 class="font-semibold text-gray-800 mb-2">Managing Kudos</h3>
                 <p class="text-sm text-gray-600 mb-3">How to give, edit, and manage kudos entries</p>
-                <button class="text-blue-600 hover:text-blue-700 text-sm font-medium">Watch Video</button>
+                <a href="https://www.youtube.com/watch?v=0oBqJ-0S8Xc" target="_blank" class="text-blue-600 hover:text-blue-700 text-sm font-medium">Watch Now</a>
               </div>
-              <div class="bg-gray-50 rounded-lg p-4">
-                <div class="w-full h-32 bg-gray-200 rounded-lg mb-3 flex items-center justify-center">
-                  <i class="ph ph-play text-gray-400 text-2xl"></i>
+              <div class="bg-white rounded-lg p-4 border border-gray-200">
+                <div class="relative mb-3">
+                  <a href="https://www.youtube.com/watch?v=c7LrqSxjJQQ" target="_blank">
+                    <img src="https://img.youtube.com/vi/c7LrqSxjJQQ/maxresdefault.jpg" alt="Planning & Reports Tutorial" class="w-full h-32 object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                      <div class="bg-black bg-opacity-50 rounded-full p-2">
+                        <i class="ph ph-play text-white text-xl"></i>
+                      </div>
+                    </div>
+                  </a>
                 </div>
                 <h3 class="font-semibold text-gray-800 mb-2">Planning & Reports</h3>
                 <p class="text-sm text-gray-600 mb-3">Creating plans and understanding reports</p>
-                <button class="text-blue-600 hover:text-blue-700 text-sm font-medium">Watch Video</button>
+                <a href="https://www.youtube.com/watch?v=c7LrqSxjJQQ" target="_blank" class="text-blue-600 hover:text-blue-700 text-sm font-medium">Watch Now</a>
               </div>
             </div>
           </div>
